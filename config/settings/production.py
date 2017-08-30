@@ -6,7 +6,6 @@ with open('secrets/prod_secrets.json') as f:
     secrets = json.loads(f.read())cd 
     
 def get_secret(setting, secrets=secrets):
-    '''Get the secret variable or return explicit exceptions'''
     try:
         return secrets[setting]
     except KeyError:
