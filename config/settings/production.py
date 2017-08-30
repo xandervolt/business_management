@@ -33,3 +33,5 @@ DATABASES = {
         'PORT': get_secret('PORT'),
     }
 }
+
+ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com',]
