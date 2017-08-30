@@ -1,0 +1,4 @@
+django_environ==0.4.4
+django_allauth==0.33.0
+#Django==1.11.4
+#django_debug_toolbar==1.8
