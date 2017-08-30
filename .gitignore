@@ -38,7 +38,7 @@ node_modules/
 business_management/media/
 
 #secrets
-business_management/secrets/
+#business_management/secrets/
 
 staticfiles/
 
