@@ -1,0 +1,27 @@
+business_management/
+    business_management/
+        accounts/
+            migrations/
+            __init__.py
+            admin.py
+            forms.py
+            models.py
+            tests.py
+            views.py
+        static/
+        templates/
+    config/
+        settings/
+            __init__.py
+            base.py
+            local.py
+            production.py
+        __init__.py
+    docs/
+        (developer documentation)
+    requirements/
+        (requirements.txt files)
+    utility/
+        (shell scripts)
+    manage.py
+    .gitignore

@@ -1,0 +1,44 @@
+{% load bootstrap4 %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block head_title %}{% endblock %}</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <link href="{% static 'css/login.css' %}" rel="stylesheet">
+        {% block extra_head %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="login-box">
+                        <img class="login-logo" src="{% static 'images/login-logo.jpg' %}" />
+                        {% block body %}
+                        {% if messages %}
+                            <div>
+                                <strong>Messages:</strong>
+                                <ul>
+                                    {% for message in messages %}
+                                    <li>{{message}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        {% block content %}
+                        {% endblock %}
+                        {% endblock %}
+                        {% block extra_body %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+input, button, select, optgroup, textarea {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  border-radius:3px;
+  

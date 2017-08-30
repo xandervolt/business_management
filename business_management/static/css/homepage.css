@@ -1,0 +1,7 @@
+body {
+    background-image: url("/static/images/home-bg.jpg");
+    background-color: #e4d021;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right top; 
+}
