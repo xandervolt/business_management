@@ -1,9 +1,9 @@
 from .base import *
 
 import json
-
+'''
 with open('secrets/prod_secrets.json') as f:
-    secrets = json.loads(f.read())
+    secrets = json.loads(f.read())cd 
     
 def get_secret(setting, secrets=secrets):
     '''Get the secret variable or return explicit exceptions'''
@@ -12,9 +12,9 @@ def get_secret(setting, secrets=secrets):
     except KeyError:
         error_msg = 'Set the {} environment variable'.format(setting)
         raise ImproperlyConfigured(error_msg)
-   
+'''   
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret('SECRET_KEY')
+SECRET_KEY = 'whb50d^$a$blw3nymfycq&8pizac+m5flrhr%28bw^p_z(5o*p"'
 
 DEBUG = False
 
@@ -25,13 +25,13 @@ INSTALLED_APPS += ['gunicorn', ]
 
 DATABASES = {
     'default': {
-        'ENGINE': get_secret('DATABASES_ENGINE'),
-        'NAME': get_secret('DATABASES_NAME'),
-        'USER': get_secret('DATABASES_USER'),
-        'PASSWORD': get_secret('DATABASES_PASSWORD'),
-        'HOST': get_secret('DATABASES_HOST'),
-        'PORT': get_secret('PORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'business_management_prod_db',
+        'USER': 'business_management_prod_user',
+        'PASSWORD': 'Rom.8:38-39PTL!',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
-ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com', 'localhost', '*']
