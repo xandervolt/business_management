@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     
     'business_management.accounts',
+    'business_management.engineering',
 ]
 
 

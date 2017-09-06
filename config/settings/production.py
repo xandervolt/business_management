@@ -3,7 +3,7 @@ from .base import *
 import json
 '''
 with open('secrets/prod_secrets.json') as f:
-    secrets = json.loads(f.read())cd 
+    secrets = json.loads(f.read())cd
     
 def get_secret(setting, secrets=secrets):
     try:
@@ -11,7 +11,7 @@ def get_secret(setting, secrets=secrets):
     except KeyError:
         error_msg = 'Set the {} environment variable'.format(setting)
         raise ImproperlyConfigured(error_msg)
-'''   
+'''
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'whb50d^$a$blw3nymfycq&8pizac+m5flrhr%28bw^p_z(5o*p"'
 
@@ -33,4 +33,4 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com', 'localhost', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com', 'localhost', '138.68.48.73',]

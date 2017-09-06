@@ -5,3 +5,10 @@ python manage.py migrate --settings=config.settings.local
 python manage.py runserver --settings=config.settings.local
 
 set DJANGO_SETTINGS_MODULE=mysite.settings
+
+CREATE USER business_management_prod_user WITH PASSWORD Rom.8:38-39PTL!;
+CREATE DATABASE business_management_prod_db;
+GRANT ALL PRIVILEGES ON DATABASE business_management_prod_db to business_management_prod_user;
+
+
+ALTER ROLE business_management_prod_user SET client_encoding TO 'utf8'; ALTER ROLE business_management_prod_user SET default_transaction_isolation TO 'read committed'; ALTER ROLE business_management_prod_user SET timezone TO 'UTC';

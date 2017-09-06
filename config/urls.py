@@ -20,11 +20,11 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^dashboard/', TemplateView.as_view(template_name='pages/dashboard.html'), name='dashboard'),
-    
+    url(r'^engineering/', include('business_management.engineering.urls', namespace='engineering')),
+    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     # User management
     #url(r'^users/', include('business_management.users.urls', namespace='users')),
     #url(r'^accounts/', include('allauth.urls')),
