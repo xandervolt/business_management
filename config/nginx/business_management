@@ -1,0 +1,9 @@
+#[label /etc/nginx/sites-available/business_management]
+
+server {
+    listen 80;
+    server_name server_domain_or_IP;
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ { root /home/xandervolt/business_management/business_management/staticfiles/; }
+    location / { include proxy_params; proxy_pass http://unix:/home/xandervolt/business_management/business_management/business_mangement.sock; }
+}

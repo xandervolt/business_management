@@ -12,3 +12,5 @@ GRANT ALL PRIVILEGES ON DATABASE business_management_prod_db to business_managem
 
 
 ALTER ROLE business_management_prod_user SET client_encoding TO 'utf8'; ALTER ROLE business_management_prod_user SET default_transaction_isolation TO 'read committed'; ALTER ROLE business_management_prod_user SET timezone TO 'UTC';
+
+

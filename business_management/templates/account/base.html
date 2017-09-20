@@ -21,8 +21,8 @@
                         {% block body %}
                         {% if messages %}
                             <div>
-                                <strong>Messages:</strong>
-                                <ul>
+                                <strong class="noshow">Messages:</strong>
+                                <ul class="messagelist">
                                     {% for message in messages %}
                                     <li>{{message}}</li>
                                     {% endfor %}

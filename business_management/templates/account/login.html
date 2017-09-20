@@ -1,5 +1,5 @@
 {% extends "account/base.html" %}
-
+{% load static from staticfiles %}
 {% load i18n %}
 {% load account socialaccount %}
 
@@ -9,12 +9,11 @@
 
     <h1>{% trans "Sign In" %}</h1>
     {% get_providers as socialaccount_providers %}
-    
+
     {% if socialaccount_providers %}
-        <p>{% blocktrans with site.name as site_name %}Please sign in with one
-        of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-        for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-        
+        <p><b>{% blocktrans with site.name as site_name %}Please sign in with your Office 365 account.</b><!--Or, <a href="{{ signup_url }}">sign up</a>
+        for a {{ site_name }} account and sign in below:-->{% endblocktrans %}</p>
+        <!--
         <div class="socialaccount_ballot">
         
             <ul class="socialaccount_providers">
@@ -24,7 +23,7 @@
             <div class="login-or">{% trans 'or' %}</div>
         
         </div>
-        
+        -->
         {% include "socialaccount/snippets/login_extra.html" %}
     
     {% else %}
@@ -34,15 +33,16 @@
     
     <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
-        {{ form.errors }}
+        <!--{{ form.errors }}
         {{ form.login }}
         {{ form.password.errors }}
         {{ form.password}}
         {{ form.remember }} Remember Me
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="btn btn-success btn-block" type="submit">{% trans "Sign In" %}</button>
+        {% endif %}-->
+        <a href="{% provider_login_url 'office365' %}" class="btn btn-clr btn-block"><img class="login-logo" src="{% static 'images/office-365.png' %}" /></a>
     </form>
-    <a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    <!--<a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>-->
+    <p>If you do not have an Office 365 account please contact support at support@optipulse.com</p>
 {% endblock %}

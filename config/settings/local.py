@@ -37,3 +37,7 @@ DATABASES = {
         'PORT': get_secret('PORT'),
     }
 }
+
+INSTALLED_APPS += (
+    "sslserver",
+)

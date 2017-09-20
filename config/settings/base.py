@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth_office365',
     
     'bootstrap4',
     
@@ -55,6 +57,15 @@ INSTALLED_APPS = [
     'business_management.engineering',
 ]
 
+#SOCIALACCOUNT_ADAPTER = 'allauth_office365.adapter.SocialAccountAdapter'
+SOCIALACCOUNT_EMAIL_VERIFICATION = False
+
+SOCIALACCOUNT_PROVIDERS = {
+    'office365': {
+      'SCOPE': ['User.read',],
+      'USERNAME_FIELD': 'mail'
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -172,14 +183,18 @@ STATICFILES_FINDERS = [
 
 AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_REDIRECT_URL = 'dashboard'
-
 SITE_ID = 1
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+LOGIN_REDIRECT_URL = 'dashboard'
+ACCOUNT_EMAIL_REQUIRED = True # email required to signup
+ACCOUNT_EMAIL_VERIFICATION = False # email verification manditory for account verification
+ACCOUNT_AUTHENTICATION_METHOD = "username_email" # username or email
+#ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+#VERIFIED_EMAIL = True
 #ACCOUNT_FORMS = {'login': 'accounts.forms.MyLoginForm', 'sign_up': 'accounts.forms.MySignupForm'}
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 #ACCOUNT_SIGNUP_FORM_CLASS = 'business_management.accounts.forms.UserCreateForm'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+#ACCOUNT_SESSION_REMEMBER = None # Controls the life time of the session. Set to None to ask the user 'Remember me?', False to not remember, and True to always remember.
