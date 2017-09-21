@@ -33,4 +33,4 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com', 'localhost', '138.68.48.73', '138.68.57.75',]
+ALLOWED_HOSTS = ['127.0.0.1', 'cloud.digitalocean.com', 'digitalocean.com', 'corporate.optipulse.com', 'optipulse.com', 'localhost', '138.68.48.73', '138.68.57.75', 'login.microsoftonline.com', 'microsoftonline.com',]
