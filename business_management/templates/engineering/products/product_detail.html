@@ -1,0 +1,136 @@
+{% extends "pages/layout.html" %}
+
+{% load static from staticfiles %}
+
+{% block title %}Account Detail - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header">User Detail - {{ user.username }}</div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-3">
+                        {% if user.prof_image %}
+                            <img class="profile-image" src="{% static 'img/avatars/' %}{{ user.prof_image }}" />
+                        {% else %}
+                            <img class="profile-image" src="{% static 'img/avatars/blank.jpg' %}" />
+                        {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <h2 class="card-detail-header">User Detail - {{ user.username }}</h2>
+                        <table class="table" style="margin-bottom: 0px;">
+                            <tr>
+                                <td class="firstcol">Username: </td>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">First Name: </td>
+                                <td>{{ user.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Last Name: </td>
+                                <td>{{ user.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Email: </td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Title: </td>
+                                <td>{{ user.title }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Company Employee: </td>
+                                <td>
+                                    {% if user.is_staff == True %}
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Superuser: </td>
+                                <td>
+                                    {% if user.is_superuser == True %}
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Account Active: </td>
+                                <td>
+                                    {% if user.is_active == True %}
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Date joined: </td>
+                                <td>{{ user.date_joined }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Last Login: </td>
+                                <td>{{ user.last_login }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Bio: </td>
+                                <td>{{ user.bio }}</td>
+                            </tr>
+                            <tr style="border:none;">
+                                <td style="border:none;" class="firstcol">
+                                    Digital Signature:
+                                </td>
+                                <td style="border:none;">
+                                    {% if user.digital_sig %}
+                                        <img src="{% static 'img/sigs/' %}{{ user.digital_sig }}" />
+                                    {% else %}
+                                        Digital Signiture not yet added
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-header">User Groups</div>
+            <div class="card-block">
+                <table class="table">
+                    {% for g in request.user.groups.all %}
+                    <tr>
+                        <td>{{ g.name }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">Change History - {{ user.username }}</div>
+            <div class="card-block">
+                <table class="table">
+                    <tr>
+                        <td>Username</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name: </td>
+                        <td>{{ user.first_name }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -27,7 +27,6 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     # User management
     #url(r'^users/', include('business_management.users.urls', namespace='users')),
-    #url(r'^accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

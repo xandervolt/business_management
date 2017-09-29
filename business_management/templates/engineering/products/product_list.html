@@ -1,0 +1,56 @@
+{% extends "pages/list_template.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block list_title %}Products{% endblock %}
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Flip Chip
+            </th>
+            <th>
+                Build Date
+            </th>
+            <th>
+                Created At
+            </th>
+            <th>
+                Created By
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Flip Chip
+            </th>
+            <th>
+                Build Date
+            </th>
+            <th>
+                Created At
+            </th>
+            <th>
+                Created By
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td><a href="">{{ product.serial_num }}</a></td>
+            <td><a href=""></td>
+            <td>{{ product.build_date }}</td>
+            <td>{{ product.created_at }}</td>
+            <td>{{ product.created_by }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}
