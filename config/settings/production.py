@@ -22,6 +22,19 @@ MIDDLEWARE = WHITENOISE_MIDDLEWARE + MIDDLEWARE
 
 INSTALLED_APPS += ['gunicorn', ]
 
+# Static File Configuration
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+STATIC_ROOT = str(ROOT_DIR('staticfiles'))
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+STATIC_URL = '/staticfiles/'
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [
+    str(APPS_DIR.path('staticfiles')),
+]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
