@@ -27,3 +27,9 @@ input[type=text], input[type=textarea], input[type=password], input[type=email] 
     border-radius: 4px;
     padding-bottom: 0px;
 }
+.btn-clr:hover {
+    background: #FCFCFC;
+}
+.btn-signin {
+    padding: 13px 0 13px 0
+}
