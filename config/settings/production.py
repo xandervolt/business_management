@@ -17,18 +17,18 @@ SECRET_KEY = 'whb50d^$a$blw3nymfycq&8pizac+m5flrhr%28bw^p_z(5o*p"'
 
 DEBUG = False
 
-WHITENOISE_MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware', ]
-MIDDLEWARE = WHITENOISE_MIDDLEWARE + MIDDLEWARE
+#WHITENOISE_MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware', ]
+#MIDDLEWARE = WHITENOISE_MIDDLEWARE + MIDDLEWARE
 
 INSTALLED_APPS += ['gunicorn', ]
 
 # Static File Configuration
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(ROOT_DIR('static'))
+STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-STATIC_URL = "https://corporate.optipulse.com/static/"
+STATIC_URL = "/staticfiles/"
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
