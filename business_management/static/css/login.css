@@ -36,7 +36,7 @@ input[type=text], input[type=textarea], input[type=password], input[type=email] 
 .or-container {
     text-align: center;
     margin-top:20px;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
     clear: both;
     color: #6a737c;
     font-variant: small-caps;
@@ -48,5 +48,5 @@ input[type=text], input[type=textarea], input[type=password], input[type=email] 
     background-color: #FFF;
 }
 hr {
-    margin-bottom: -24px;
+    margin-bottom: -14px;
 }
