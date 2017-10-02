@@ -5,7 +5,7 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /staticfiles/ {
-        root /home/optipulse/business_management;
+        root /home/optipulse/business_management/business_management;
     }
 
     location / {

@@ -41,7 +41,7 @@ input[type=text], input[type=textarea], input[type=password], input[type=email] 
     color: #6a737c;
     font-variant: small-caps;
 }
-.or {
+#or {
     display: inline-block;
     position: relative;
     padding: 10px;

@@ -13,7 +13,7 @@
     {% if socialaccount_providers %}
         <p>Please sign in with your Office 365 account by clicking the Office 365 button below.</p>
         
-        <a href="{% provider_login_url 'office365' %}" class="btn btn-clr btn-block"><img style="height:25px;" class="login-logo" src="{% static 'images/office-365.png' %}" /></a>
+        <a href="{% provider_login_url 'office365' %}" class="btn btn-clr btn-block"><img style="height:25px;" class="login-logo" src="{% static 'images/office_365_logo_sm.png' %}" /></a>
         
         <!--<p>If you do not have an Office 365 account / optipulse email account you can sign up for access to optiPulse Apps <a href="{{ signup_url }}">by clicking here</a></p>
         
@@ -35,7 +35,7 @@
     
     <div class="or-container">
         <hr class="or-hr" />
-        <div class="or">or</div>
+        <div id="or">or</div>
     </div>
 
     <form class="login" method="POST" action="{% url 'account_login' %}">
