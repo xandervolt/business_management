@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.views import defaults as default_views
 
 urlpatterns = [
@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^dashboard/', TemplateView.as_view(template_name='pages/dashboard.html'), name='dashboard'),
     url(r'^engineering/', include('business_management.engineering.urls', namespace='engineering')),
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    url(r'^$', RedirectView.as_view(url='accounts/login'), name='home'),
     # User management
     #url(r'^users/', include('business_management.users.urls', namespace='users')),
 ]
