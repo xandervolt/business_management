@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     
     'business_management.accounts',
     'business_management.engineering',
+    'business_management.dashboard',
 ]
 
 #SOCIALACCOUNT_ADAPTER = 'allauth_office365.adapter.SocialAccountAdapter'
@@ -172,7 +173,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'dashboard:dashboard'
 ACCOUNT_EMAIL_REQUIRED = True # email required to signup
 ACCOUNT_EMAIL_VERIFICATION = False # email verification manditory for account verification
 ACCOUNT_AUTHENTICATION_METHOD = "username_email" # username or email
