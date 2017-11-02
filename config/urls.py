@@ -22,7 +22,7 @@ from django.views import defaults as default_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^dashboard/', TemplateView.as_view(template_name='pages/dashboard.html'), name='dashboard'),
+    url(r'^dashboard/', include('business_management.dashboard.urls', namespace='dashboard')),
     url(r'^engineering/', include('business_management.engineering.urls', namespace='engineering')),
     url(r'^$', RedirectView.as_view(url='accounts/login'), name='home'),
     # User management
