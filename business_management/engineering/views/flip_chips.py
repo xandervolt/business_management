@@ -23,7 +23,7 @@ class FlipChipDetailView(LoginRequiredMixin, DetailView):
     
     
 class FlipChipCreateView(LoginRequiredMixin, CreateView):
-    fields = ("serial_num", "build_date", "created_by", "notes")
+    fields = ("serial_num", "bond_date", "created_by", "notes")
     model = FlipChip
     #form = forms.CreateProductForm()
     
@@ -31,11 +31,11 @@ class FlipChipCreateView(LoginRequiredMixin, CreateView):
         object = form.save(commit=False)
         object.created_by = self.request.user
         object.save()
-        return super(ProductCreateView, self).form_valid(form)
+        return super(FlipChipCreateView, self).form_valid(form)
     
     
 class FlipChipUpdateView(LoginRequiredMixin, UpdateView):
-    fields = ("serial_num", "build_date", "notes")
+    fields = ("serial_num", "bond_date", "notes")
     model = FlipChip
     
     def get_page_title(self):
