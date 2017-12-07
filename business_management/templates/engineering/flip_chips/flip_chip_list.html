@@ -1,0 +1,56 @@
+{% extends "pages/list_template.html" %}
+
+{% block title %}Flip Chips{% endblock %}
+
+{% block list_title %}Flip Chips{% endblock %}
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Flip Chip
+            </th>
+            <th>
+                Bond Date
+            </th>
+            <th>
+                Created At
+            </th>
+            <th>
+                Created By
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                Serial Number
+            </th>
+            <th>
+                Flip Chip
+            </th>
+            <th>
+                Bond Date
+            </th>
+            <th>
+                Created At
+            </th>
+            <th>
+                Created By
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for flip_chip in flip_chips %}
+        <tr>
+            <td><a href="">{{ flip_chip.serial_num }}</a></td>
+            <td><a href=""></td>
+            <td>{{ flip_chip.bond_date }}</td>
+            <td>{{ flip_chip.created_at }}</td>
+            <td>{{ flip_chip.created_by }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}

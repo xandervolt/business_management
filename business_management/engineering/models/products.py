@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
 
-#from .flip_chips.models import FlipChip
+#from .models.flip_chips import FlipChip
 
 # Create your models here.
 class Product(models.Model):
