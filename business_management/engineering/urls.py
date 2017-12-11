@@ -9,6 +9,8 @@ from .views import gaas_wafer_designs
 
 urlpatterns = [
     url(r'^$', dashboard.EngineeringDashboardView.as_view(), name='engineering'),
+    url(r'^database-flow/$', dashboard.DatabaseFlowView.as_view(), name='database_flow'),
+    
     url(r'^products/$', products.ProductListView.as_view(), name='product_list'),
     url(r'^flip-chips/$', flip_chips.FlipChipListView.as_view(), name='flip_chip_list'),
     

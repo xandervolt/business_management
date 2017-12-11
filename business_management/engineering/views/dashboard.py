@@ -15,3 +15,6 @@ from django.views.generic import (
 
 class EngineeringDashboardView(LoginRequiredMixin, TemplateView):
     template_name = "engineering/dashboard/dashboard.html"
+    
+class DatabaseFlowView(LoginRequiredMixin, TemplateView):
+    template_name = "engineering/database_flow/database_flow.html"
