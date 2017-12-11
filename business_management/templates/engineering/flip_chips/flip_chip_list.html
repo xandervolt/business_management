@@ -10,16 +10,31 @@
                 Serial Number
             </th>
             <th>
-                Flip Chip
+                Laser Chip
+            </th>
+            <th>
+                Substrate
+            </th>
+            <th>
+                Bond Pressure
+            </th>
+            <th>
+                Bond Heat
+            </th>
+            <th>
+                Bond Time
             </th>
             <th>
                 Bond Date
             </th>
             <th>
-                Created At
+                Bonding Tool
             </th>
             <th>
-                Created By
+                Pack/Carrier
+            </th>
+            <th>
+                Geo Location
             </th>
         </tr>
     </thead>
@@ -29,16 +44,31 @@
                 Serial Number
             </th>
             <th>
-                Flip Chip
+                Laser Chip
+            </th>
+            <th>
+                Substrate
+            </th>
+            <th>
+                Bond Pressure
+            </th>
+            <th>
+                Bond Heat
+            </th>
+            <th>
+                Bond Time
             </th>
             <th>
                 Bond Date
             </th>
             <th>
-                Created At
+                Bonding Tool
             </th>
             <th>
-                Created By
+                Pack/Carrier
+            </th>
+            <th>
+                Geo Location
             </th>
         </tr>
     </tfoot>
@@ -46,10 +76,15 @@
         {% for flip_chip in flip_chips %}
         <tr>
             <td><a href="">{{ flip_chip.serial_num }}</a></td>
-            <td><a href=""></td>
+            <td><a href="">[Laser Chip]</td>
+            <td><a href="">[Substrate]</td>
+            <td>{{ flip_chip.bond_pressure }}</td>
+            <td>{{ flip_chip.bond_heat }}</td>
+            <td>{{ flip_chip.bond_time }}</td>
             <td>{{ flip_chip.bond_date }}</td>
-            <td>{{ flip_chip.created_at }}</td>
-            <td>{{ flip_chip.created_by }}</td>
+            <td>{{ flip_chip.bond_tool }}</td>
+            <td>{{ flip_chip.carrier }}</td>
+            <td>{{ flip_chip.geo_location }}</td>
         </tr>
         {% endfor %}
     </tbody>

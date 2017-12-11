@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 #from .flip_chips.models import FlipChip
 
 # Create your models here.
-class FlipChip(models.Model):
+class LaserChip(models.Model):
     serial_num = models.CharField(max_length=255)
     #laser_chip = models.ForeignKey(LaserChip)
     #substrate = models.ForeignKey(Substrate) 

@@ -1,0 +1,77 @@
+{% extends "pages/list_template.html" %}
+
+{% block title %}GaAs Wafer Designs{% endblock %}
+
+{% block list_title %}GaAs Wafer Designs{% endblock %}
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                Wafer Design UI
+            </th>
+            <th>
+                Emitting Type
+            </th>
+            <th>
+                Contact Location
+            </th>
+            <th>
+                Optical Power
+            </th>
+            <th>
+                Design Date
+            </th>
+            <th>
+                Designer
+            </th>
+            <th>
+                Designer UI
+            </th>
+            <th>
+                Created At
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                Wafer Design UI
+            </th>
+            <th>
+                Emitting Type
+            </th>
+            <th>
+                Contact Location
+            </th>
+            <th>
+                Optical Power
+            </th>
+            <th>
+                Design Date
+            </th>
+            <th>
+                Designer
+            </th>
+            <th>
+                Designer UI
+            </th>
+            <th>
+                Created At
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for gaas_wafer_design in gaas_wafer_designs %}
+        <tr>
+            <td><a href="">{{ gaas_wafer_design.design_ui }}</a></td>
+            <td>{{ gaas_wafer_design.emitting }}</td>
+            <td>{{ gaas_wafer_design.contact_location }}</td>
+            <td>{{ gaas_wafer_design.optical_power }}</td>
+            <td>{{ gaas_wafer_design.design_date }}</td>
+            <td>{{ gaas_wafer_design.designer }}</td>
+            <td>{{ gaas_wafer_design.designer_ui }}</td>
+            <td>{{ gaas_wafer_design.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}

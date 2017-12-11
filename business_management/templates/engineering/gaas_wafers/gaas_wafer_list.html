@@ -1,0 +1,103 @@
+{% extends "pages/list_template.html" %}
+
+{% block title %}GaAs Wafers{% endblock %}
+
+{% block list_title %}GaAs Wafers{% endblock %}
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                Wafer UI
+            </th>
+            <th>
+                Wafer Design
+            </th>
+            <th>
+                Growth Date
+            </th>
+            <th>
+                Wafer Position
+            </th>
+            <th>
+                Reflectance Map
+            </th>
+            <th>
+                Wafer Diameter
+            </th>
+            <th>
+                Conductivity
+            </th>
+            <th>
+                Wavelength
+            </th>
+            <th>
+                Gain Offset
+            </th>
+            <th>
+                Operating Temp.
+            </th>
+            <th>
+                Vendor
+            </th>
+            <th>
+                Growth Lot
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                Wafer UI
+            </th>
+            <th>
+                Wafer Design
+            </th>
+            <th>
+                Growth Date
+            </th>
+            <th>
+                Wafer Position
+            </th>
+            <th>
+                Reflectance Map
+            </th>
+            <th>
+                Wafer Diameter
+            </th>
+            <th>
+                Conductivity
+            </th>
+            <th>
+                Wavelength
+            </th>
+            <th>
+                Gain Offset
+            </th>
+            <th>
+                Operating Temp.
+            </th>
+            <th>
+                Vendor
+            </th>
+            <th>
+                Growth Lot
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for gaas_wafer in gaas_wafers %}
+        <tr>
+            <td><a href="">{{ gaas_wafer.wafer_ui }}</a></td>
+            <td>{{ gaas_wafer.design_ui }}</td>
+            <td>{{ gaas_wafer.growth_date }}</td>
+            <td>{{ gaas_wafer.wafer_position }}</td>
+            <td>{{ gaas_wafer.reflectance_map }}</td>
+            <td>{{ gaas_wafer.wafer_diameter }}</td>
+            <td>{{ gaas_wafer.conductivity }}</td>
+            <td>{{ gaas_wafer.wavelength }}</td>
+            <td>{{ gaas_wafer.gain_offset }}</td>
+            <td>{{ gaas_wafer.designed_operating_temp }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}

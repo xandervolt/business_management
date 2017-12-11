@@ -1,0 +1,53 @@
+{% extends "pages/layout.html" %}
+
+{% load static from staticfiles %}
+
+{% block title %}{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <a class="btn btn-info disabled" href=""><i class="fa fa-lightbulb-o fa-fw"></i> Add New</a>
+                <a class="btn btn-info disabled" href=""><i class="fa fa-files-o fa-fw"></i> Copy</a>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <a class="btn btn-warning disabled" href=""><i class="fa fa-pencil-square-o fa-fw"></i> Edit</a>
+                <a class="btn btn-warning disabled" href=""><i class="fa fa-print fa-fw"></i> Print</a>
+                <a class="btn btn-warning disabled" href=""><i class="fa fa-line-chart fa-fw"></i> Create Report</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third group">
+                <a class="btn btn-danger disabled" href=""><i class="fa fa-trash-o fa-fw"></i> Move to Trash</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="card-detail-header">{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit {{ form.instance.gaas_wafer_design.design_ui }}{% endif %}</div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2 class="card-detail-header"></h2>
+                        <form method='POST'>
+                            {% csrf_token %}
+                            <table class="table inputform" style="margin-bottom: 0px;">
+                                {{ form.as_table }}
+                            </table>
+                            <input type="submit" class="btn btn-success" value="Save">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
