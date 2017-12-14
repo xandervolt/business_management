@@ -15,9 +15,9 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             {% if request.user.prof_image %}
-                <img src="" class="img-avatar" alt="">
+                <img src="{% static 'images/users/avatars/' %}{{ request.user.prof_image }}" class="img-avatar" alt="">
             {% else %}
-                <img src="" class="img-avatar" alt="">
+                <img src="{% static 'images/users/avatars/blank.jpg' %}" class="img-avatar" alt="">
             {% endif %}
             <span class="d-md-down-none"></span>
         </a>
