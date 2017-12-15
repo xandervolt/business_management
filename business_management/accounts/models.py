@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=80, unique=True)
     bio = models.CharField(max_length=255, blank=True, default="")
     title = models.CharField(max_length=100, blank=True, default="")
-    prof_image = models.ImageField(blank=True, null=True, upload_to='https://optipulse.sharepoint.com/ITSupport/Documents/Drivers')
+    prof_image = models.ImageField(blank=True, null=True, upload_to='https://optipulse.sharepoint.com/ITSupport/Shared%20Documents/')
     digital_sig = models.ImageField(blank=True, null=True, upload_to='business_management/static/images/users/signatures')
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(null=True)
