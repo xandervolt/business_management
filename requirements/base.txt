@@ -5,3 +5,5 @@ Pillow==4.2.1
 psycopg2==2.7.3
 pytz==2017.2
 git+https://github.com/Lamelos/django-allauth-office365.git
+django-admin-view-permission
+django-braces
