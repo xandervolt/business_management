@@ -7,7 +7,7 @@
             <a href="{% url 'dashboard:dashboard' %}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
-        </li><!--
+        </li>{% if perms.administration %}
         <li class="sidebar-header">ADMINISTRATION</li>
         <li>
             <a href="#">
@@ -30,18 +30,7 @@
                 <li><a href="">Contacts</a></li>
             </ul>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-money" aria-hidden="true"></i>
-                <span>Financial</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="">Fixed Assets</a></li>
-                <li><a href="">Invoices</a></li>
-                <li><a href="">Purchase Orders</a></li>
-            </ul>
-        </li>-->
+        {% endif %}
         {% if perms.engineering %}
         <li class="sidebar-header">ENGINEERING</li>
         <li><a href="{% url 'engineering:database_flow' %}"><i class="fa fa-area-chart"></i> Database Flow</a></li>

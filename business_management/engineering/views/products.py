@@ -15,17 +15,22 @@ from ..models.products import Product
 # Create your views here.
 
 class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    permission_required = 'engineering.view_product'
-    raise_exception = True
+    permission_required = 'engineering.change_product'
+    login_url = 'accounts:logout'
+    permission_denied_message = 'Nope'
     context_object_name = "products"
     model = Product
     template_name = 'engineering/products/product_list.html'
 
-class ProductDetailView(LoginRequiredMixin, DetailView):
+class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    permission_required = 'engineering.view_product'
+    raise_exception = True
     model = Product
     
     
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = 'engineering.add_product'
+    raise_exception = True
     fields = ("serial_num", "build_date", "created_by", "notes")
     model = Product
     #form = forms.CreateProductForm()
@@ -37,7 +42,9 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super(ProductCreateView, self).form_valid(form)
     
     
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin,  PermissionRequiredMixin, UpdateView):
+    permission_required = 'engineering.change_product'
+    raise_exception = True
     fields = ("serial_num", "build_date", "notes")
     model = Product
     

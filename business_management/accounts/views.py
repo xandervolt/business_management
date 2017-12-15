@@ -7,3 +7,6 @@ from .models import User
 
 class ConfirmEmailView(ConfirmEmailView):
     pass
+
+class PermissionRequiredView(TemplateView):
+    template_name = 'account/account_banned.html'
