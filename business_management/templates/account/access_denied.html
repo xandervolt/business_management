@@ -1,0 +1,13 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Account Inactive" %}{% endblock %}
+
+{% block content %}
+<h1 class="text-danger">{% trans "Access Denied" %}</h1>
+
+<p><b>{% trans "Access is denied. You do not have the appropriate permissions to view this page." %}</b></p>
+<p>If you believe this message was seen in error please contact support.</p>
+<p>Please press the back button in your browser</p>
+{% endblock %}

@@ -22,6 +22,7 @@ from django.views import defaults as default_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/', include('business_management.accounts.urls', namespace='accounts')),
     url(r'^dashboard/', include('business_management.dashboard.urls', namespace='dashboard')),
     url(r'^engineering/', include('business_management.engineering.urls', namespace='engineering')),
     url(r'^$', RedirectView.as_view(url='accounts/login'), name='home'),

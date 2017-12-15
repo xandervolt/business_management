@@ -59,22 +59,14 @@ INSTALLED_APPS = [
     'business_management.dashboard',
 ]
 
-'''
-ADMIN_VIEW_PERMISSION_MODELS = [
-    'engineering.models.flip-chips.FlipChip',
-    'engineering.models.gaas_wafer_designs.GaasWaferDesign',
-    'engineering.models.gaas_wafers.GaasWafer',
-    'engineering.models.laser_chips.LaserChip',
-    'engineering.models.products.Product',
-]
-'''
-
 #SOCIALACCOUNT_ADAPTER = 'allauth_office365.adapter.SocialAccountAdapter'
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
 
 SOCIALACCOUNT_PROVIDERS = {
     'office365': {
-      'SCOPE': ['User.read',],
+      'SCOPE': ['User.read',
+                'Files.ReadWrite',
+                ],
       'USERNAME_FIELD': 'mail'
     }
 }
