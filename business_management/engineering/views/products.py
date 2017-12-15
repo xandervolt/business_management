@@ -1,4 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, AccessMixin
+from braces.views import GroupRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import (
@@ -13,7 +14,9 @@ from ..models.products import Product
 
 # Create your views here.
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'engineering.view_product'
+    raise_exception = True
     context_object_name = "products"
     model = Product
     template_name = 'engineering/products/product_list.html'

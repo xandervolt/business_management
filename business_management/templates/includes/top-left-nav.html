@@ -4,16 +4,18 @@
     <li class="nav-item">
         <a class="nav-link navbar-toggler sidebar-toggler" href="#">☰</a>
     </li>
-    <li class="nav-item px-3">
-        <a class="nav-link" href="#">Admin Dashboard</a>
-    </li>
-    <li class="nav-item px-3">
-        <a class="nav-link" href="">Users</a>
-    </li>
-    <li class="nav-item px-3">
-        <a class="nav-link" href="#">Groups</a>
-    </li>
-    <li class="nav-item px-3">
-        <a class="nav-link" href="#">Account Settings</a>
-    </li>
+    {% if perms.account %}
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">Admin Dashboard</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="">Users</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">Groups</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">Account Settings</a>
+        </li>
+    {% endif %}
 </ul>

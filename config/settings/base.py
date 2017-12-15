@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    #'admin_view_permission',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
