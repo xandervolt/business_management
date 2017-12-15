@@ -38,6 +38,7 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 # ------------------------------------------------------------------------------
 
 INSTALLED_APPS = [
+    'admin_view_permission',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    #'admin_view_permission',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -58,6 +58,16 @@ INSTALLED_APPS = [
     'business_management.engineering',
     'business_management.dashboard',
 ]
+
+'''
+ADMIN_VIEW_PERMISSION_MODELS = [
+    'engineering.models.flip-chips.FlipChip',
+    'engineering.models.gaas_wafer_designs.GaasWaferDesign',
+    'engineering.models.gaas_wafers.GaasWafer',
+    'engineering.models.laser_chips.LaserChip',
+    'engineering.models.products.Product',
+]
+'''
 
 #SOCIALACCOUNT_ADAPTER = 'allauth_office365.adapter.SocialAccountAdapter'
 SOCIALACCOUNT_EMAIL_VERIFICATION = False
