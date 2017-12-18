@@ -1,9 +1,10 @@
 from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
-
+import reversion
 
 # Create your models here.
+@reversion.register
 class GaasWaferDesign(models.Model):
     design_ui = models.CharField(max_length=60, unique=True) # Wafer Design UI
     

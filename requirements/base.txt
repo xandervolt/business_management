@@ -6,4 +6,4 @@ psycopg2==2.7.3
 pytz==2017.2
 git+https://github.com/Lamelos/django-allauth-office365.git
 django-admin-view-permission
-django-braces
+django-reversion==2.0.12
