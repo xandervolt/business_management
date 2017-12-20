@@ -25,7 +25,9 @@ class LaserMaskDesign(models.Model):
     
     def save(self, *args, **kwargs):
          # Get the authenticated user credentials from python-social-auth
-        social = request.user.allauth.get(provider='office365')
+        #social = request.user.allauth.get(provider='office365')
+        return request.user.allauth.get(provider='office365')
+        '''
         access_token = social.extra_data['access_token']
     
         # build our header for the api call
@@ -40,6 +42,7 @@ class LaserMaskDesign(models.Model):
         response = requests.put(url, data=open(design_document, 'rb'), headers=headers)
         return response
     
+        '''
         super(LaserMaskDesign, self).save(*args, **kwargs)
     
     class Meta:
