@@ -28,7 +28,7 @@ class LaserMaskDesignDetailView(LoginRequiredMixin, PermissionRequiredMixin, Det
     model = LaserMaskDesign
     template_name = 'engineering/laser_mask_designs/laser_mask_design_detail.html'
 
-class LaserMaskDesignCreateView(LoginRequiredMixin, PermissionRequiredMixin, FileUploadMixin, CreateView):
+class LaserMaskDesignCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = 'engineering.add_laser_mask_design'
     login_url = 'accounts:access_denied'
     fields = ("laser_mask_design_ui", "mask_layers", "design_date", "designer", "pcm", "critical_dimensions", "dimensions", "thickness", "thickness", "material", "number_of_products", "chip_list", "design_document", "notes")
@@ -59,7 +59,7 @@ class LaserMaskDesignCreateView(LoginRequiredMixin, PermissionRequiredMixin, Fil
         object = form.save(commit=False)
         object.created_by = self.request.user
         object.save()
-        return super(LaserMaskDesignDetailView, self).form_valid(form)
+        return super(LaserMaskDesignCreateView, self).form_valid(form)
     
 class LaserMaskDesignUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'engineering.change_laser_mask_design'

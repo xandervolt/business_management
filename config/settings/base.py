@@ -184,9 +184,9 @@ SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'Your AzureAD Secret'
 SOCIAL_AUTH_AZUREAD_OAUTH2_RESOURCE = 'https://{YourSharepointTenant}.sharepoint.com'
 
 SOCIAL_AUTH_AZUREAD_OAUTH2_SCOPE = ['Files.ReadWrite',]
-'''
-SHAREPOINT_RESOURCE = 'https://optipulse.sharepoint.com'
 
+SHAREPOINT_RESOURCE = 'https://optipulse.sharepoint.com'
+'''
 
 # AllAuth Settings
 # ------------------------------------------------------------------------------

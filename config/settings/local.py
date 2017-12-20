@@ -47,7 +47,8 @@ INSTALLED_APPS += (
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
-
+MEDIA_ROOT = str(ROOT_DIR('media'))
+MEDIA_URL = '/media/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 

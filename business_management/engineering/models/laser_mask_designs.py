@@ -17,7 +17,7 @@ class LaserMaskDesign(models.Model):
     material = models.CharField(max_length=255, default='')
     number_of_products = models.IntegerField(default=0)
     chip_list = models.CharField(max_length=255, default='')
-    design_document = models.FileField()
+    design_document = models.FileField(blank=True, null=True)
     notes = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
