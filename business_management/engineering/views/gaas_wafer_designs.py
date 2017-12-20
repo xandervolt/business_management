@@ -17,15 +17,18 @@ class GaasWaferDesignListView(LoginRequiredMixin, ListView):
     context_object_name = "gaas_wafer_designs"
     model = GaasWaferDesign
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_list.html'
+    
 
 class GaasWaferDesignDetailView(LoginRequiredMixin, DetailView):
     model = GaasWaferDesign
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_detail.html'
+    
 
-class GaasWaferDesignCreateView(LoginRequiredMixin, CreateView):
+class GaasWaferDesignCreateView(LoginRequiredMixin, CreateView,):
     fields = ("design_ui", "emitting", "contact_location", "optical_power", "design_date", "designer", "design_ui", "notes")
     model = GaasWaferDesign
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form.html'
+    
     def form_valid(self, form):
         object = form.save(commit=False)
         object.created_by = self.request.user

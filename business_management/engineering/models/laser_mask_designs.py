@@ -17,11 +17,30 @@ class LaserMaskDesign(models.Model):
     material = models.CharField(max_length=255, default='')
     number_of_products = models.IntegerField(default=0)
     chip_list = models.CharField(max_length=255, default='')
-    design_document = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    design_document = models.FileField()
     notes = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
     in_trash = models.BooleanField(default=False)
+    
+    def save(self, *args, **kwargs):
+         # Get the authenticated user credentials from python-social-auth
+        social = request.user.social_auth.get(provider='office365')
+        access_token = social.extra_data['access_token']
+    
+        # build our header for the api call
+        headers = {
+            'Authorization' : 'Bearer {0}'.format(access_token),
+        }
+    
+        # build the url for the api call
+        # Look at https://dev.onedrive.com/items/upload_put.htm for reference
+        url = 'https://36b2a01a-c6af-4694-bb6c-c941c1ec8b4a.sharepoint.com/sites/ITSupport/drive/items/root:/' + design_document + ':/content'
+        # Make the api call
+        response = requests.put(url, data=open(design_document, 'rb'), headers=headers)
+        return response
+    
+        super(LaserMaskDesign, self).save(*args, **kwargs)
     
     class Meta:
         ordering = ['laser_mask_design_ui', ]

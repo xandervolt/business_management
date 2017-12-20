@@ -5,4 +5,8 @@ input, button, select, optgroup, textarea {
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
   border-radius:3px;
-  
+}
+
+label {
+    font-weight: normal;
+}

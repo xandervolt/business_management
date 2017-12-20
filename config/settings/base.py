@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth_office365',
+    #'social.apps.django_app.default',
     'reversion',
     
     'bootstrap4',
@@ -147,6 +148,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+    # for Office365/SharePoint Auth
+    #'oauth.backends.AzureADOAuth2',
 )
 
 
@@ -169,6 +172,20 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+
+# OAuth Office365/SharePoint Variables
+# ------------------------------------------------------------------------------
+'''
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = 'Your AzureAD Client ID'
+
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'Your AzureAD Secret'
+
+SOCIAL_AUTH_AZUREAD_OAUTH2_RESOURCE = 'https://{YourSharepointTenant}.sharepoint.com'
+
+SOCIAL_AUTH_AZUREAD_OAUTH2_SCOPE = ['Files.ReadWrite',]
+'''
+SHAREPOINT_RESOURCE = 'https://optipulse.sharepoint.com'
 
 
 # AllAuth Settings

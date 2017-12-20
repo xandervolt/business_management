@@ -1,12 +1,12 @@
 {% extends "pages/list_template.html" %}
 
-{% block title %}GaAs Wafer Design List{% endblock %}
+{% block title %}Laser Mask List{% endblock %}
 
-{% block list_title %}GaAs Wafer Designs{% endblock %}
+{% block list_title %}Laser Masks{% endblock %}
 
 {% block buttons %}
 <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -100px; z-index:1000;">
-    <a class="btn btn-primary"><i class="fa fa-magic fa-fw"></i> Add GaAs Wafer Design</a>
+    <a class="btn btn-primary"><i class="fa fa-magic fa-fw"></i> Add Laser Mask</a>
     <a class="btn btn-primary"><i class="fa fa-trash-o fa-fw"></i> View Trash</a>
   
     <div class="btn-group" role="group">
@@ -82,7 +82,7 @@
         {% for gaas_wafer_design in gaas_wafer_designs %}
         <tr>
             <td><a href="">{{ gaas_wafer_design.design_ui }}</a></td>
-            <td>{{ gaas_wafer_design.get_emitting_display }}</td>
+            <td>{{ gaas_wafer_design.emitting }}</td>
             <td>{{ gaas_wafer_design.contact_location }}</td>
             <td>{{ gaas_wafer_design.optical_power }}</td>
             <td>{{ gaas_wafer_design.design_date }}</td>

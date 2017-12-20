@@ -1,12 +1,13 @@
 {% extends "pages/list_template.html" %}
 
-{% block title %}GaAs Wafer Design List{% endblock %}
+{% block title %}Laser Mask Design List{% endblock %}
 
-{% block list_title %}GaAs Wafer Designs{% endblock %}
+{% block list_title %}Laser Mask Designs{% endblock %}
 
 {% block buttons %}
 <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -100px; z-index:1000;">
-    <a class="btn btn-primary">Add GaAs Wafer Design</a>
+    <a class="btn btn-primary" a href="{% url 'engineering:laser_mask_design_create' %}"><i class="fa fa-magic fa-fw"></i> Add Laser Mask Design</a>
+    <a class="btn btn-primary"><i class="fa fa-trash-o fa-fw"></i> View Trash</a>
   
     <div class="btn-group" role="group">
         <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -24,16 +25,10 @@
     <thead>
         <tr>
             <th>
-                Wafer Design UI
+                Mask Design UI
             </th>
             <th>
-                Emitting Type
-            </th>
-            <th>
-                Contact Location
-            </th>
-            <th>
-                Optical Power
+                Mask Layers
             </th>
             <th>
                 Design Date
@@ -42,26 +37,35 @@
                 Designer
             </th>
             <th>
-                Designer UI
+                PCM
             </th>
             <th>
-                Created At
+                Critical Dims.
+            </th>
+            <th>
+                Dims.
+            </th>
+            <th>
+                Thickness
+            </th>
+            <th>
+                Material
+            </th>
+            <th>
+                # Products
+            </th>
+            <th>
+                Chip List
             </th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>
-                Wafer Design UI
+                Mask Design UI
             </th>
             <th>
-                Emitting Type
-            </th>
-            <th>
-                Contact Location
-            </th>
-            <th>
-                Optical Power
+                Mask Layers
             </th>
             <th>
                 Design Date
@@ -70,24 +74,42 @@
                 Designer
             </th>
             <th>
-                Designer UI
+                PCM
             </th>
             <th>
-                Created At
+                Critical Dims.
+            </th>
+            <th>
+                Dims.
+            </th>
+            <th>
+                Thickness
+            </th>
+            <th>
+                Material
+            </th>
+            <th>
+                # Products
+            </th>
+            <th>
+                Chip List
             </th>
         </tr>
     </tfoot>
     <tbody>
-        {% for gaas_wafer_design in gaas_wafer_designs %}
+        {% for laser_mask_design in laser_mask_designs %}
         <tr>
-            <td><a href="">{{ gaas_wafer_design.design_ui }}</a></td>
-            <td>{{ gaas_wafer_design.emitting }}</td>
-            <td>{{ gaas_wafer_design.contact_location }}</td>
-            <td>{{ gaas_wafer_design.optical_power }}</td>
-            <td>{{ gaas_wafer_design.design_date }}</td>
-            <td>{{ gaas_wafer_design.designer }}</td>
-            <td>{{ gaas_wafer_design.designer_ui }}</td>
-            <td>{{ gaas_wafer_design.created_at }}</td>
+            <td><a href="">{{ laser_mask_design.laser_mask_design_ui }}</a></td>
+            <td>{{ laser_mask_design.mask_layers }}</td>
+            <td>{{ laser_mask_design.design_date }}</td>
+            <td>{{ laser_mask_design.designer }}</td>
+            <td>{{ laser_mask_design.pcm }}</td>
+            <td>{{ laser_mask_design.critical_dimensions }}</td>
+            <td>{{ laser_mask_design.dimensions }}</td>
+            <td>{{ laser_mask_design.thickness }}</td>
+            <td>{{ laser_mask_design.material }}</td>
+            <td>{{ laser_mask_design.number_of_products }}</td>
+            <td>{{ laser_mask_design.chip_list }}</td>
         </tr>
         {% endfor %}
     </tbody>

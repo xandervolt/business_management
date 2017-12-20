@@ -2,7 +2,7 @@
 
 {% load static from staticfiles %}
 
-{% block title %}{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% block title %}{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -26,13 +26,13 @@
 <br />
 <div class="row">
     <div class="col-md-12">
-        <h2 class="card-detail-header">{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit Laser Mask Design - {{ lasermaskdesign.laser_mask_design_ui }}{{ form.instance.lasermaskdesign.laser_mask_design_ui }}{% endif %}</h2>
+        <h2 class="card-detail-header">{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit {{ form.instance.lasermaskdesign.laser_mask_design_ui }}{% endif %}</div>
+            <div class="card-header">{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit {{ form.instance.gaas_wafer_design.design_ui }}{% endif %}</div>
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-9">
