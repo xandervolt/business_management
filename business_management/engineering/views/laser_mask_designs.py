@@ -34,7 +34,7 @@ class LaserMaskDesignCreateView(LoginRequiredMixin, PermissionRequiredMixin, Fil
     fields = ("laser_mask_design_ui", "mask_layers", "design_date", "designer", "pcm", "critical_dimensions", "dimensions", "thickness", "thickness", "material", "number_of_products", "chip_list", "design_document", "notes")
     model = LaserMaskDesign
     template_name = 'engineering/laser_mask_designs/laser_mask_design_form.html'
-    design_document = "design_document"
+
     '''
     def handle_file_upload(design_document):
     
@@ -54,6 +54,7 @@ class LaserMaskDesignCreateView(LoginRequiredMixin, PermissionRequiredMixin, Fil
         response = requests.put(url, data=open(design_document, 'rb'), headers=headers)
         return response 
     '''
+    
     def form_valid(self, form):
         object = form.save(commit=False)
         object.created_by = self.request.user
