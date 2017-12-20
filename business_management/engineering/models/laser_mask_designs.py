@@ -35,7 +35,7 @@ class LaserMaskDesign(models.Model):
     
         # build the url for the api call
         # Look at https://dev.onedrive.com/items/upload_put.htm for reference
-        url = 'https://36b2a01a-c6af-4694-bb6c-c941c1ec8b4a.sharepoint.com/sites/ITSupport/drive/items/root:/' + design_document.name + ':/content'
+        url = 'https://36b2a01a-c6af-4694-bb6c-c941c1ec8b4a.sharepoint.com/me/drive/root:/' + design_document.name + ':/content'
         # Make the api call
         response = requests.put(url, data=open(design_document, 'rb'), headers=headers)
         return response
