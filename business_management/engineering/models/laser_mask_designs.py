@@ -26,13 +26,14 @@ class LaserMaskDesign(models.Model):
     
     def save(self, *args, **kwargs):
          # Get the authenticated user credentials from python-social-auth
-        social = request.user.allauth.get(provider='office365')
-        access_token = social.extra_data['access_token']
+        #social = request.user.allauth.get(provider='office365')
+        #access_token = social.extra_data['access_token']
     
         # build our header for the api call
+        '''
         headers = {
             'Authorization' : 'Bearer {0}'.format(access_token),
-        }
+        }'''
     
         # build the url for the api call
         # Look at https://dev.onedrive.com/items/upload_put.htm for reference
