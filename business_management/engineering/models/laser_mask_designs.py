@@ -7,18 +7,18 @@ from django.core.urlresolvers import reverse
 #@reversion.register
 class LaserMaskDesign(models.Model):
     laser_mask_design_ui = models.CharField(max_length=60, unique=True) # Wafer Design UI
-    mask_layers = models.CharField(max_length=255, default='')
-    design_date = models.DateTimeField()
-    designer = models.CharField(max_length=255, default='')
-    pcm = models.CharField(max_length=255, default='')
-    critical_dimensions = models.DecimalField(max_digits=20, decimal_places=4, default=0.0000)
+    mask_layers = models.CharField(max_length=255, default='', blank=True, null=True)
+    design_date = models.DateTimeField(blank=True, null=True)
+    designer = models.CharField(max_length=255, default='', blank=True, null=True)
+    pcm = models.CharField(max_length=255, default='', blank=True, null=True)
+    critical_dimensions = models.DecimalField(max_digits=20, decimal_places=4, default=0.0000, blank=True, null=True)
     dimensions = models.CharField(max_length=255, default='')
-    thickness = models.DecimalField(max_digits=20, decimal_places=4, default=0.0000)
-    material = models.CharField(max_length=255, default='')
-    number_of_products = models.IntegerField(default=0)
-    chip_list = models.CharField(max_length=255, default='')
+    thickness = models.DecimalField(max_digits=20, decimal_places=4, default=0.0000, blank=True, null=True)
+    material = models.CharField(max_length=255, default='', blank=True, null=True)
+    number_of_products = models.IntegerField(default=0, blank=True, null=True)
+    chip_list = models.CharField(max_length=255, default='', blank=True, null=True)
     design_document = models.FileField(blank=True, null=True)
-    notes = models.TextField(blank=True, default='')
+    notes = models.TextField(blank=True, null=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
     in_trash = models.BooleanField(default=False)
@@ -40,7 +40,7 @@ class LaserMaskDesign(models.Model):
         # Make the api call
         response = requests.get(url)
         #response = requests.put(url, data=open(self.design_document, 'rb'), headers=headers)
-        return response
+        #return response
     
         super(LaserMaskDesign, self).save(*args, **kwargs)
     
