@@ -38,7 +38,7 @@ class LaserMaskDesign(models.Model):
         url = 'https://graph.microsoft.com/v1.0/me/'
         #url = 'https://graph.microsoft.com/v1.0/sites/ITSupport/drive/root:/' + self.design_document.name + ':/content'
         # Make the api call
-        response = requests.get(url, headers=headers)
+        response = requests.get(url)
         #response = requests.put(url, data=open(self.design_document, 'rb'), headers=headers)
         return response
     
