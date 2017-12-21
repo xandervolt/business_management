@@ -42,7 +42,7 @@ class LaserMaskDesign(models.Model):
         # Make the api call
         response = requests.get(url)
         #response = requests.put(url, data=open(self.design_document, 'rb'), headers=headers)
-        #return response
+        return response
     
         super(LaserMaskDesign, self).save(*args, **kwargs)
     
