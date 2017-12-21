@@ -35,9 +35,11 @@ class LaserMaskDesign(models.Model):
     
         # build the url for the api call
         # Look at https://dev.onedrive.com/items/upload_put.htm for reference
-        url = 'https://graph.microsoft.com/v1.0/sites/ITSupport/drive/root:/' + self.design_document.name + ':/content'
+        url = 'https://graph.microsoft.com/v1.0/me/'
+        #url = 'https://graph.microsoft.com/v1.0/sites/ITSupport/drive/root:/' + self.design_document.name + ':/content'
         # Make the api call
-        response = requests.put(url, data=open(self.design_document, 'rb'), headers=headers)
+        response = requests.get(url, headers=headers)
+        #response = requests.put(url, data=open(self.design_document, 'rb'), headers=headers)
         return response
     
         super(LaserMaskDesign, self).save(*args, **kwargs)
