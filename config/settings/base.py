@@ -176,17 +176,17 @@ STATICFILES_FINDERS = [
 
 # OAuth Office365/SharePoint Variables
 # ------------------------------------------------------------------------------
-'''
-SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = 'Your AzureAD Client ID'
 
-SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'Your AzureAD Secret'
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = 'e3dbcbc0-8370-4a17-b526-bb43e7e20247'
 
-SOCIAL_AUTH_AZUREAD_OAUTH2_RESOURCE = 'https://{YourSharepointTenant}.sharepoint.com'
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = 'RhhK4po2vesAkEP0tebh9jr'
+
+SOCIAL_AUTH_AZUREAD_OAUTH2_RESOURCE = 'https://36b2a01a-c6af-4694-bb6c-c941c1ec8b4a.sharepoint.com'
 
 SOCIAL_AUTH_AZUREAD_OAUTH2_SCOPE = ['Files.ReadWrite',]
 
-SHAREPOINT_RESOURCE = 'https://optipulse.sharepoint.com'
-'''
+#SHAREPOINT_RESOURCE = 'https://optipulse.sharepoint.com'
+
 
 # AllAuth Settings
 # ------------------------------------------------------------------------------
