@@ -1,0 +1,130 @@
+{% extends "pages/layout.html" %}
+
+{% load static from staticfiles %}
+
+{% block title %}Fixed Asset - Tag {{ fixed_asset.asset_tag }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
+            <a class="btn btn-primary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
+            <a class="btn btn-primary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
+            <a class="btn btn-primary" href="{% url 'administration:fixed_asset_update' pk=fixed_asset.pk %}"><i class="fa fa-edit fa-fw"></i> Edit</a>
+            <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
+            <!--
+            <div class="btn-group" role="group">
+                <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Options
+                </a>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">Print</a>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="card-detail-header">Fixed Asset - Tag {{ fixed_asset.asset_tag }}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Fixed Asset - Tag {{ fixed_asset.asset_tag }}</div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-9">
+
+                        <table class="table" style="margin-bottom: 0px;">
+                            <tr style="border-top: hidden;">
+                                <td class="firstcol">Asset Tag: </td>
+                                <td>{{ fixed_asset.asset_tag }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Serial Number: </td>
+                                <td>{{ fixed_asset.serial_number }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Manufacturer: </td>
+                                <td>{{ fixed_asset.manufacturer }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Model: </td>
+                                <td>{{ fixed_asset.model_number }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Purchase Date: </td>
+                                <td>{{ fixed_asset.purchase_date }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Purchase Price: </td>
+                                <td>${{ fixed_asset.purchase_price }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Purchased From </td>
+                                <td>{{ fixed_asset.purchased_from }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Purchase Condition: </td>
+                                <td>{{ fixed_asset.get_purchase_condition_display }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Purchase Order: </td>
+                                <td>{{ fixed_asset.purchase_order }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Asset Type: </td>
+                                <td>{{ fixed_asset.get_asset_type_display }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Owner: </td>
+                                <td>{{ fixed_asset.owner }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Location: </td>
+                                <td>{{ fixed_asset.location }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Active: </td>
+                                <td>{{ fixed_asset.active }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Comments: </td>
+                                <td>{{ fixed_asset.comments }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Record Created By: </td>
+                                <td>{{ fixed_asset.created_by }}</td>
+                            </tr>
+                            <tr>
+                                <td class="firstcol">Record Created At: </td>
+                                <td>{{ fixed_asset.created_at }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Change History: Fixed Asset - Tag {{ fixed_asset.asset_tag }}</div>
+            <div class="card-block">
+                <!--<table class="table">
+                    <tr style="border-top: hidden;">
+                        <td>Username</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name: </td>
+                        <td>{{ user.first_name }}</td>
+                    </tr>
+                </table>-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

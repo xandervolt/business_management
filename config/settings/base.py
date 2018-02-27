@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -53,12 +53,13 @@ INSTALLED_APPS = [
     'allauth_office365',
     #'social.apps.django_app.default',
     'reversion',
-    
+
     'bootstrap4',
-    
+
     'business_management.accounts',
-    'business_management.engineering',
+    'business_management.administration',
     'business_management.dashboard',
+    'business_management.engineering',
 ]
 
 #SOCIALACCOUNT_ADAPTER = 'allauth_office365.adapter.SocialAccountAdapter'

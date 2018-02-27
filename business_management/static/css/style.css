@@ -1837,15 +1837,15 @@ fieldset[disabled] a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #20a8d8;
-  border-color: #20a8d8; }
+  background-color: #CCC;
+  border-color: #CCC; }
   .btn-primary:hover {
     color: #fff;
     background-color: #1985ac;
     border-color: #187fa3; }
   .btn-primary.disabled, .btn-primary:disabled {
-    background-color: #20a8d8;
-    border-color: #20a8d8; }
+    background-color: #CCC;
+    border-color: #CCC; }
   .btn-primary:active, .btn-primary.active,
   .show > .btn-primary.dropdown-toggle {
     color: #fff;
@@ -3471,7 +3471,7 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none; }
-  
+
 .modal-content {
   margin-top: 200px;
 }
@@ -8924,7 +8924,7 @@ hr.transparent {
     border-right-color: #f86c6b; }
   *[dir="rtl"] .callout-success {
     border-right-color: #4dbd74; }
-    
+
 /* Override Styles */
 body {
   background-color: #F2F2F2;
@@ -9050,7 +9050,7 @@ hr.doc {
 
 .tree ul {
 	padding-top: 20px; position: relative;
-	
+
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -9061,7 +9061,7 @@ hr.doc {
 	list-style-type: none;
 	position: relative;
 	padding: 20px 5px 0 5px;
-	
+
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -9080,7 +9080,7 @@ hr.doc {
 	border-left: 1px solid #ccc;
 }
 
-/*We need to remove left-right connectors from elements without 
+/*We need to remove left-right connectors from elements without
 any siblings*/
 .tree li:only-child::after, .tree li:only-child::before {
 	display: none;
@@ -9089,7 +9089,7 @@ any siblings*/
 /*Remove space from the top of single children*/
 .tree li:only-child{ padding-top: 0;}
 
-/*Remove left connector from first child and 
+/*Remove left connector from first child and
 right connector from last child*/
 .tree li:first-child::before, .tree li:last-child::after{
 	border: 0 none;
@@ -9123,11 +9123,11 @@ right connector from last child*/
 	font-family: arial, verdana, tahoma;
 	font-size: 11px;
 	display: inline-block;
-	
+
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	
+
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -9140,9 +9140,9 @@ right connector from last child*/
 	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
 }
 /*Connector styles on hover*//*
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
+.tree li a:hover+ul li::after,
+.tree li a:hover+ul li::before,
+.tree li a:hover+ul::before,
 .tree li a:hover+ul ul::before{
 	border-color:  #94a0b4;
 }

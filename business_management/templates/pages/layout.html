@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <!-- Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
     <link href="{% static 'css/simple-line-icons.css' %}" rel="stylesheet">
     <link href="{% static 'css/sidebar-menu.css' %}" rel="stylesheet">
     <!-- Main styles for this application -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block styles %}{% endblock %}
     {% block head_js %}{% endblock %}
-    
+
 </head>
 
 <!-- BODY options, add following classes to body to change options
@@ -55,7 +56,7 @@
         {% include "includes/top-left-nav.html" %}
         {% include "includes/top-right-nav.html" %}
     </header>
-    
+
     <div class="app-body">
         {% include "includes/sidebar.html" %}
         <!-- Main content -->
@@ -80,7 +81,7 @@
                 <div class="animated fadeIn">
 
                     {% block content %}{% endblock %}
-                    
+
                 </div>
 
             </div>
@@ -376,7 +377,7 @@
 
     </div>
     <footer class="app-footer">
-        <a href="#">© 2017 Joseph Enterprises, LLC.</a>
+        <a href="#">© 2018 Joseph Enterprises, LLC.</a>
         <!--<span class="float-right">Powered by <a href="http://coreui.io">CoreUI</a>-->
         </span>
     </footer>

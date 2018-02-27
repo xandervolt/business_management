@@ -4,7 +4,7 @@ import json
 
 with open('secrets/dev_secrets.json') as f:
     secrets = json.loads(f.read())
-    
+
 def get_secret(setting, secrets=secrets):
     '''Get the secret variable or return explicit exceptions'''
     try:
@@ -12,8 +12,8 @@ def get_secret(setting, secrets=secrets):
     except KeyError:
         error_msg = 'Set the {} environment variable'.format(setting)
         raise ImproperlyConfigured(error_msg)
-   
- 
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_secret('SECRET_KEY')
 
@@ -37,11 +37,6 @@ DATABASES = {
         'PORT': get_secret('PORT'),
     }
 }
-
-INSTALLED_APPS += (
-    "sslserver",
-)
-
 
 # Static File Configuration
 # ------------------------------------------------------------------------------

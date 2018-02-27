@@ -5,24 +5,13 @@
         <li class="sidebar-header">MAIN NAVIGATION</li>
         <li>
             <a href="{% url 'dashboard:dashboard' %}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-tachometer-alt"></i> <span>Dashboard</span>
             </a>
         </li>{% if perms.administration %}
         <li class="sidebar-header">ADMINISTRATION</li>
         <li>
             <a href="#">
-                <i class="fa fa-users"></i>
-                <span>Human Resources</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="#">Employees</a></li>
-                <li><a href="#">Timesheets</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-address-book-o"></i>
+                <i class="fa fa-address-book"></i>
                 <span>Contacts</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
@@ -30,10 +19,30 @@
                 <li><a href="">Contacts</a></li>
             </ul>
         </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-address-card"></i>
+                <span>Employees</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="#">Timesheets</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-clipboard"></i>
+                <span>Inventory</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="{% url 'administration:fixed_asset_list' %}">Fixed Assets</a></li>
+            </ul>
+        </li>
         {% endif %}
         {% if perms.engineering %}
         <li class="sidebar-header">ENGINEERING</li>
-        <li><a href="{% url 'engineering:database_flow' %}"><i class="fa fa-area-chart"></i> Product Flow</a></li>
+        <li><a href="{% url 'engineering:database_flow' %}"><i class="fa fa-sitemap" data-fa-transform="rotate-180"></i> Product Flow</a></li>
         <!--<li><a href="{% url 'engineering:product_list' %}"><i class="fa fa-database"></i> Products</a></li>
         <li>
             <a href="#">Flip Chips <i class="fa fa-angle-left pull-right"></i></a>
@@ -109,7 +118,7 @@
         {% endif %}
         <!--
         <li class="sidebar-header">LEGAL</li>
-        
+
         <li>
             <a href="#">
                 <i class="fa fa-balance-scale"></i> <span>Legal</span>
