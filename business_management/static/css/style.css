@@ -9184,3 +9184,11 @@ Thanks :)*/
   margin-bottom:0px;
   padding-left:4px;
 }
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  border-top: 1px dotted #ccc;
+  padding-bottom: 4px;
+  padding-top:12px
+}
+.table th, .table td {
+  border-top: 1px dotted #ccc;
+}

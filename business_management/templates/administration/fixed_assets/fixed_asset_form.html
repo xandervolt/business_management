@@ -5,28 +5,28 @@
 {% block title %}{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}{% endblock %}
 
 {% block content %}
-<!--
 <div class="row">
-    <div class="col-md-12">
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
-            <a class="btn btn-primary disabled" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
-            <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
-            <!--
-            <div class="btn-group" role="group">
-                <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Options
-                </a>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="#">Print</a>
-                </div>
+  <div class="col">
+      <h2 class="card-detail-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h2>
+  </div>
+  <div class="col-8">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -30px; z-index:1000;">
+        <a class="btn btn-primary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
+        <a class="btn btn-primary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
+        <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
+        <div class="btn-group" role="group">
+            <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                View
+            </a>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item" href="{% url 'administration:fixed_asset_list' %}">All Active</a>
+              <a class="dropdown-item" href="{% url 'administration:fixed_asset_inactive_list' %}">All Inactive</a>
+              <a class="dropdown-item" href="{% url 'administration:fixed_asset_500_list' %}">> $500</a>
+              <a class="dropdown-item" href="{% url 'administration:fixed_asset_1000_list' %}">> $1000</a>
             </div>
         </div>
     </div>
-</div>-->
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="card-detail-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h2>
-    </div>
+  </div>
 </div>
 <div class="row">
     <div class="col-md-6">
@@ -35,7 +35,6 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-9">
-                        <h2 class="card-detail-header"></h2>
                         <form method='POST'>
                             {% csrf_token %}
                             <table class="inputform" style="margin-bottom: 0px;">
