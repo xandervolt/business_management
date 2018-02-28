@@ -6,10 +6,11 @@ import requests
 
 class FixedAsset(models.Model):
     asset_tag = models.CharField(max_length=20, unique=True)
-    serial_number = models.CharField(max_length=100, default='', blank=True, null=True)
+    serial_number = models.CharField(max_length=60, default='', blank=True, null=True)
     manufacturer = models.CharField(max_length=100, default='', null=True)
     model_number = models.CharField(max_length=100, default='', null=True)
-    purchase_date = models.DateField(auto_now_add=False)
+    description = models.CharField(max_length=100, default='', null=True)
+    purchase_date = models.DateField(auto_now_add=False, blank=True, null=True)
     purchase_price = models.DecimalField(max_digits=7, decimal_places=2, default=000000.00, blank=True, null=True)
     purchased_from = models.CharField(max_length=100, default='', blank=True, null=True)
 

@@ -2,7 +2,7 @@
 
 {% load static from staticfiles %}
 
-{% block title %}{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% block title %}{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}{% endblock %}
 
 {% block content %}
 <!--
@@ -25,22 +25,23 @@
 </div>-->
 <div class="row">
     <div class="col-md-12">
-        <h2 class="card-detail-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset - {{ lasermaskdesign.laser_mask_design_ui }}{{ form.instance.lasermaskdesign.laser_mask_design_ui }}{% endif %}</h2>
+        <h2 class="card-detail-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit {{ form.instance.lasermaskdesign.laser_mask_design_ui }}{% endif %}</div>
+            <div class="card-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</div>
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-9">
                         <h2 class="card-detail-header"></h2>
                         <form method='POST'>
                             {% csrf_token %}
-                            <table class="table inputform" style="margin-bottom: 0px;">
+                            <table class="inputform" style="margin-bottom: 0px;">
                                 {{ form.as_table }}
                             </table>
+                            <br />
                             <input type="submit" class="btn btn-success" value="Save">
                         </form>
                     </div>

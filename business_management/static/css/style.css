@@ -9149,3 +9149,38 @@ right connector from last child*/
 
 /*Thats all. I hope you enjoyed it.
 Thanks :)*/
+
+.inputform input[type=text],
+.inputform input[type=number],
+.inputform input[type=date],
+.inputform input[type=datetime],
+.inputform input[type=dropdown],
+.inputform input[type=email],
+.inputform textarea,
+.inputform select {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 250px;
+  background-color: #fefefe;
+  padding: 2px 4px;
+  margin-top:10px;
+  margin-left:20px;
+  margin-bottom:0px;
+}
+.inputform input[type=checkbox] {
+  margin-left:20px;
+  margin-top:10px;
+}
+.inputform table, tr {
+  margin-top:10px;
+}
+.inputform th {
+  border-bottom: 1px dotted #ddd;
+  padding-top:15px;
+}
+.inputform label {
+  margin-right:50px;
+  padding-bottom:0px;
+  margin-bottom:0px;
+  padding-left:4px;
+}

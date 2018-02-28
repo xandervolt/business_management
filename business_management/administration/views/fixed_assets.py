@@ -18,6 +18,36 @@ class FixedAssetListView(LoginRequiredMixin, ListView):
     model = FixedAsset
     template_name = 'administration/fixed_assets/fixed_asset_list.html'
 
+    def get_queryset(self):
+        return self.model.objects.filter(active=True)
+
+
+class FixedAssetInactiveListView(LoginRequiredMixin, ListView):
+    context_object_name = "fixed_assets"
+    model = FixedAsset
+    template_name = 'administration/fixed_assets/fixed_asset_inactive_list.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(active=False)
+
+
+class FixedAsset500ListView(LoginRequiredMixin, ListView):
+    context_object_name = "fixed_assets"
+    model = FixedAsset
+    template_name = 'administration/fixed_assets/fixed_asset_500_list.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(purchase_price__gte=500)
+
+
+class FixedAsset1000ListView(LoginRequiredMixin, ListView):
+    context_object_name = "fixed_assets"
+    model = FixedAsset
+    template_name = 'administration/fixed_assets/fixed_asset_1000_list.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(purchase_price__gte=1000)
+
 
 class FixedAssetDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "fixed_asset"
@@ -26,7 +56,7 @@ class FixedAssetDetailView(LoginRequiredMixin, DetailView):
 
 
 class FixedAssetCreateView(LoginRequiredMixin, CreateView):
-    fields = ("asset_tag", "serial_number", "manufacturer", "model_number", "purchase_date", "purchase_price", "purchased_from", "purchase_condition", "asset_type", "owner", "location", "active", "inactive_date", "comments")
+    fields = ("asset_tag", "serial_number", "manufacturer", "model_number", "description", "purchase_date", "purchase_price", "purchased_from", "purchase_condition", "asset_type", "owner", "location", "active", "inactive_date", "comments")
     model = FixedAsset
     template_name = 'administration/fixed_assets/fixed_asset_form.html'
     #form = forms.CreateProductForm()
@@ -39,7 +69,7 @@ class FixedAssetCreateView(LoginRequiredMixin, CreateView):
 
 
 class FixedAssetUpdateView(LoginRequiredMixin, UpdateView):
-    fields = ("asset_tag", "serial_number", "manufacturer", "model_number", "purchase_date", "purchase_price", "purchased_from", "purchase_condition", "asset_type", "owner", "location", "active", "inactive_date", "comments")
+    fields = ("asset_tag", "serial_number", "manufacturer", "model_number", "description", "purchase_date", "purchase_price", "purchased_from", "purchase_condition", "asset_type", "owner", "location", "active", "inactive_date", "comments")
     model = FixedAsset
     template_name = 'administration/fixed_assets/fixed_asset_form.html'
 

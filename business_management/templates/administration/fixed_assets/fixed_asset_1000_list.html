@@ -1,8 +1,8 @@
 {% extends "pages/list_template.html" %}
 
-{% block title %}Fixed Assets{% endblock %}
+{% block title %}Fixed Assets over $1000{% endblock %}
 
-{% block list_title %}Fixed Assets{% endblock %}
+{% block list_title %}Fixed Assets over $1000{% endblock %}
 
 {% block buttons %}
 <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -30px; z-index:1000;">
@@ -16,7 +16,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="{% url 'administration:fixed_asset_500_list' %}">> $500</a>
-            <a class="dropdown-item" href="{% url 'administration:fixed_asset_1000_list' %}">> $1000</a>
+            <a class="dropdown-item" href="{% url 'administration:fixed_asset_list' %}">All Active</a>
         </div>
     </div>
 </div>

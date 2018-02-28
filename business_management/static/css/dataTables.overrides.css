@@ -1,6 +1,8 @@
 input, button, select, optgroup, textarea {
     border: 1px solid #ccc;
     border-radius: 3px;
+    background: #fefefe;
+    font-weight: 400;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
@@ -9,4 +11,16 @@ input, button, select, optgroup, textarea {
 
 label {
     font-weight: normal;
+}
+
+table.dataTable tfoot th, table.dataTable tfoot td {
+  padding: 10px 10px 6px 10px;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+  padding:10px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  padding: 2px;
 }
