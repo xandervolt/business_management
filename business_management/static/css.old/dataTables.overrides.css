@@ -24,8 +24,3 @@ table.dataTable thead th, table.dataTable thead td {
 .dataTables_wrapper .dataTables_filter input {
   padding: 2px;
 }
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 0;
-    margin: 0;
-}

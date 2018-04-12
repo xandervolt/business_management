@@ -1,161 +1,85 @@
-{% load static from staticfiles %}
 <div class="sidebar">
-    <section>
-    <ul class="sidebar-menu">
-        <li class="sidebar-header">MAIN NAVIGATION</li>
-        <li>
-            <a href="{% url 'dashboard:dashboard' %}">
-                <i class="fa fa-tachometer-alt"></i> <span>Dashboard</span>
-            </a>
-        </li>{% if perms.administration %}
-        <li class="sidebar-header">ADMINISTRATION</li>
-        <li>
-            <a href="#">
-                <i class="fa fa-address-book"></i>
-                <span>Contacts</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="">Contacts</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-address-card"></i>
-                <span>Employees</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="#">Timesheets</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-clipboard"></i>
-                <span>Inventory</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="{% url 'administration:fixed_asset_list' %}">Fixed Assets</a></li>
-            </ul>
-        </li>
-        {% endif %}
-        {% if perms.engineering %}
-        <li class="sidebar-header">ENGINEERING</li>
-        <li><a href="{% url 'engineering:database_flow' %}"><i class="fa fa-sitemap" data-fa-transform="rotate-180"></i> Product Flow</a></li>
-        <!--<li><a href="{% url 'engineering:product_list' %}"><i class="fa fa-database"></i> Products</a></li>
-        <li>
-            <a href="#">Flip Chips <i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="sidebar-submenu">
-              <li><a href="{% url 'engineering:flip_chip_list' %}"><i class="fa fa-database"></i> Flip Chips</a></li>
-              <li>
-                <a href="#">Laser Chips <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="sidebar-submenu">
-                    <li><a href=""><i class="fa fa-database"></i> Laser Chips</a></li>
-                    <li>
-                        <a href="#">Processed Epis <i class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="sidebar-submenu">
-                            <li><a href=""><i class="fa fa-database"></i> Processed Epis</a></li>
-                            <li><a href="#">Epi Wafers <i class="fa fa-angle-left pull-right"></i></a>
-                                <ul class="sidebar-submenu">
-                                    <li><a href=""><i class="fa fa-database"></i> Epi Wafers</a></li>
-                                    <li>
-                                        <a href="#">Epi Growths <i class="fa fa-angle-left pull-right"></i></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href=""><i class="fa fa-database"></i> Epi Growths</a></li>
-                                            <li>
-                                                <a href="#">GaAs Wafers <i class="fa fa-angle-left pull-right"></i></a>
-                                                <ul class="sidebar-submenu">
-                                                    <li><a href="{% url 'engineering:gaas_wafer_list' %}"><i class="fa fa-database"></i> GaAs Wafers</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Laser Chip Masks <i class="fa fa-angle-left pull-right"></i></a>
-                                <ul class="sidebar-submenu">
-                                    <li><a href="">Laser Chip Mask DB</a></li>
-                                    <li>
-                                        <a href="#">Epi Growths <i class="fa fa-angle-left pull-right"></i></a>
-                                        <ul class="sidebar-submenu">
-                                            <li><a href="">Epi Growth DB</a></li>
-                                            <li>
-                                                <a href="#">GaAs Wafers <i class="fa fa-angle-left pull-right"></i></a>
-                                                <ul class="sidebar-submenu">
-                                                    <li><a href="">GaAs Wafer DB</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                </li>
-                <li>
-                    <a href="#">Submounts <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="sidebar-submenu">
-                        <li><a href="#">Submounts DB</a></li>
-                        <li>
-                            <a href="#">Substrate Masks <i class="fa fa-angle-left pull-right"></i></a>
-                            <ul class="sidebar-submenu">
-                                <li><a href="#">Substrate Mask DB</a></li>
-                                <li><a href="#">Mask Design DB</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Si Wafers <i class="fa fa-angle-left pull-right"></i></a>
-                            <ul class="sidebar-submenu">
-                                <li><a href="#">Si Wafer DB</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>-->
-        {% endif %}
-        <!--
-        <li class="sidebar-header">LEGAL</li>
+  <nav class="sidebar-nav">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:dashboard' %}">Dashboard</a>
+      </li>
+      <li class="nav-title">
+        <i class="fas fa-tasks" style="margin-right:10px;"></i>Administration
+      </li>
+      {% if perms.administration %}
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">Company</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="pages-login.html" target="_top">Contacts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'administration:fixed_asset_list' %}" target="_top">Assets</a>
+          </li>
+        </ul>
+      </li>
+      {% endif %}
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">Employees</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="pages-login.html" target="_top">Time Reporting</a>
+          </li>
+        </ul>
+      </li>
 
-        <li>
-            <a href="#">
-                <i class="fa fa-balance-scale"></i> <span>Legal</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="#">NDAs</a></li>
-            </ul>
-        </li>
-        <li class="sidebar-header">APPS</li>
-        <li>
-            <a href="#">
-                <i class="fa fa-tasks"></i> <span>Tasks</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="#">Tasks</a></li>
-            </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <small class="label pull-right label-danger">3</small>
-          </a>
-        </li>-->
-        <li class="sidebar-header">HELP</li>
-        <li>
-            <a href="#">
-                <i class="fa fa-life-ring"></i> Help
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="#">Documentation</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Support</a></li>
-            </ul>
-        </li>
+      {% if perms.financial %}
+      <li class="nav-title">
+        <i class="fas fa-dollar-sign" style="margin-right:10px;"></i>Fincancial
+      </li>
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">Accounting</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="pages-login.html" target="_top">POs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages-register.html" target="_top">Invoices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages-register.html" target="_top">SOWs</a>
+          </li>
+        </ul>
+      </li>
+      {% endif %}
+
+      <li class="nav-title">
+        <i class="fas fa-bolt" style="margin-right:10px;"></i>Engineering
+      </li>
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">Product Database</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'engineering:database_flow' %}" target="_top">Product Flow</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-title">
+        <i class="fas fa-gavel" style="margin-right:10px;"></i>Legal
+      </li>
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="#">Contracts</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" href="pages-login.html" target="_top">NDAs</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item mt-auto">
+        <a class="nav-link nav-link-primary" href="http://coreui.io/" target="_top">Documentation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-link-primary" href="http://coreui.io/pro/" target="_top">Support</a>
+      </li>
+
     </ul>
-  </section>
+  </nav>
 </div>

@@ -1,0 +1,158 @@
+{% load static from staticfiles %}
+<div class="sidebar">
+    <section>
+    <ul class="sidebar-menu">
+        <li class="sidebar-header"><i class="fa fa-tachometer-alt"></i> MAIN NAVIGATION</li>
+        <li>
+            <a href="{% url 'dashboard:dashboard' %}">
+                <span>Dashboard</span>
+            </a>
+        </li>{% if perms.administration %}
+        <li class="sidebar-header"><i class="fa fa-address-card" aria-hidden="true"></i> ADMINISTRATION</li>
+        <li>
+            <a href="#">
+                <span>Contacts</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="">Contacts</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <span>Employees</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="#">Timesheets</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <span>Inventory</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="{% url 'administration:fixed_asset_list' %}">Fixed Assets</a></li>
+            </ul>
+        </li>
+        {% endif %}
+        {% if perms.engineering %}
+        <li class="sidebar-header"><i class="fas fa-fighter-jet"></i> ENGINEERING</li>
+        <li><a href="{% url 'engineering:database_flow' %}">Product Flow</a></li>
+        <!--<li><a href="{% url 'engineering:product_list' %}"><i class="fa fa-database"></i> Products</a></li>
+        <li>
+            <a href="#">Flip Chips <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="sidebar-submenu">
+              <li><a href="{% url 'engineering:flip_chip_list' %}"><i class="fa fa-database"></i> Flip Chips</a></li>
+              <li>
+                <a href="#">Laser Chips <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                    <li><a href=""><i class="fa fa-database"></i> Laser Chips</a></li>
+                    <li>
+                        <a href="#">Processed Epis <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href=""><i class="fa fa-database"></i> Processed Epis</a></li>
+                            <li><a href="#">Epi Wafers <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="sidebar-submenu">
+                                    <li><a href=""><i class="fa fa-database"></i> Epi Wafers</a></li>
+                                    <li>
+                                        <a href="#">Epi Growths <i class="fa fa-angle-left pull-right"></i></a>
+                                        <ul class="sidebar-submenu">
+                                            <li><a href=""><i class="fa fa-database"></i> Epi Growths</a></li>
+                                            <li>
+                                                <a href="#">GaAs Wafers <i class="fa fa-angle-left pull-right"></i></a>
+                                                <ul class="sidebar-submenu">
+                                                    <li><a href="{% url 'engineering:gaas_wafer_list' %}"><i class="fa fa-database"></i> GaAs Wafers</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Laser Chip Masks <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="sidebar-submenu">
+                                    <li><a href="">Laser Chip Mask DB</a></li>
+                                    <li>
+                                        <a href="#">Epi Growths <i class="fa fa-angle-left pull-right"></i></a>
+                                        <ul class="sidebar-submenu">
+                                            <li><a href="">Epi Growth DB</a></li>
+                                            <li>
+                                                <a href="#">GaAs Wafers <i class="fa fa-angle-left pull-right"></i></a>
+                                                <ul class="sidebar-submenu">
+                                                    <li><a href="">GaAs Wafer DB</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+                <li>
+                    <a href="#">Submounts <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="sidebar-submenu">
+                        <li><a href="#">Submounts DB</a></li>
+                        <li>
+                            <a href="#">Substrate Masks <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="sidebar-submenu">
+                                <li><a href="#">Substrate Mask DB</a></li>
+                                <li><a href="#">Mask Design DB</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Si Wafers <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="sidebar-submenu">
+                                <li><a href="#">Si Wafer DB</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>-->
+        {% endif %}
+        <!--
+        <li class="sidebar-header">LEGAL</li>
+
+        <li>
+            <a href="#">
+                <i class="fa fa-balance-scale"></i> <span>Legal</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="#">NDAs</a></li>
+            </ul>
+        </li>
+        <li class="sidebar-header">APPS</li>
+        <li>
+            <a href="#">
+                <i class="fa fa-tasks"></i> <span>Tasks</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="#">Tasks</a></li>
+            </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-calendar"></i> <span>Calendar</span>
+            <small class="label pull-right label-danger">3</small>
+          </a>
+        </li>-->
+        <li class="sidebar-header"><i class="fa fa-life-ring"></i> HELP</li>
+        <li>
+            <a href="#">
+                Help
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="#">Documentation</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </li>
+    </ul>
+  </section>
+</div>

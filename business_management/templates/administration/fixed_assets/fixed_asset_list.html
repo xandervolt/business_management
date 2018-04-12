@@ -1,16 +1,14 @@
 {% extends "pages/list_template.html" %}
 
-{% block title %}Fixed Assets{% endblock %}
+{% block meta_title %}Fixed Assets{% endblock %}
 
 {% block list_title %}Fixed Assets{% endblock %}
 
 {% block buttons %}
-<div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -30px; z-index:1000;">
-    <a class="btn btn-primary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
-    <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
-    <a class="btn btn-primary disabled"><i class="fa fa-file-excel fa-fw"></i> Export</a>
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -130px; z-index:1000;">
+    <a class="btn btn-secondary js-create-book" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
     <div class="btn-group" role="group">
-        <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a id="btnGroupDrop1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             View
         </a>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -21,6 +19,7 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block table %}

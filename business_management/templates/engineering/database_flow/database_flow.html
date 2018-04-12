@@ -1,9 +1,8 @@
 {% extends "pages/layout.html" %}
 {% load static from staticfiles %}
 {% block title %}Database Flow{% endblock %}
-{% block styles %}
+{% block view_styles %}
 <link rel="stylesheet" type="text/css" media="screen, print" href="{% static 'css/slickmap.css' %}" />
-
 {% endblock %}
 {% block content %}
     <h2>Product Flow</h2>
@@ -17,6 +16,6 @@
         </div>
     </div>
 {% endblock %}
-{% block scripts %}
+{% block view_scripts %}
     <script type="text/javascript" src="https://www.draw.io/js/viewer.min.js"></script>
 {% endblock %}

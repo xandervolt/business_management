@@ -1,38 +1,30 @@
-{% load static from staticfiles %}
-
-<!DOCTYPE html>
+{% load static from staticfiles %}<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <!-- Icons -->
-    <!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
-    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
-    <link href="{% static 'css/simple-line-icons.css' %}" rel="stylesheet">
-    <link href="{% static 'css/sidebar-menu.css' %}" rel="stylesheet">
-    <!-- Main styles for this application -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    {% block styles %}{% endblock %}
-    {% block head_js %}{% endblock %}
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="{% block meta_description %}{% endblock %}">
+  <meta name="author" content="Alexander Joseph">
+  <link rel="shortcut icon" href="img/favicon.png">
+  <title>{% block meta_title %}{% endblock %}</title>
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Icons -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <!-- Main styles for this application -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <!-- Styles required by this view -->
+  {% block view_styles %}{% endblock %}
 </head>
 
 <!-- BODY options, add following classes to body to change options
 
 // Header options
 1. '.header-fixed'					- Fixed Header
+
+// Brand options
+1. '.brand-minimized'       - Minimized brand (Only symbol)
 
 // Sidebar options
 1. '.sidebar-fixed'					- Fixed Sidebar
@@ -46,358 +38,84 @@
 2. '.aside-menu-hidden'			- Hidden Aside Menu
 3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
 
+// Breadcrumb options
+1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+
 // Footer options
-1. '.footer-fixed'						- Fixed footer
+1. '.footer-fixed'					- Fixed footer
 
 -->
+
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-    <header class="app-header navbar">
-        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
-        {% include "includes/top-left-nav.html" %}
-        {% include "includes/top-right-nav.html" %}
-    </header>
+  <header class="app-header navbar">
+      <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
+      {% include "includes/top-left-nav.html" %}
+      {% include "includes/top-right-nav.html" %}
+  </header>
 
-    <div class="app-body">
-        {% include "includes/sidebar.html" %}
-        <!-- Main content -->
-        <main class="main">
+  <div class="app-body">
+    {% include "includes/sidebar.html" %}
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                {% block breadcrumb %}{% endblock %}
+    <!-- Main content -->
+    <main class="main">
 
-                <!-- Breadcrumb Menu-->
-                <li class="breadcrumb-menu d-md-down-none">
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <a class="btn btn-secondary" href="#"><i class="fa fa-cogs"></i> Options</a>
-                        <!--<a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a> -->
-                        <a class="btn btn-secondary" href="#"><i class="fa fa-cog"></i> View Settings</a>
-                    </div>
-                </li>
-            </ol>
+      <!-- Breadcrumb -->
+      <ol class="breadcrumb">
+        {% block breadcrumb %}{% endblock %}
+
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+          <div class="btn-group" role="group" aria-label="Button group">
+            <a class="btn" href="#"><i class="icon-speech"></i></a>
+            <a class="btn" href="./"><i class="icon-graph"></i> &nbsp;Options</a>
+            <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+          </div>
+        </li>
+      </ol>
+
+      <div class="container-fluid">
+        <div class="animated fadeIn">
+
+          {% block content %}{% endblock %}
+
+        </div>
+      </div>
+      <!-- /.conainer-fluid -->
+
+    </main>
+
+    {% include "includes/aside-menu.html" %}
+
+  </div>
+
+  <footer class="app-footer">
+    <span><a href="">Joseph Enterprises</a> © 2018</span>
+    <!--<span class="ml-auto">Powered by <a href="http://coreui.io">CoreUI</a></span>-->
+  </footer>
+
+  <!-- Bootstrap and necessary plugins -->
+  <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
+  <script src="{% static 'js/vendors/jquery.min.js' %}"></script>
+  <script src="{% static 'js/vendors/popper.min.js' %}"></script>
+  <script src="{% static 'js/vendors/bootstrap.min.js' %}"></script>
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+  <script src="{% static 'js/vendors/pace.min.js' %}"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>-->
+
+  <!-- Plugins and scripts required by all views -->
+  <!--<script src="{% static 'js/vendors/Chart.min.js' %}"></script>-->
 
 
-            <div class="container-fluid">
-                <div class="animated fadeIn">
+  <!-- CoreUI main scripts -->
+  <script src="{% static 'js/app.js' %}"></script>
 
-                    {% block content %}{% endblock %}
+  <!-- Plugins and scripts required by this views -->
 
-                </div>
+  <!-- Custom scripts required by this view -->
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 
-            </div>
-            <!-- /.conainer-fluid -->
-        </main>
+  {% block view_scripts %}{% endblock %}
 
-        <aside class="aside-menu">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="fa fa-list"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="fa fa-comment-o"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-cogs"></i></a>
-                </li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="timeline" role="tabpanel">
-                    <div class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
-                        <small><b>Today</b>
-                        </small>
-                    </div>
-                    <hr class="transparent mx-3 my-0">
-                    <div class="callout callout-warning m-0 py-3">
-                        <div class="avatar float-right">
-                            <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div>Meeting with
-                            <strong>Lucas</strong>
-                        </div>
-                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
-                        <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
-                    </div>
-                    <hr class="mx-3 my-0">
-                    <div class="callout callout-info m-0 py-3">
-                        <div class="avatar float-right">
-                            <img src="{% static 'img/avatars/4.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                        </div>
-                        <div>Skype with
-                            <strong>Megan</strong>
-                        </div>
-                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 5pm</small>
-                        <small class="text-muted"><i class="icon-social-skype"></i>&nbsp; On-line</small>
-                    </div>
-                    <hr class="transparent mx-3 my-0">
-                    <div class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
-                        <small><b>Tomorrow</b>
-                        </small>
-                    </div>
-                    <hr class="transparent mx-3 my-0">
-                    <div class="callout callout-danger m-0 py-3">
-                        <div>New UI Project -
-                            <strong>deadline</strong>
-                        </div>
-                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
-                        <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
-                        <div class="avatars-stack mt-2">
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/2.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/3.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/4.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/5.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/6.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mx-3 my-0">
-                    <div class="callout callout-success m-0 py-3">
-                        <div>
-                            <strong>#10 Startups.Garden</strong>Meetup</div>
-                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
-                        <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
-                    </div>
-                    <hr class="mx-3 my-0">
-                    <div class="callout callout-primary m-0 py-3">
-                        <div>
-                            <strong>Team meeting</strong>
-                        </div>
-                        <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 6pm</small>
-                        <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ</small>
-                        <div class="avatars-stack mt-2">
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/2.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/3.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/4.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/5.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/6.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                            <div class="avatar avatar-xs">
-                                <img src="{% static 'img/avatars/8.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mx-3 my-0">
-                </div>
-                <div class="tab-pane p-3" id="messages" role="tabpanel">
-                    <div class="message">
-                        <div class="py-3 pb-5 mr-3 float-left">
-                            <div class="avatar">
-                                <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                <span class="avatar-status badge-success"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lukasz Holeczek</small>
-                            <small class="text-muted float-right mt-1">1:52 PM</small>
-                        </div>
-                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-                    </div>
-                    <hr>
-                    <div class="message">
-                        <div class="py-3 pb-5 mr-3 float-left">
-                            <div class="avatar">
-                                <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                <span class="avatar-status badge-success"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lukasz Holeczek</small>
-                            <small class="text-muted float-right mt-1">1:52 PM</small>
-                        </div>
-                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-                    </div>
-                    <hr>
-                    <div class="message">
-                        <div class="py-3 pb-5 mr-3 float-left">
-                            <div class="avatar">
-                                <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                <span class="avatar-status badge-success"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lukasz Holeczek</small>
-                            <small class="text-muted float-right mt-1">1:52 PM</small>
-                        </div>
-                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-                    </div>
-                    <hr>
-                    <div class="message">
-                        <div class="py-3 pb-5 mr-3 float-left">
-                            <div class="avatar">
-                                <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                <span class="avatar-status badge-success"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lukasz Holeczek</small>
-                            <small class="text-muted float-right mt-1">1:52 PM</small>
-                        </div>
-                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-                    </div>
-                    <hr>
-                    <div class="message">
-                        <div class="py-3 pb-5 mr-3 float-left">
-                            <div class="avatar">
-                                <img src="{% static 'img/avatars/7.jpg' %}" class="img-avatar" alt="admin@bootstrapmaster.com">
-                                <span class="avatar-status badge-success"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lukasz Holeczek</small>
-                            <small class="text-muted float-right mt-1">1:52 PM</small>
-                        </div>
-                        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-                    </div>
-                </div>
-                <div class="tab-pane p-3" id="settings" role="tabpanel">
-                    <h6>Settings</h6>
-
-                    <div class="aside-options">
-                        <div class="clearfix mt-4">
-                            <small><b>Option 1</b>
-                            </small>
-                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                                <input type="checkbox" class="switch-input" checked="">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-                        </div>
-                    </div>
-
-                    <div class="aside-options">
-                        <div class="clearfix mt-3">
-                            <small><b>Option 2</b>
-                            </small>
-                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                                <input type="checkbox" class="switch-input">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                        <div>
-                            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-                        </div>
-                    </div>
-
-                    <div class="aside-options">
-                        <div class="clearfix mt-3">
-                            <small><b>Option 3</b>
-                            </small>
-                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                                <input type="checkbox" class="switch-input">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="aside-options">
-                        <div class="clearfix mt-3">
-                            <small><b>Option 4</b>
-                            </small>
-                            <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                                <input type="checkbox" class="switch-input" checked="">
-                                <span class="switch-label" data-on="On" data-off="Off"></span>
-                                <span class="switch-handle"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <hr>
-                    <h6>System Utilization</h6>
-
-                    <div class="text-uppercase mb-1 mt-4">
-                        <small><b>CPU Usage</b>
-                        </small>
-                    </div>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small class="text-muted">348 Processes. 1/4 Cores.</small>
-
-                    <div class="text-uppercase mb-1 mt-2">
-                        <small><b>Memory Usage</b>
-                        </small>
-                    </div>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small class="text-muted">11444GB/16384MB</small>
-
-                    <div class="text-uppercase mb-1 mt-2">
-                        <small><b>SSD 1 Usage</b>
-                        </small>
-                    </div>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small class="text-muted">243GB/256GB</small>
-
-                    <div class="text-uppercase mb-1 mt-2">
-                        <small><b>SSD 2 Usage</b>
-                        </small>
-                    </div>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small class="text-muted">25GB/256GB</small>
-                </div>
-            </div>i
-        </aside>
-
-    </div>
-    <footer class="app-footer">
-        <a href="#">© 2018 Joseph Enterprises, LLC.</a>
-        <!--<span class="float-right">Powered by <a href="http://coreui.io">CoreUI</a>-->
-        </span>
-    </footer>
-    {% block modals %}{% endblock %}
-    {% block scripts %}{% endblock %}
-    <!-- Bootstrap and necessary plugins -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-
-    <script src="{% static 'js/sidebar-menu.js' %}"></script>
-    <script>
-        $.sidebarMenu($('.sidebar-menu'));
-    </script>
-    <!-- Plugins and scripts required by all views -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
-    <!-- GenesisUI main scripts -->
-
-    <script src="{% static 'js/app.js' %}"></script>
-    {% block jsrefs %}{% endblock %}
 </body>
-
 </html>

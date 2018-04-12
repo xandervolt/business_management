@@ -6,9 +6,9 @@
 
 {% block buttons %}
 <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -100px; z-index:1000;">
-    <a class="btn btn-primary"><i class="fa fa-magic fa-fw"></i> Add GaAs Wafer Design</a>
-    <a class="btn btn-primary"><i class="fa fa-trash-o fa-fw"></i> View Trash</a>
-  
+    <a href="{% url 'engineering:gaas_wafer_design_create' %}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> Add GaAs Wafer Design</a>
+    <a class="btn btn-primary"><i class="fa fa-trash fa-fw"></i> View Trash</a>
+
     <div class="btn-group" role="group">
         <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Options
