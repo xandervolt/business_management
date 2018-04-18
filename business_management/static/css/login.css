@@ -22,9 +22,13 @@ input[type=text], input[type=textarea], input[type=password], input[type=email] 
     display: none;
 }
 .btn-clr {
-    background: #EFEFEF;
-    border: 1px solid #E2E2E2;
-    /*border-radius: 4px;*/
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #e2e2e2 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#e2e2e2 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ffffff 0%,#e2e2e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
+  border-radius: 3px;
+  border-color: #ccc;
     padding-bottom: 0px;
 }
 .btn-clr:hover {
@@ -53,11 +57,21 @@ hr {
 
 .btn-primary {
   color: #fff;
-  background-color: #3bc68c;
+  border-radius: 3px;
+  background: #44e2a6; /* Old browsers */
+  background: -moz-linear-gradient(top, #44e2a6 0%, #3bc68c 81%, #3bc68c 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #44e2a6 0%,#3bc68c 81%,#3bc68c 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #44e2a6 0%,#3bc68c 81%,#3bc68c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#44e2a6', endColorstr='#3bc68c',GradientType=0 ); /* IE6-9 */
   border-color: #3bc68c; }
   .btn-primary:hover {
     color: #fff;
-    background-color: #36af7d;
+    border-radius: 3px;
+    background: #44e2a6; /* Old browsers */
+    background: -moz-linear-gradient(top, #44e2a6 0%, #41db91 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #44e2a6 0%,#41db91 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #44e2a6 0%,#41db91 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#44e2a6', endColorstr='#41db91',GradientType=0 ); /* IE6-9 */
     border-color: #3bc68c; }
   .btn-primary:focus, .btn-primary.focus {
     box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.5); }
@@ -82,9 +96,8 @@ hr {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 1px solid transparent;
     font-size: 1rem;
-    border-radius: 0;
+    border-radius: 3px;
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
