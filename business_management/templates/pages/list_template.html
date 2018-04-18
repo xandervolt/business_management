@@ -22,17 +22,17 @@
 {% endblock %}
 
 {% block content %}
-  <div class="row">
-      <div class="col-4">
-          <h1 class="page_title">{% block list_title %}{% endblock %}</h1>
+  <div class="row" style="margin-left:-30px; margin-right:-30px;">
+      <div class="col-6">
+          <h1 class="page_title" style="margin-left:14px;">{% block list_title %}{% endblock %}</h1>
       </div>
-      <div class="col-8">
+      <div class="col-6">
           {% block buttons %}{% endblock %}
       </div>
 
-  <table id="example" class="display" style="width:100%">
-      {% block table %}{% endblock %}
-  </table>
+      <table id="example" class="display" style="width:100%">
+          {% block table %}{% endblock %}
+      </table>
   </div>
 {% endblock %}
 

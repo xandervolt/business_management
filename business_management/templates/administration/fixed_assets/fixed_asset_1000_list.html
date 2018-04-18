@@ -5,22 +5,7 @@
 {% block list_title %}Fixed Assets over $1000{% endblock %}
 
 {% block buttons %}
-<div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -30px; z-index:1000;">
-    <a class="btn btn-primary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
-    <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
-    <a class="btn btn-primary disabled"><i class="fa fa-file-excel fa-fw"></i> Export</a>
-    <div class="btn-group" role="group">
-        <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            View
-        </a>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="{% url 'administration:fixed_asset_list' %}">All Active</a>
-          <a class="dropdown-item" href="{% url 'administration:fixed_asset_inactive_list' %}">All Inactive</a>
-          <a class="dropdown-item" href="{% url 'administration:fixed_asset_500_list' %}">> $500</a>
-          <a class="dropdown-item" href="{% url 'administration:fixed_asset_1000_list' %}">> $1000</a>
-        </div>
-    </div>
-</div>
+  {% include "administration/fixed_assets/fixed_asset_buttons.html" %}
 {% endblock %}
 
 {% block table %}
