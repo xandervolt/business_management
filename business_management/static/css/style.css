@@ -10586,6 +10586,7 @@ base-chart.chart {
     overflow-y: hidden;
     transition: max-height .3s ease-in-out; }
     .sidebar .nav-dropdown-items .nav-item {
+      background-color: #212b31;
       padding: 0;
       list-style: none; }
   .sidebar .nav-link, .sidebar .navbar .dropdown-toggle, .navbar .sidebar .dropdown-toggle {
