@@ -19,7 +19,7 @@ $(function(){
     datasets: [
       {
         label: 'My First dataset',
-        backgroundColor: 'rgba(255,255,255,.2)',
+        backgroundColor: 'transparent',
         borderColor: 'rgba(255,255,255,.55)',
         data: [65, 59, 84, 84, 51, 55, 40]
       },
@@ -74,7 +74,7 @@ $(function(){
     datasets: [
       {
         label: 'My First dataset',
-        backgroundColor: 'rgba(255,255,255,.2)',
+        backgroundColor: 'transparent',
         borderColor: 'rgba(255,255,255,.55)',
         data: [1, 18, 9, 17, 34, 22, 11]
       },
@@ -324,7 +324,7 @@ $(function(){
   var data1 = {
     labels: labels,
     datasets: [{
-      backgroundColor: 'rgba(255,255,255,.1)',
+      backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
       pointHoverBackgroundColor: '#fff',
       borderWidth: 2,
@@ -342,7 +342,7 @@ $(function(){
     labels: labels,
     datasets: [
       {
-        backgroundColor: 'rgba(255,255,255,.1)',
+        backgroundColor: 'transparent',
         borderColor: 'rgba(255,255,255,.55)',
         pointHoverBackgroundColor: '#fff',
         borderWidth: 2,
@@ -361,7 +361,7 @@ $(function(){
     labels: labels,
     datasets: [
       {
-        backgroundColor: 'rgba(255,255,255,.1)',
+        backgroundColor: 'transparent',
         borderColor: 'rgba(255,255,255,.55)',
         pointHoverBackgroundColor: '#fff',
         borderWidth: 2,
@@ -380,7 +380,7 @@ $(function(){
     labels: labels,
     datasets: [
       {
-        backgroundColor: 'rgba(255,255,255,.1)',
+        backgroundColor: 'transparent',
         borderColor: 'rgba(255,255,255,.55)',
         pointHoverBackgroundColor: '#fff',
         borderWidth: 2,
