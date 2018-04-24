@@ -7,115 +7,157 @@
 {% block content %}
 <div class="row">
   <div class="col">
-      <h2 class="card-detail-header">Fixed Asset - Tag {{ fixed_asset.asset_tag }}</h2>
+      <h1 class="page_title">Fixed Asset</h1>
   </div>
   <div class="col-8">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -30px; z-index:1000;">
-        <a class="btn btn-primary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
-        <a class="btn btn-primary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
-        <a class="btn btn-primary" href="{% url 'administration:fixed_asset_update' pk=fixed_asset.pk %}"><i class="fa fa-edit fa-fw"></i> Edit</a>
-        <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
-        <div class="btn-group" role="group">
-            <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                View
-            </a>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_list' %}">All Active</a>
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_inactive_list' %}">All Inactive</a>
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_500_list' %}">> $500</a>
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_1000_list' %}">> $1000</a>
-            </div>
-        </div>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
+        <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
+        <a class="btn btn-secondary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
+        <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_update' pk=fixed_asset.pk %}"><i class="fa fa-edit fa-fw"></i> Edit</a>
+        <a class="btn btn-secondary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
     </div>
   </div>
 </div>
-
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">Fixed Asset - Tag {{ fixed_asset.asset_tag }}</div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-9">
-                        <table class="table" style="margin-bottom: 0px;">
-                            <tr style="border-top: hidden;">
-                                <td class="firstcol">Asset Tag: </td>
-                                <td>{{ fixed_asset.asset_tag }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Serial Number: </td>
-                                <td>{{ fixed_asset.serial_number }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Manufacturer: </td>
-                                <td>{{ fixed_asset.manufacturer }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Model: </td>
-                                <td>{{ fixed_asset.model_number }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Description: </td>
-                                <td>{{ fixed_asset.description }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Purchase Date: </td>
-                                <td>{{ fixed_asset.purchase_date }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Purchase Price: </td>
-                                <td>${{ fixed_asset.purchase_price }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Purchased From </td>
-                                <td>{{ fixed_asset.purchased_from }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Purchase Condition: </td>
-                                <td>{{ fixed_asset.get_purchase_condition_display }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Purchase Order: </td>
-                                <td>{{ fixed_asset.purchase_order }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Asset Type: </td>
-                                <td>{{ fixed_asset.get_asset_type_display }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Owner: </td>
-                                <td>{{ fixed_asset.owner }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Location: </td>
-                                <td>{{ fixed_asset.location }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Active: </td>
-                                <td>{{ fixed_asset.active }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Comments: </td>
-                                <td>{{ fixed_asset.comments }}</td>
-                            </tr>
-                        </table>
-                    </div>
+          <div class="card-header">
+              <strong>Fixed Asset</strong>
+              <small>Tag #{{ fixed_asset.asset_tag }}</small>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Asset Tag #</div>
+                  {{ fixed_asset.asset_tag }}
                 </div>
+              </div>
             </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Manufacturer</div>
+                  {{ fixed_asset.manufacturer }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Model Number</div>
+                  {{ fixed_asset.model_number }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Serial Number</div>
+                  {{ fixed_asset.serial_number }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Asset Type</div>
+                  {{ fixed_asset.get_asset_type_display }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Owner</div>
+                  {{ fixed_asset.owner }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Location</div>
+                  {{ fixed_asset.location }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Description</div>
+                  {{ fixed_asset.description }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Purchase Date</div>
+                  {{ fixed_asset.purchase_date }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Purchase Price</div>
+                  {{ fixed_asset.purchase_price }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Purchased From</div>
+                  {{ fixed_asset.purchased_from }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Purchase Condition</div>
+                  {{ fixed_asset.get_purchase_condition_display }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Active</div>
+                  {{ fixed_asset.active }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Inactive Date</div>
+                  {{ fixed_asset.inactive_date }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Comments</div>
+                {{ fixed_asset.comments }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
         </div>
     </div>
+
     <div class="col-md-3">
         <div class="card">
-            <div class="card-header">Updated: Fixed Asset - Tag {{ fixed_asset.asset_tag }}</div>
+            <div class="card-header">
+              <strong>Fixed Asset</strong>
+              <small>Last Updated</small>
+            </div>
             <div class="card-block">
               <table class="table">
                 <tr style="border-top: hidden;">
-                    <td class="firstcol">Record Updated By: </td>
-                    <td>{{ fixed_asset.created_by }}</td>
+                  <td class="firstcol">Record Updated By: </td>
+                  <td>{{ fixed_asset.created_by }}</td>
                 </tr>
                 <tr>
-                    <td class="firstcol">Record Updated At: </td>
-                    <td>{{ fixed_asset.created_at }}</td>
+                  <td class="firstcol">Record Updated At: </td>
+                  <td>{{ fixed_asset.created_at }}</td>
                 </tr>
               </table>
             </div>

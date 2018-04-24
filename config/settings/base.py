@@ -33,7 +33,6 @@ if READ_DOT_ENV_FILE:
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
-
 # Application definition
 # ------------------------------------------------------------------------------
 
@@ -53,7 +52,7 @@ INSTALLED_APPS = [
     'allauth_office365',
     #'social.apps.django_app.default',
     'reversion',
-
+    'widget_tweaks',
     'bootstrap4',
 
     'business_management.accounts',
@@ -86,7 +85,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-
 
 TEMPLATES = [
     {

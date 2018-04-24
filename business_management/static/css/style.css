@@ -1769,7 +1769,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   height: calc(2.64063rem + 2px); }
 
 .form-group {
-  margin-bottom: 1rem; }
+  margin-bottom: 6px; }
 
 .form-text {
   display: block;
@@ -12693,4 +12693,19 @@ hr.transparent {
 
 .page_title {
   margin-bottom: 20px;
+  margin-top:-10px;
+}
+.detail-group {
+  margin-bottom:20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom:4px;
+}
+.detail-name {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.page_title_2 {
+  color: #999;
+  margin-bottom: 10px;
+  margin-top: -14px;
 }

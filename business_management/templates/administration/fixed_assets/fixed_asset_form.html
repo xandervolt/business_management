@@ -1,52 +1,159 @@
 {% extends "pages/layout.html" %}
-
 {% load static from staticfiles %}
-
+{% load widget_tweaks %}
 {% block title %}{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}{% endblock %}
 
 {% block content %}
 <div class="row">
   <div class="col">
-      <h2 class="card-detail-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h2>
-  </div>
-  <div class="col-8">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -30px; z-index:1000;">
-        <a class="btn btn-primary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
-        <a class="btn btn-primary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
-        <a class="btn btn-primary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
-        <div class="btn-group" role="group">
-            <a id="btnGroupDrop1" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                View
-            </a>
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_list' %}">All Active</a>
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_inactive_list' %}">All Inactive</a>
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_500_list' %}">> $500</a>
-              <a class="dropdown-item" href="{% url 'administration:fixed_asset_1000_list' %}">> $1000</a>
-            </div>
-        </div>
-    </div>
+      <h1 class="page_title">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h1>
   </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-9">
-                        <form method='POST'>
-                            {% csrf_token %}
-                            <table class="inputform" style="margin-bottom: 0px;">
-                                {{ form.as_table }}
-                            </table>
-                            <br />
-                            <input type="submit" class="btn btn-success" value="Save">
-                        </form>
-                    </div>
+          <form method='POST'>
+          {% csrf_token %}
+          <div class="card-header">
+              <strong>Fixed Asset</strong>
+              <small>Form</small>
+          </div>
+          <div class="card-body">
+            {{ form.non_field_errors }}
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.asset_tag.id_for_label }}"><b>Asset Tag #</b></label>
+                  {% render_field form.asset_tag class+="form-control" %}
+                  {{ form.asset_tag.errors }}
                 </div>
+              </div>
             </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.manufacturer.id_for_label }}"><b>Manufacturer</b></label>
+                  {% render_field form.manufacturer class+="form-control" %}
+                  {{ form.manufacturer.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.model_number.id_for_label }}"><b>Model Number</b></label>
+                  {% render_field form.model_number class+="form-control" %}
+                  {{ form.model_number.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.serial_number.id_for_label }}"><b>Serial Number</b></label>
+                  {% render_field form.serial_number class+="form-control" %}
+                  {{ form.serial_number.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.asset_type.id_for_label }}">Asset Type</label>
+                  {% render_field form.asset_type class+="form-control" %}
+                  {{ form.asset_type.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.owner.id_for_label }}">Owner</label>
+                  {% render_field form.owner class+="form-control" %}
+                  {{ form.owner.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.location.id_for_label }}">Location</label>
+                  {% render_field form.location class+="form-control" %}
+                  {{ form.location.errors }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.description.id_for_label }}"><b>Description</b></label>
+                  {% render_field form.description class+="form-control" %}
+                  {{ form.description.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.purchase_date.id_for_label }}">Purchase Date</label>
+                  {% render_field form.purchase_date class+="form-control" %}
+                  {{ form.purchase_date.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.purchase_price.id_for_label }}">Purchase Price</label>
+                  {% render_field form.purchase_price class+="form-control" %}
+                  {{ form.purchase_price.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.purchased_from.id_for_label }}">Purchased From</label>
+                  {% render_field form.purchased_from class+="form-control" %}
+                  {{ form.purchased_from.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.purchase_condition.id_for_label }}">Purchase Condition</label>
+                  {% render_field form.purchase_condition class+="form-control" %}
+                  {{ form.purchase_condition.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6 text-left">
+                <div class="form-group">
+                  <label for="{{ form.active.id_for_label }}">Active</label>
+                  {% render_field form.active class+="form-control" %}
+                  {{ form.active.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.inactive_date.id_for_label }}">Date Marked Inactive</label>
+                  {% render_field form.inactive_date class+="form-control" %}
+                  {{ form.inactive_date.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.comments.id_for_label }}">Comments</label>
+                  {% render_field form.comments class+="form-control" %}
+                  {{ form.comments.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
+          <div class="card-footer">
+            <input type="submit" class="btn btn-primary" value="Save">
         </div>
+        </form>
+
     </div>
 </div>
 {% endblock %}
