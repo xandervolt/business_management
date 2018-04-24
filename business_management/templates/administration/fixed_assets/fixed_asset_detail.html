@@ -1,8 +1,7 @@
 {% extends "pages/layout.html" %}
 {% load static from staticfiles %}
 
-{% block title %}Fixed Asset{% endblock %}
-<h4 class="page_title_2">Asset Tag {{ fixed_asset.asset_tag }}</h4>
+{% block meta_title %}Fixed Asset - {{ fixed_asset.asset_tag }} {% endblock %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
@@ -14,6 +13,7 @@
 <div class="row">
   <div class="col">
       <h1 class="page_title">Fixed Asset</h1>
+      <h4 class="page_title_2">Asset Tag {{ fixed_asset.asset_tag }} Detail</h4>
   </div>
   <div class="col-8">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
@@ -151,40 +151,62 @@
 
     <div class="col-md-3">
         <div class="card">
-            <div class="card-header">
-              <strong>Fixed Asset</strong>
-              <small>Last Updated</small>
+          <div class="card-header">
+            <strong>Fixed Asset</strong>
+            <small>Updated</small>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Updated By</div>
+                  {{ fixed_asset.created_by }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Updated At</div>
+                  {{ fixed_asset.created_at }}
+                </div>
+              </div>
             </div>
-            <div class="card-block">
-              <table class="table">
-                <tr style="border-top: hidden;">
-                  <td class="firstcol">Record Updated By: </td>
-                  <td>{{ fixed_asset.created_by }}</td>
-                </tr>
-                <tr>
-                  <td class="firstcol">Record Updated At: </td>
-                  <td>{{ fixed_asset.created_at }}</td>
-                </tr>
-              </table>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Updated</div>
+                  Manufacturer: {{ fixed_asset.manufacturer }}
+                </div>
+              </div>
             </div>
+            <!--/.row-->
+          </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card">
-            <div class="card-header">Created: Fixed Asset - Tag {{ fixed_asset.asset_tag }}</div>
-            <div class="card-block">
-                <table class="table">
-                  <tr style="border-top: hidden;">
-                      <td class="firstcol">Record Created By: </td>
-                      <td>{{ fixed_asset.created_by }}</td>
-                  </tr>
-                  <tr>
-                      <td class="firstcol">Record Created At: </td>
-                      <td>{{ fixed_asset.created_at }}</td>
-                  </tr>
-                </table>
-            </div>
+      <div class="card">
+        <div class="card-header">
+          <strong>Fixed Asset</strong>
+          <small>Created</small>
         </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="detail-group">
+                <div class="detail-name">Created By</div>
+                {{ fixed_asset.created_by }}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="detail-group">
+                <div class="detail-name">Created At</div>
+                {{ fixed_asset.created_at }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+        </div>
+      </div>
     </div>
 </div>
 {% endblock %}
