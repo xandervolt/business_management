@@ -1,10 +1,12 @@
 {% extends "pages/list_template.html" %}
-
 {% block title %}Fixed Assets over $1000{% endblock %}
-
 {% block list_title %}Fixed Assets{% endblock %}
 {% block list_title_2 %}Active Assets $1000 or Over{% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item active">Active Assets $1000 or Over</li>
+{% endblock %}
 {% block buttons %}
   {% include "administration/fixed_assets/fixed_asset_buttons.html" %}
 {% endblock %}

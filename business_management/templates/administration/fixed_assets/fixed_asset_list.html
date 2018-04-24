@@ -1,9 +1,12 @@
 {% extends "pages/list_template.html" %}
-
 {% block meta_title %}Fixed Assets{% endblock %}
-
 {% block list_title %}Fixed Assets{% endblock %}
 {% block list_title_2 %}All Active Assets{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item active">All Active Assets</li>
+{% endblock %}
 {% block buttons %}
   {% include "administration/fixed_assets/fixed_asset_buttons.html" %}
 {% endblock %}

@@ -1,8 +1,13 @@
 {% extends "pages/layout.html" %}
-
 {% load static from staticfiles %}
 
 {% block title %}Fixed Asset - Tag {{ fixed_asset.asset_tag }}{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item"><a href="{% url 'administration:fixed_asset_list' %}">All Active Assets</a></li>
+<li class="breadcrumb-item active">Fixed Asset Detail</li>
+{% endblock %}
 
 {% block content %}
 <div class="row">

@@ -3,10 +3,17 @@
 {% load widget_tweaks %}
 {% block title %}{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}{% endblock %}
 
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item"><a href="{% url 'administration:fixed_asset_list' %}">All Active Assets</a></li>
+<li class="breadcrumb-item active">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</li>
+{% endblock %}
+
 {% block content %}
 <div class="row">
   <div class="col">
       <h1 class="page_title">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h1>
+      <h5 class="page_title_2">Fields in bold are required</h5>
   </div>
 </div>
 <div class="row">
@@ -47,7 +54,7 @@
               </div>
               <div class="form-group col-sm-4">
                 <div class="form-group">
-                  <label for="{{ form.serial_number.id_for_label }}"><b>Serial Number</b></label>
+                  <label for="{{ form.serial_number.id_for_label }}">Serial Number</label>
                   {% render_field form.serial_number class+="form-control" %}
                   {{ form.serial_number.errors }}
                 </div>
@@ -123,7 +130,7 @@
             <!--/.row-->
             <div class="row">
               <div class="form-group col-sm-6 text-left">
-                <div class="form-group">
+                <div class="form-group" style="float:left;">
                   <label for="{{ form.active.id_for_label }}">Active</label>
                   {% render_field form.active class+="form-control" %}
                   {{ form.active.errors }}

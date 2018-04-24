@@ -5957,7 +5957,7 @@ button.bg-success:focus {
   background-color: #3a9d5d !important; }
 
 .bg-info {
-  background-color: #63c2de !important; }
+  background-color: #98c2ce !important; }
 
 a.bg-info:hover, a.bg-info:focus,
 button.bg-info:hover,
@@ -9639,7 +9639,7 @@ button {
       background-color: #44b76c;
       border-color: #379457; }
   .card.bg-info {
-    border-color: #2eadd3; }
+    border-color: #8bafba; }
     .card.bg-info .card-header {
       background-color: #56bddb;
       border-color: #2eadd3; }
@@ -12705,7 +12705,8 @@ hr.transparent {
   font-weight: bold;
 }
 .page_title_2 {
-  color: #999;
+  color: #7ea6b2;
   margin-bottom: 10px;
   margin-top: -14px;
+  font-weight: 400;
 }
