@@ -13,7 +13,6 @@
 <div class="row">
   <div class="col">
       <h1 class="page_title">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</h1>
-      <h5 class="page_title_2">Fields in bold are required</h5>
   </div>
 </div>
 <div class="row">
@@ -26,6 +25,7 @@
               <small>Form</small>
           </div>
           <div class="card-body">
+            <p><strong>Bold are required *</strong></p>
             {{ form.non_field_errors }}
             <div class="row">
               <div class="form-group col-sm-12">
