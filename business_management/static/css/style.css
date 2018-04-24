@@ -12710,3 +12710,6 @@ hr.transparent {
   margin-top: -14px;
   font-weight: 400;
 }
+a.disabled-link:link {
+  color: rgba(255, 255, 255, 0.45);
+}

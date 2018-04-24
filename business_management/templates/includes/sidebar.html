@@ -9,7 +9,7 @@
       </li>
       {% if perms.administration %}
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#">Company</a>
+        <a class="nav-link nav-dropdown-toggle disabled-link" href="#">Company</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
             <a class="nav-link" href="#" target="_top">Contacts</a>
@@ -18,7 +18,7 @@
       </li>
       {% endif %}
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#">Employees</a>
+        <a class="nav-link nav-dropdown-toggle disabled-link" href="#">Employees</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
             <a class="nav-link" href="#" target="_top">Time Reporting</a>
@@ -29,7 +29,7 @@
         </ul>
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#">Shipping/Receiving</a>
+        <a class="nav-link nav-dropdown-toggle disabled-link" href="#">Shipping/Receiving</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
             <a class="nav-link" href="#" target="_top">Receiving Log</a>
@@ -48,7 +48,7 @@
             <a class="nav-link" href="{% url 'administration:fixed_asset_list' %}" target="_top">Assets</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" target="_top">Purchase Orders</a>
+            <a class="nav-link disabled-link" href="#" target="_top">Purchase Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" target="_top">Invoices</a>
@@ -73,7 +73,7 @@
         <i class="fas fa-gavel" style="margin-right:10px;"></i>Legal
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#">Contracts</a>
+        <a class="nav-link nav-dropdown-toggle disabled-link" href="#">Contracts</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
             <a class="nav-link" href="#" target="_top">NDAs</a>
