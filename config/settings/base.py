@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'reversion',
     'widget_tweaks',
     'bootstrap4',
+    'django_bootstrap_breadcrumbs',
 
     'business_management.accounts',
     'business_management.administration',

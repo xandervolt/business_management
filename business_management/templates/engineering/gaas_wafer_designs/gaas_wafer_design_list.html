@@ -78,11 +78,11 @@
     <tbody>
         {% for gaas_wafer_design in gaas_wafer_designs %}
         <tr>
-            <td><a href="">{{ gaas_wafer_design.design_ui }}</a></td>
+            <td><a href="{% url 'engineering:gaas_wafer_design_detail' pk=gaas_wafer_design.pk %}">{{ gaas_wafer_design.design_ui }}</a></td>
             <td>{{ gaas_wafer_design.get_emitting_display }}</td>
             <td>{{ gaas_wafer_design.contact_location }}</td>
             <td>{{ gaas_wafer_design.optical_power }}</td>
-            <td>{{ gaas_wafer_design.design_date }}</td>
+            <td>{{ gaas_wafer_design.design_date|date:"m/d/y" }}</td>
             <td>{{ gaas_wafer_design.designer }}</td>
             <td>{{ gaas_wafer_design.designer_ui }}</td>
             <td>{{ gaas_wafer_design.created_at }}</td>

@@ -1,7 +1,14 @@
 {% extends "pages/layout.html" %}
 {% load static from staticfiles %}
 {% block title %}My Dashboard{% endblock %}
+
+{% load django_bootstrap_breadcrumbs %}
+
 {% block breadcrumb %}
+  {% block breadcrumbs %}
+    {% clear_breadcrumbs %}
+    {% breadcrumb "Dashboard" "/" %}
+  {% endblock %}
 <li class="breadcrumb-item active">Dashboard</li>
 {% endblock %}
 {% block content %}

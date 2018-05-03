@@ -1,53 +1,134 @@
 {% extends "pages/layout.html" %}
-
 {% load static from staticfiles %}
+{% load widget_tweaks %}
+{% block title %}{% if not form.instance.pk %}Add GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% load django_bootstrap_breadcrumbs %}
 
-{% block title %}{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% block breadcrumb %}
+  {% block breadcrumbs %}
+      {{ block.super }}
+  {% endblock %}
+{% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12">
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-                <a class="btn btn-info disabled" href=""><i class="fa fa-lightbulb-o fa-fw"></i> Add New</a>
-                <a class="btn btn-info disabled" href=""><i class="fa fa-files-o fa-fw"></i> Copy</a>
-            </div>
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <a class="btn btn-warning disabled" href=""><i class="fa fa-pencil-square-o fa-fw"></i> Edit</a>
-                <a class="btn btn-warning disabled" href=""><i class="fa fa-print fa-fw"></i> Print</a>
-                <a class="btn btn-warning disabled" href=""><i class="fa fa-line-chart fa-fw"></i> Create Report</a>
-            </div>
-            <div class="btn-group" role="group" aria-label="Third group">
-                <a class="btn btn-danger disabled" href=""><i class="fa fa-trash-o fa-fw"></i> Move to Trash</a>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="card-detail-header">{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}</h2>
-    </div>
+  <div class="col">
+      <h1 class="page_title">{% if not form.instance.pk %}Add GaAs Wafer Design{% else %}Edit GaAs Wafer Design{% endif %}</h1>
+  </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{% if not form.instance.pk %}Create GaAs Wafer Design{% else %}Edit {{ form.instance.gaas_wafer_design.design_ui }}{% endif %}</div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h2 class="card-detail-header"></h2>
-                        <form method='POST'>
-                            {% csrf_token %}
-                            <table class="table inputform" style="margin-bottom: 0px;">
-                                {{ form.as_table }}
-                            </table>
-                            <input type="submit" class="btn btn-success" value="Save">
-                        </form>
-                    </div>
+          <form method='POST'>
+          {% csrf_token %}
+          <div class="card-header">
+              <strong>GaAs Wafer Design</strong>
+              <small>Form</small>
+          </div>
+          <div class="card-body">
+            <p><strong>Bold are required *</strong></p>
+            {{ form.non_field_errors }}
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.design_ui.id_for_label }}"><b>GaAs Wafer Design UI</b></label>
+                  {% render_field form.design_ui class+="form-control" %}
+                  {{ form.design_ui.errors }}
                 </div>
+              </div>
             </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.emitting.id_for_label }}"><b>Emitter Type</b></label>
+                  {% render_field form.emitting class+="form-control" %}
+                  {{ form.emitting.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.contact_location.id_for_label }}"><b>Contact Location</b></label>
+                  {% render_field form.contact_location class+="form-control" %}
+                  {{ form.contact_location.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.optical_power.id_for_label }}"><b>Optical Power</b></label>
+                  {% render_field form.optical_power class+="form-control" %}
+                  {{ form.optical_power.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.design_date.id_for_label }}"><b>Design Date</b></label>
+                  {% render_field form.design_date class+="form-control" %}
+                  {{ form.design_date.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.designer.id_for_label }}"><b>Designer</b></label>
+                  {% render_field form.designer class+="form-control" %}
+                  {{ form.owner.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.designer_ui.id_for_label }}">Designer UI</label>
+                  {% render_field form.designer_ui class+="form-control" %}
+                  {{ form.designer_ui.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.design_document.id_for_label }}">Design Document</label>
+                  {% render_field form.design_document class+="form-control" %}
+                  {{ form.design_document.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6 text-left">
+                <div class="form-group" style="float:left;">
+                  <label for="{{ form.in_trash.id_for_label }}">In Trash?</label>
+                  {% render_field form.in_trash class+="form-control" %}
+                  {{ form.in_trash.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.inactive_date.id_for_label }}">Date Trashed</label>
+                  {% render_field form.inactive_date class+="form-control" %}
+                  {{ form.inactive_date.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.comments.id_for_label }}">Notes</label>
+                  {% render_field form.notes class+="form-control" %}
+                  {{ form.notes.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
+          <div class="card-footer">
+            <input type="submit" class="btn btn-primary" value="Save">
         </div>
+      </form>
     </div>
+  </div>
 </div>
 {% endblock %}

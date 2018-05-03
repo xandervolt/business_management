@@ -1,113 +1,181 @@
 {% extends "pages/layout.html" %}
-
 {% load static from staticfiles %}
 
-{% block title %}GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{% endblock %}
+{% block meta_title %}GaAs Wafer Design - {{ gaas_wafer_design.design_ui }} {% endblock %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumb %}
+  {% block breadcrumbs %}
+    {{ block.super }}
+
+  {% endblock %}
+{% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12">
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-                <a class="btn btn-info" href="{% url 'engineering:gaas_wafer_design_create' %}"><i class="fa fa-lightbulb-o fa-fw"></i> Add New</a>
-                <a class="btn btn-info" href=""><i class="fa fa-files-o fa-fw"></i> Copy</a>
-            </div>
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <a class="btn btn-warning" href="{% url 'engineering:gaas_wafer_design_update' pk=gaaswaferdesign.pk %}"><i class="fa fa-pencil-square-o fa-fw"></i> Edit</a>
-                <a class="btn btn-warning" href=""><i class="fa fa-print fa-fw"></i> Print</a>
-                <a class="btn btn-warning" href=""><i class="fa fa-line-chart fa-fw"></i> Create Report</a>
-            </div>
-            <div class="btn-group" role="group" aria-label="Third group">
-                <a class="btn btn-danger" href=""><i class="fa fa-trash-o fa-fw"></i> Move to Trash</a>
-            </div>
-        </div>
+  <div class="col">
+    <h1 class="page_title">GaAs Wafer Design</h1>
+    <h4 class="page_title_2">Design {{ gaas_wafer_design.design_ui }} Detail</h4>
+  </div>
+  <div class="col-8">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
+      <a class="btn btn-secondary" href="{% url 'engineering:gaas_wafer_design_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
+      <a class="btn btn-secondary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
+      <a class="btn btn-secondary" href="{% url 'engineering:gaas_wafer_design_update' pk=gaas_wafer_design.pk %}"><i class="fa fa-edit fa-fw"></i> Edit</a>
+      <a class="btn btn-secondary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
     </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="card-detail-header">GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}</h2>
-    </div>
+  </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}</div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-9">
-                        
-                        <table class="table" style="margin-bottom: 0px;">
-                            <tr style="border-top: hidden;">
-                                <td class="firstcol">Wafer Design UI: </td>
-                                <td>{{ gaaswaferdesign.design_ui }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Emitting Type: </td>
-                                <td>{{ gaaswaferdesign.get_emitting_display }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Contact Location: </td>
-                                <td>{{ gaaswaferdesign.contact_location }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Optical Power: </td>
-                                <td>{{ gaaswaferdesign.optical_power }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Design Date: </td>
-                                <td>{{ gaaswaferdesign.design_date }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Designer: </td>
-                                <td>{{ gaaswaferdesign.designer }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Designer UI: </td>
-                                <td>{{ gaaswaferdesign.designer_ui }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Record Created At: </td>
-                                <td>{{ gaaswaferdesign.created_at }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">Record Created By: </td>
-                                <td>{{ gaaswaferdesign.created_by }}</td>
-                            </tr>
-                            <tr>
-                                <td class="firstcol">In Trash: </td>
-                                <td>{{ gaaswaferdesign.in_trash }}</td>
-                            </tr>
-                        </table>
-                    </div>
+          <div class="card-header">
+              <strong>GaAs Wafer Design</strong>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">GaAs Wafer Design UI</div>
+                  {{ gaas_wafer_design.design_ui }}
                 </div>
+              </div>
             </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Emitter Type</div>
+                  {{ gaas_wafer_design.get_emitting_display }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Contact Location</div>
+                  {{ gaas_wafer_design.contact_location }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Optical Power</div>
+                  {{ gaas_wafer_design.optical_power }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Design Date</div>
+                  {{ gaas_wafer_design.design_date }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Designer</div>
+                  {{ gaas_wafer_design.designer }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="detail-group">
+                  <div class="detail-name">Designer UI</div>
+                  {{ gaas_wafer_design.designer_ui }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Design Document</div>
+                  {{ gaas_wafer_design.design_document }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">In Trash?</div>
+                  {{ gaas_wafer_design.in_trash }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Date Trashed</div>
+                  {{ gaas_wafer_design.inactive_date }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Notes</div>
+                  {{ gaas_wafer_design.notes }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
         </div>
     </div>
-    <div class="col-md-4">
+
+    <div class="col-md-3">
         <div class="card">
-            <div class="card-header">Attachments</div>
-            <div class="card-block">
-                Design Document - {{ gaaswaferdesign.design_ui }}
+          <div class="card-header">
+            <strong>Updated</strong>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Updated By</div>
+                  {{ gaas_wafer_design.created_by }}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="detail-group">
+                  <div class="detail-name">Updated At</div>
+                  {{ gaas_wafer_design.created_at }}
+                </div>
+              </div>
             </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="detail-group">
+                  <div class="detail-name">Updated</div>
+                  Optical Power: {{ gaas_wafer_design.optical_power }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
         </div>
     </div>
-    <div class="col-md-2">
-        <div class="card">
-            <div class="card-header">Change History - {{ gaaswaferdesign.design_ui }}</div>
-            <div class="card-block">
-                <table class="table">
-                    <tr style="border-top: hidden;">
-                        <td>Username</td>
-                        <td>{{ user.username }}</td>
-                    </tr>
-                    <tr>
-                        <td>First Name: </td>
-                        <td>{{ user.first_name }}</td>
-                    </tr>
-                </table>
-            </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <strong>Created</strong>
         </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="detail-group">
+                <div class="detail-name">Created By</div>
+                {{ gaas_wafer_design.created_by }}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="detail-group">
+                <div class="detail-name">Created At</div>
+                {{ gaas_wafer_design.created_at }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+        </div>
+      </div>
     </div>
 </div>
 {% endblock %}

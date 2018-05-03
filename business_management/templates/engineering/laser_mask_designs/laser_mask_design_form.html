@@ -1,53 +1,165 @@
 {% extends "pages/layout.html" %}
-
 {% load static from staticfiles %}
+{% load widget_tweaks %}
+{% block title %}{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit Laser Mask Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% load django_bootstrap_breadcrumbs %}
 
-{% block title %}{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% block breadcrumb %}
+  {% block breadcrumbs %}
+      {{ block.super }}
+  {% endblock %}
+{% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12">
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-                <a class="btn btn-info disabled" href=""><i class="fa fa-lightbulb-o fa-fw"></i> Add New</a>
-                <a class="btn btn-info disabled" href=""><i class="fa fa-files-o fa-fw"></i> Copy</a>
-            </div>
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <a class="btn btn-warning disabled" href=""><i class="fa fa-pencil-square-o fa-fw"></i> Edit</a>
-                <a class="btn btn-warning disabled" href=""><i class="fa fa-print fa-fw"></i> Print</a>
-                <a class="btn btn-warning disabled" href=""><i class="fa fa-line-chart fa-fw"></i> Create Report</a>
-            </div>
-            <div class="btn-group" role="group" aria-label="Third group">
-                <a class="btn btn-danger disabled" href=""><i class="fa fa-trash-o fa-fw"></i> Move to Trash</a>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-md-12">
-        <h2 class="card-detail-header">{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit Laser Mask Design - {{ lasermaskdesign.laser_mask_design_ui }}{{ form.instance.lasermaskdesign.laser_mask_design_ui }}{% endif %}</h2>
-    </div>
+  <div class="col">
+      <h1 class="page_title">{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit Laser Mask Design{% endif %}</h1>
+  </div>
 </div>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{% if not form.instance.pk %}Add Laser Mask Design{% else %}Edit {{ form.instance.lasermaskdesign.laser_mask_design_ui }}{% endif %}</div>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h2 class="card-detail-header"></h2>
-                        <form method='POST'>
-                            {% csrf_token %}
-                            <table class="table inputform" style="margin-bottom: 0px;">
-                                {{ form.as_table }}
-                            </table>
-                            <input type="submit" class="btn btn-success" value="Save">
-                        </form>
-                    </div>
+          <form method='POST'>
+          {% csrf_token %}
+          <div class="card-header">
+              <strong>Laser Mask Design</strong>
+              <small>Form</small>
+          </div>
+          <div class="card-body">
+            <p><strong>Bold are required *</strong></p>
+            {{ form.non_field_errors }}
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.laser_mask_design_ui.id_for_label }}"><b>Laser Mask Design UI</b></label>
+                  {% render_field form.laser_mask_design_ui class+="form-control" %}
+                  {{ form.laser_mask_design_ui.errors }}
                 </div>
+              </div>
             </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.design_date.id_for_label }}"><b>Design Date</b></label>
+                  {% render_field form.design_date class+="form-control" %}
+                  {{ form.design_date.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.designer.id_for_label }}"><b>Designer</b></label>
+                  {% render_field form.designer class+="form-control" %}
+                  {{ form.designer.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.design_document.id_for_label }}"><b>Design Document</b></label>
+                  {% render_field form.design_document class+="form-control" %}
+                  {{ form.design_document.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.mask_layers.id_for_label }}"><b>Mask Layers</b></label>
+                  {% render_field form.mask_layers class+="form-control" %}
+                  {{ form.mask_layers.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.pcm.id_for_label }}"><b>PCM</b></label>
+                  {% render_field form.pcm class+="form-control" %}
+                  {{ form.pcm.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.critical_dimensions.id_for_label }}">Critical Dimensions</label>
+                  {% render_field form.critical_dimensions class+="form-control" %}
+                  {{ form.critical_dimensions.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.dimensions.id_for_label }}">Dimensions</label>
+                  {% render_field form.dimensions class+="form-control" %}
+                  {{ form.dimensions.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.thickness.id_for_label }}">Thickness</label>
+                  {% render_field form.thickness class+="form-control" %}
+                  {{ form.thickness.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-4">
+                <div class="form-group">
+                  <label for="{{ form.material.id_for_label }}">Material</label>
+                  {% render_field form.material class+="form-control" %}
+                  {{ form.material.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.number_of_products.id_for_label }}">Number of Products</label>
+                  {% render_field form.number_of_products class+="form-control" %}
+                  {{ form.number_of_products.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.chip_list.id_for_label }}">Chip List</label>
+                  {% render_field form.chip_list class+="form-control" %}
+                  {{ form.chip_list.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-6 text-left">
+                <div class="form-group" style="float:left;">
+                  <label for="{{ form.in_trash.id_for_label }}">In Trash?</label>
+                  {% render_field form.in_trash class+="form-control" %}
+                  {{ form.in_trash.errors }}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <div class="form-group">
+                  <label for="{{ form.inactive_date.id_for_label }}">Date Trashed</label>
+                  {% render_field form.inactive_date class+="form-control" %}
+                  {{ form.inactive_date.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <div class="form-group">
+                  <label for="{{ form.comments.id_for_label }}">Notes</label>
+                  {% render_field form.notes class+="form-control" %}
+                  {{ form.notes.errors }}
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+          </div>
+          <div class="card-footer">
+            <input type="submit" class="btn btn-primary" value="Save">
         </div>
+      </form>
     </div>
+  </div>
 </div>
 {% endblock %}

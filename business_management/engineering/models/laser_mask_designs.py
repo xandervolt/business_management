@@ -23,18 +23,19 @@ class LaserMaskDesign(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
     in_trash = models.BooleanField(default=False)
-    
+    inactive_date = models.DateTimeField(blank=True, null=True)
+
     def save(self, *args, **kwargs):
          # Get the authenticated user credentials from python-social-auth
         #social = request.user.allauth.get(provider='office365')
         #access_token = social.extra_data['access_token']
-    
+
         # build our header for the api call
         '''
         headers = {
             'Authorization' : 'Bearer {0}'.format(access_token),
         }'''
-    
+
         # build the url for the api call
         # Look at https://dev.onedrive.com/items/upload_put.htm for reference
         url = 'https://graph.microsoft.com/v1.0/me/'
@@ -43,15 +44,14 @@ class LaserMaskDesign(models.Model):
         response = requests.get(url)
         #response = requests.put(url, data=open(self.design_document, 'rb'), headers=headers)
         return response
-    
+
         super(LaserMaskDesign, self).save(*args, **kwargs)
-    
+
     class Meta:
         ordering = ['laser_mask_design_ui', ]
-    
+
     def __str__(self):
         return self.laser_mask_design_ui
-    
+
     def get_absolute_url(self):
         return reverse("engineering:laser_mask_design_detail", kwargs={"pk": self.pk})
-    

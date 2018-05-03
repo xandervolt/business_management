@@ -2,11 +2,12 @@
 {% load static from staticfiles %}
 {% load widget_tweaks %}
 {% block title %}{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}{% endblock %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
-<li class="breadcrumb-item"><a href="{% url 'administration:fixed_asset_list' %}">All Active Assets</a></li>
-<li class="breadcrumb-item active">{% if not form.instance.pk %}Add Fixed Asset{% else %}Edit Fixed Asset{% endif %}</li>
+  {% block breadcrumbs %}
+      {{ block.super }}
+  {% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -162,5 +163,6 @@
         </form>
 
     </div>
+  </div>
 </div>
 {% endblock %}

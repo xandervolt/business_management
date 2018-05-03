@@ -36,7 +36,6 @@
           </li>
         </ul>
       </li>
-
       {% if perms.financial %}
       <li class="nav-title">
         <i class="fas fa-dollar-sign" style="margin-right:10px;"></i>Fincancial
@@ -56,7 +55,6 @@
         </ul>
       </li>
       {% endif %}
-
       <li class="nav-title">
         <i class="fas fa-bolt" style="margin-right:10px;"></i>Engineering
       </li>
@@ -64,11 +62,10 @@
         <a class="nav-link nav-dropdown-toggle" href="#">Product Database</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'engineering:database_flow' %}" target="_top">Product Flow</a>
+            <a class="nav-link" href="{% url 'engineering:database_flow' %}" target="_top">Production Flow</a>
           </li>
         </ul>
       </li>
-
       <li class="nav-title">
         <i class="fas fa-gavel" style="margin-right:10px;"></i>Legal
       </li>
@@ -90,7 +87,6 @@
       <li class="nav-item">
         <a class="nav-link nav-link-primary" href="#" target="_top">Support</a>
       </li>
-
     </ul>
   </nav>
 </div>

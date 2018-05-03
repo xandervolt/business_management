@@ -2,25 +2,27 @@
 {% load static from staticfiles %}
 
 {% block meta_title %}Fixed Asset - {{ fixed_asset.asset_tag }} {% endblock %}
+{% load django_bootstrap_breadcrumbs %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
-<li class="breadcrumb-item"><a href="{% url 'administration:fixed_asset_list' %}">All Active Assets</a></li>
-<li class="breadcrumb-item active">Fixed Asset Detail</li>
+  {% block breadcrumbs %}
+    {{ block.super }}
+    
+  {% endblock %}
 {% endblock %}
 
 {% block content %}
 <div class="row">
   <div class="col">
-      <h1 class="page_title">Fixed Asset</h1>
-      <h4 class="page_title_2">Asset Tag {{ fixed_asset.asset_tag }} Detail</h4>
+    <h1 class="page_title">Fixed Asset</h1>
+    <h4 class="page_title_2">Asset Tag {{ fixed_asset.asset_tag }} Detail</h4>
   </div>
   <div class="col-8">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
-        <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
-        <a class="btn btn-secondary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
-        <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_update' pk=fixed_asset.pk %}"><i class="fa fa-edit fa-fw"></i> Edit</a>
-        <a class="btn btn-secondary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
+      <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
+      <a class="btn btn-secondary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
+      <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_update' pk=fixed_asset.pk %}"><i class="fa fa-edit fa-fw"></i> Edit</a>
+      <a class="btn btn-secondary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
     </div>
   </div>
 </div>
