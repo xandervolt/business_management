@@ -47,6 +47,7 @@
 -->
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+  {% block loading_icon %}{% endblock %}
   <header class="app-header navbar">
       <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
       {% include "includes/top-left-nav.html" %}
@@ -92,10 +93,10 @@
     <span><a href="">Joseph Enterprises</a> © 2018</span>
     <!--<span class="ml-auto">Powered by <a href="http://coreui.io">CoreUI</a></span>-->
   </footer>
-
+  {% block end_loading_icon %}{% endblock %}
   <!-- Bootstrap and necessary plugins -->
   <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
-  <script src="{% static 'js/vendors/jquery.min.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{% static 'js/vendors/popper.min.js' %}"></script>
   <script src="{% static 'js/vendors/bootstrap.min.js' %}"></script>
   <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->

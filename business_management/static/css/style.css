@@ -12713,3 +12713,16 @@ hr.transparent {
 a.disabled-link:link {
   color: rgba(255, 255, 255, 0.45);
 }
+
+/* loading icon */
+#loader{
+position:fixed;
+top:0;
+width:100%;
+background-color:000;
+height:100%;
+text-align:center;
+margin:0;
+padding:0;
+overflow:hidden;
+}

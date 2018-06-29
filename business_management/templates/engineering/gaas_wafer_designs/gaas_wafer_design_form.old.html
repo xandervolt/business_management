@@ -1,0 +1,32 @@
+{% extends "pages/layout.html" %}
+{% load static from staticfiles %}
+{% load widget_tweaks %}
+{% block title %}{% if not form.instance.pk %}Add GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumb %}
+  {% block breadcrumbs %}
+      {{ block.super }}
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <h1 class="page_title">{% if not form.instance.pk %}Add GaAs Wafer Design{% else %}Edit GaAs Wafer Design{% endif %}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <strong>GaAs Wafer Design</strong>
+        <small>Form</small>
+      </div>
+      <div class="card-body">
+        {% include 'engineering/gaas_wafer_designs/test_form_inner.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

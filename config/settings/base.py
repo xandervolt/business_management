@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'bootstrap4',
     'django_bootstrap_breadcrumbs',
+    'crispy_forms',
+    #'modal',
 
     'business_management.accounts',
     'business_management.administration',
@@ -173,6 +175,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # OAuth Office365/SharePoint Variables
 # ------------------------------------------------------------------------------

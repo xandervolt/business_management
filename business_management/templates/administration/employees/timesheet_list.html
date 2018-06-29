@@ -1,0 +1,94 @@
+{% extends "pages/list_create_template.html" %}
+{% load widget_tweaks %}
+{% block meta_title %}Employee Timesheets{% endblock %}
+{% block list_title %}Employee Timesheets{% endblock %}
+{% block list_title_2 %}[username]{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item active">Employee Timesheets</li>
+{% endblock %}
+{% block form %}
+
+<div class="card">
+  <form method='POST'>
+      {% csrf_token %}
+      <div class="card-header">
+          <strong>New Timesheet</strong>
+          <small>Form</small>
+      </div>
+      <div class="card-body">
+        {{ form.non_field_errors }}
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <div class="form-group">
+              <label for="{{ form.week_start.id_for_label }}"><b>Week Start</b> (Must be a Monday date in format mm/dd/yy)</label>
+              {% render_field form.week_start class+="form-control" %}
+              {{ form.week_start.errors }}
+            </div>
+          </div>
+        </div>
+        <!--/.row-->
+        <input type="submit" class="btn btn-primary" value="Create">
+      </div>
+  </form>
+</div>
+{% endblock %}
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                Week Start
+            </th>
+            <th>
+                Total Hours
+            </th>
+            <th>
+                Employee Signature
+            </th>
+            <th>
+                Employee Sign Date
+            </th>
+            <th>
+                Supervisor Signature
+            </th>
+            <th>
+                Supervisor Sign Date
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                Week Start
+            </th>
+            <th>
+                Total Hours
+            </th>
+            <th>
+                Employee Signature
+            </th>
+            <th>
+                Employee Sign Date
+            </th>
+            <th>
+                Supervisor Signature
+            </th>
+            <th>
+                Supervisor Sign Date
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for timesheet in timesheets %}
+        <tr>
+            <td><a href="">{{ timesheet.week_start }}</a></td>
+            <td>{{ timesheet.total_hours }}</td>
+            <td>{{ timesheet.employee_signature }}</td>
+            <td>{{ timesheet.employee_sign_date }}</td>
+            <td>{{ timesheet.supervisor_signature }}</td>
+            <td>{{ timesheet.supervisor_sign_date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}

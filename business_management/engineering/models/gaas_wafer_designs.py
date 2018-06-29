@@ -1,7 +1,11 @@
+import os, datetime
 from django.conf import settings
 from django.db import models
 from django.core.urlresolvers import reverse
 import reversion
+
+def upload_path(instance, filename):
+    return os.path.join('uploads/' + datetime.datetime.now().strftime('%Y/%m/%d/') + instance.design_ui, filename)
 
 # Create your models here.
 @reversion.register
@@ -26,7 +30,7 @@ class GaasWaferDesign(models.Model):
     design_date = models.DateTimeField()
     designer = models.CharField(max_length=255, default='')
     designer_ui = models.CharField(max_length=255, default='')
-    design_document = models.FileField(upload_to='uploads/%Y/%m/%d/', blank=True)
+    design_document = models.FileField(upload_to=upload_path, blank=True)
     notes = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)

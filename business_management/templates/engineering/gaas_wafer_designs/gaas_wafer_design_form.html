@@ -1,134 +1,25 @@
-{% extends "pages/layout.html" %}
-{% load static from staticfiles %}
-{% load widget_tweaks %}
-{% block title %}{% if not form.instance.pk %}Add GaAs Wafer Design{% else %}Edit GaAs Wafer Design - {{ gaaswaferdesign.design_ui }}{{ form.instance.gaas_wafer_design.design_ui }}{% endif %}{% endblock %}
-{% load django_bootstrap_breadcrumbs %}
-
-{% block breadcrumb %}
-  {% block breadcrumbs %}
-      {{ block.super }}
-  {% endblock %}
-{% endblock %}
-
-{% block content %}
-<div class="row">
-  <div class="col">
-      <h1 class="page_title">{% if not form.instance.pk %}Add GaAs Wafer Design{% else %}Edit GaAs Wafer Design{% endif %}</h1>
-  </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-          <form method='POST'>
-          {% csrf_token %}
-          <div class="card-header">
-              <strong>GaAs Wafer Design</strong>
-              <small>Form</small>
-          </div>
-          <div class="card-body">
-            <p><strong>Bold are required *</strong></p>
-            {{ form.non_field_errors }}
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <div class="form-group">
-                  <label for="{{ form.design_ui.id_for_label }}"><b>GaAs Wafer Design UI</b></label>
-                  {% render_field form.design_ui class+="form-control" %}
-                  {{ form.design_ui.errors }}
-                </div>
-              </div>
+{% load i18n widget_tweaks %}
+<div class="modal-dialog modal-lg" role="document">
+    <form action="{% url 'engineering:gaas_wafer_design_create' %}" method="post" id="gaas-create" class="form">{% csrf_token %}
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Add News</h4>
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-4">
-                <div class="form-group">
-                  <label for="{{ form.emitting.id_for_label }}"><b>Emitter Type</b></label>
-                  {% render_field form.emitting class+="form-control" %}
-                  {{ form.emitting.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-4">
-                <div class="form-group">
-                  <label for="{{ form.contact_location.id_for_label }}"><b>Contact Location</b></label>
-                  {% render_field form.contact_location class+="form-control" %}
-                  {{ form.contact_location.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-4">
-                <div class="form-group">
-                  <label for="{{ form.optical_power.id_for_label }}"><b>Optical Power</b></label>
-                  {% render_field form.optical_power class+="form-control" %}
-                  {{ form.optical_power.errors }}
-                </div>
-              </div>
+            <div class="modal-body">
+                Test
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-6">
-                <div class="form-group">
-                  <label for="{{ form.design_date.id_for_label }}"><b>Design Date</b></label>
-                  {% render_field form.design_date class+="form-control" %}
-                  {{ form.design_date.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-6">
-                <div class="form-group">
-                  <label for="{{ form.designer.id_for_label }}"><b>Designer</b></label>
-                  {% render_field form.designer class+="form-control" %}
-                  {{ form.owner.errors }}
-                </div>
-              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Save changes" />
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-6">
-                <div class="form-group">
-                  <label for="{{ form.designer_ui.id_for_label }}">Designer UI</label>
-                  {% render_field form.designer_ui class+="form-control" %}
-                  {{ form.designer_ui.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-6">
-                <div class="form-group">
-                  <label for="{{ form.design_document.id_for_label }}">Design Document</label>
-                  {% render_field form.design_document class+="form-control" %}
-                  {{ form.design_document.errors }}
-                </div>
-              </div>
-            </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-6 text-left">
-                <div class="form-group" style="float:left;">
-                  <label for="{{ form.in_trash.id_for_label }}">In Trash?</label>
-                  {% render_field form.in_trash class+="form-control" %}
-                  {{ form.in_trash.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-6">
-                <div class="form-group">
-                  <label for="{{ form.inactive_date.id_for_label }}">Date Trashed</label>
-                  {% render_field form.inactive_date class+="form-control" %}
-                  {{ form.inactive_date.errors }}
-                </div>
-              </div>
-            </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <div class="form-group">
-                  <label for="{{ form.comments.id_for_label }}">Notes</label>
-                  {% render_field form.notes class+="form-control" %}
-                  {{ form.notes.errors }}
-                </div>
-              </div>
-            </div>
-            <!--/.row-->
-          </div>
-          <div class="card-footer">
-            <input type="submit" class="btn btn-primary" value="Save">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-{% endblock %}
+        </div><!-- /.modal-content -->
+    </form>
+</div><!-- /.modal-dialog -->
+<script>
+    var form_options = { target: '#modal', success: function(response) {} };
+    $('#gaas-create').ajaxForm(form_options);
+</script>
