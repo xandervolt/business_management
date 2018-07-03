@@ -8,11 +8,12 @@
 {% block extra_js%}
 <!--<script src="{% static 'js/jscreate.js' %}"></script>-->
 <script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 {% endblock %}
 
 {% block buttons %}
   <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="margin-bottom: -150px; z-index:1000;">
-    <button class="btn btn-secondary" data-toggle="modal" data-target="#modal" %}>Create a new wafer design</button>
+    <button class="btn btn-secondary" data-toggle="modal" data-target="#form-modal" id="create-button">Create a new wafer design</button>
     <div class="btn-group" role="group">
       <a id="btnGroupDrop1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           View
@@ -22,30 +23,23 @@
       </div>
     </div>
   </div>
-
 {% endblock %}
 
 {% block table %}
-<div class="modal fade" id="modal">
-  <div class="modal-dialog modal-lg" role="document">
-      <form action="{% url 'engineering:gaas_wafer_design_create' %}" method="post" id="gaas-create" class="form">{% csrf_token %}
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h4 class="modal-title">Add Wafer Design</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                      <span class="sr-only">Close</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  Test
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <input type="submit" class="btn btn-primary" value="Save changes" />
-              </div>
-          </div><!-- /.modal-content -->
-      </form>
+<div class="modal fade" id="form-modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Add Wafer Design</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+              <span class="sr-only">Close</span>
+          </button>
+      </div>
+      <div id="form-modal-body" class="modal-body">
+
+      </div>
+    </div>
   </div><!-- /.modal-dialog -->
 </div>
   <thead>
@@ -119,15 +113,33 @@
       {% endfor %}
   </tbody>
 
-  <script>/*
-  $('#modal').on('show.bs.modal', function (event) {
-    var modal = $(this)
-    $.ajax({
-      url: "create/",
-      context: document.body
-    }).done(function(response) {
-      modal.html(response);
-    });
-  })
-  </script>
+<script>
+var formAjaxSubmit = function(form, modal) {
+    $(form).submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function (xhr, ajaxOptions, thrownError) {
+                if ( $(xhr).find('.has-error').length > 0 ) {
+                   $(modal).find('.modal-body').html(xhr);
+                   formAjaxSubmit(form, modal);
+               } else {
+                   $(modal).modal('toggle');
+               }
+           },
+           error: function (xhr, ajaxOptions, thrownError) {
+               // handle response errors here
+           }
+       });
+   });
+}
+$('#create-button').click(function() {
+   $('#form-modal-body').load('create/', function () {
+       $('#form-modal').modal('toggle');
+       formAjaxSubmit('#form-modal-body form', '#form-modal');
+   });
+});
+</script>
 {% endblock %}
