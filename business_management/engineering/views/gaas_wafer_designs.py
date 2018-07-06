@@ -45,15 +45,21 @@ def gaas_create(request):
     return JsonResponse({'html_form': html_form})
 
 
-class GaasWaferDesignFormView(SuccessMessageMixin, AjaxTemplateMixin, CreateView):
+class GaasWaferDesignFormView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, CreateView):
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form.html'
     ajax_template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form_inner.html'
     form_class = GaasWaferDesignForm
-    model = GaasWaferDesign
     form = GaasWaferDesignForm()
-    success_url = reverse_lazy('engineering:gaas_wafer_design_list')
-    success_message = "Way to go!"
-
+    model = GaasWaferDesign
+    #success_url = reverse_lazy('engineering:gaas_wafer_design_list')
+    #success_message = "yes!"
+'''
+    def form_valid(self, form):
+        object = form.save(commit=False)
+        object.created_by = self.request.user
+        object.save()
+        return super(GaasWaferDesignFormView, self).form_valid(form)
+'''
 
 class GaasWaferDesignCreateView(LoginRequiredMixin, CreateView):
     fields = ("design_ui", "emitting", "contact_location", "optical_power", "design_date", "designer", "design_document", "designer_ui", "in_trash", "inactive_date", "notes")

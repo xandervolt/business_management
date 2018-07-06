@@ -29,7 +29,7 @@ class GaasWaferDesign(models.Model):
     optical_power = models.DecimalField(max_digits=20, decimal_places=4, default=0.0000)
     design_date = models.DateTimeField()
     designer = models.CharField(max_length=255, default='')
-    designer_ui = models.CharField(max_length=255, default='')
+    designer_ui = models.CharField(max_length=255, default='', blank=True)
     design_document = models.FileField(upload_to=upload_path, blank=True)
     notes = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)

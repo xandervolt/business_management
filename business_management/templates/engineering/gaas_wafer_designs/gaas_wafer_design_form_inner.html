@@ -34,6 +34,77 @@
     </div>
   </div>
   <!--/.row-->
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  <input type="submit" class="btn btn-primary" value="Save changes" />
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <div class="form-group">
+        <label for="{{ form.design_date.id_for_label }}"><b>Design Date</b></label>
+        {% render_field form.design_date class+="form-control" %}
+        {{ form.design_date.errors }}
+      </div>
+    </div>
+    <div class="form-group col-sm-6">
+      <div class="form-group">
+        <label for="{{ form.designer.id_for_label }}"><b>Designer</b></label>
+        {% render_field form.designer class+="form-control" %}
+        {{ form.designer.errors }}
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <div class="form-group">
+        <label for="{{ form.designer_ui.id_for_label }}">Designer UI</label>
+        {% render_field form.designer_ui class+="form-control" %}
+        {{ form.designer_ui.errors }}
+      </div>
+    </div>
+    <div class="form-group col-sm-6">
+      <div class="form-group">
+        <label for="{{ form.design_document.id_for_label }}">Design Document</label>
+        {% render_field form.design_document class+="form-control" %}
+        {{ form.design_document.errors }}
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+  <div class="row">
+    <div class="form-group col-sm-4">
+      <div class="form-group" style="float:left;">
+        <label for="{{ form.in_trash.id_for_label }}">In Trash</label>
+        {% render_field form.in_trash class+="form-control" %}
+        {{ form.in_trash.errors }}
+      </div>
+    </div>
+    <div class="form-group col-sm-4">
+      <div class="form-group">
+        <label for="{{ form.inactive_date.id_for_label }}">Inactive Date</label>
+        {% render_field form.inactive_date class+="form-control" %}
+        {{ form.inactive_date.errors }}
+      </div>
+    </div>
+    <div class="form-group col-sm-4">
+      <div class="form-group">
+        <label for="{{ form.created_by.id_for_label }}">Creeated By</label>
+        {% render_field form.created_by class+="form-control" %}
+        {{ form.created_by.errors }}
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <div class="form-group">
+        <label for="{{ form.notes.id_for_label }}">Notes</label>
+        {% render_field form.notes class+="form-control" %}
+        {{ form.notes.errors }}
+      </div>
+    </div>
+  </div>
+  <br />
+  <!--/.row-->
+  <span style="float:right;">
+    <input type="submit" class="btn btn-primary" value="Save" />
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+  </span>
 </form>

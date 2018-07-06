@@ -8,4 +8,4 @@ class GaasWaferDesignForm(forms.ModelForm):
 
     class Meta:
         model = GaasWaferDesign
-        exclude = ['created_by',]
+        fields = '__all__'
