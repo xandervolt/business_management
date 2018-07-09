@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 #from django.db import transaction
 #from django.db import IntegrityError
 from django.template.loader import render_to_string
@@ -16,6 +16,7 @@ from django.views.generic import (
     TemplateView,
     FormView,
 )
+import simplejson as json
 
 from ..models.gaas_wafer_designs import GaasWaferDesign
 from ..forms import GaasWaferDesignForm
@@ -45,22 +46,45 @@ def gaas_create(request):
     return JsonResponse({'html_form': html_form})
 
 
-class GaasWaferDesignFormView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, CreateView):
+class GaasWaferDesignCreateView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, CreateView):
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form.html'
     ajax_template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form_inner.html'
     form_class = GaasWaferDesignForm
     form = GaasWaferDesignForm()
     model = GaasWaferDesign
-    #success_url = reverse_lazy('engineering:gaas_wafer_design_list')
-    #success_message = "yes!"
-'''
-    def form_valid(self, form):
-        object = form.save(commit=False)
-        object.created_by = self.request.user
-        object.save()
-        return super(GaasWaferDesignFormView, self).form_valid(form)
-'''
+    success_url = reverse_lazy('engineering:gaas_wafer_design_list')
+    success_message = "yes!"
 
+    def form_valid(self, form):
+        """
+        If the request is ajax, save the form and return a json response.
+        Otherwise return super as expected.
+        """
+        if self.request.is_ajax():
+            self.object = form.save(commit=False)
+            self.object.created_by = self.request.user
+            self.object = form.save()
+            return HttpResponse(json.dumps("success"),
+                content_type="application/json")
+
+        else:
+            object = form.save(commit=False)
+            object.created_by = self.request.user
+            object.save()
+
+        return super(GaasWaferDesignCreateView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        """
+        We haz errors in the form. If ajax, return them as json.
+        Otherwise, proceed as normal.
+        """
+        if self.request.is_ajax():
+            return HttpResponseBadRequest(json.dumps(form.errors),
+                content_type="application/json")
+        return super(GaasWaferDesignCreateView, self).form_invalid(form)
+
+'''
 class GaasWaferDesignCreateView(LoginRequiredMixin, CreateView):
     fields = ("design_ui", "emitting", "contact_location", "optical_power", "design_date", "designer", "design_document", "designer_ui", "in_trash", "inactive_date", "notes")
     model = GaasWaferDesign
@@ -71,7 +95,7 @@ class GaasWaferDesignCreateView(LoginRequiredMixin, CreateView):
         object.created_by = self.request.user
         object.save()
         return super(GaasWaferDesignCreateView, self).form_valid(form)
-
+'''
 
 class GaasWaferDesignUpdateView(LoginRequiredMixin, UpdateView):
     fields = ("design_ui", "emitting", "contact_location", "optical_power", "design_date", "designer", "design_document", "designer_ui", "in_trash", "inactive_date", "notes")

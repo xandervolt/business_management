@@ -18,7 +18,7 @@ urlpatterns = [
 
     # GaAs Wafer Designs URLS
     url(r'^gaas-wafer-designs/$', gaas_wafer_designs.GaasWaferDesignListView.as_view(), name='gaas_wafer_design_list'),
-    url(r'^gaas-wafer-designs/create/$', gaas_wafer_designs.GaasWaferDesignFormView.as_view(), name='gaas_wafer_design_create'),
+    url(r'^gaas-wafer-designs/create/$', gaas_wafer_designs.GaasWaferDesignCreateView.as_view(), name='gaas_wafer_design_create'),
     #url(r'^gaas-wafer-designs/create/$', gaas_wafer_designs.GaasWaferDesignCreateView.as_view(), name='gaas_wafer_design_create'),
     #url(r'^gaas-wafer-designs/create/$', gaas_wafer_designs.gaas_create, name='gaas_wafer_design_create'),
     url(r'^gaas-wafer-designs/edit/(?P<pk>\d+)/$', gaas_wafer_designs.GaasWaferDesignUpdateView.as_view(), name='gaas_wafer_design_update'),

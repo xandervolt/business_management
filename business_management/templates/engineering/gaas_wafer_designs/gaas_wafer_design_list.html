@@ -115,7 +115,7 @@
 
 <script>
 var formAjaxSubmit = function(form, modal) {
-    $(form).submit(function (e) {
+    /*$(form).submit(function (e) {
         e.preventDefault();
         $.ajax({
             type: $(this).attr('method'),
@@ -124,9 +124,7 @@ var formAjaxSubmit = function(form, modal) {
             success: function (xhr, ajaxOptions, thrownError) {
                if ( $(xhr).find('.has-error').length > 0 ) {
                    $(modal).find('.modal-body').html(xhr);
-
                } else {
-
                    $(modal).modal('toggle');
                    alert("Design created!");  // <-- This is just a placeholder for now for testing
                    window.location.replace("{% url 'engineering:gaas_wafer_design_list' %}");
@@ -134,12 +132,44 @@ var formAjaxSubmit = function(form, modal) {
            },
            error: function (xhr, ajaxOptions, thrownError) {
                // handle response errors here
-               $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+thrownError+
-               " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-               console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+               var errors = $.parseJSON(data.responseText);
+                $.each(errors, function(index, value) {
+                    if (index === "__all__") {
+                        django_message(value[0], "error");
+                    } else {
+                        apply_form_field_error(index, value);
+                    }
+                });
            }
        });
-   });
+   });*/
+   $(form).on("submit", "#create_form", function(e) {
+    e.preventDefault();
+    var self = $(this),
+        url = self.attr("action"),
+        ajax_req = $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                name: self.find("#id_name").val()
+            },
+            success: function(data, textStatus, jqXHR) {
+              $(modal).modal('toggle');
+              alert("Design created!");  // <-- This is just a placeholder for now for testing
+              window.location.replace("{% url 'engineering:gaas_wafer_design_list' %}");
+            },
+            error: function(data, textStatus, jqXHR) {
+                var errors = $.parseJSON(data.responseText);
+                $.each(errors, function(index, value) {
+                    if (index === "__all__") {
+                        django_message(value[0], "error");
+                    } else {
+                        apply_form_field_error(index, value);
+                    }
+                });
+            }
+        });
+      });
 }
 $('#create-button').click(function() {
    $('#form-modal-body').load('create/', function () {
