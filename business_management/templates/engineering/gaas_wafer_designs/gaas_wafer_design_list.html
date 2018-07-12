@@ -28,14 +28,13 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-          <h4 class="modal-title">Add Wafer Design</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-              <span class="sr-only">Close</span>
-          </button>
+        <h4 class="modal-title">Add Wafer Design</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+        </button>
       </div>
       <div id="form-modal-body" class="modal-body">
-
       </div>
       <div class="modal-footer">
       </div>
@@ -43,106 +42,119 @@
   </div><!-- /.modal-dialog -->
 </div>
 <thead>
-    <tr>
-        <th>
-            Wafer Design UI
-        </th>
-        <th>
-            Emitting Type
-        </th>
-        <th>
-            Contact Location
-        </th>
-        <th>
-            Optical Power
-        </th>
-        <th>
-            Design Date
-        </th>
-        <th>
-            Designer
-        </th>
-        <th>
-            Designer UI
-        </th>
-        <th>
-            Created At
-        </th>
-    </tr>
+  <tr>
+    <th>
+        Wafer Design UI
+    </th>
+    <th>
+        Emitting Type
+    </th>
+    <th>
+        Contact Location
+    </th>
+    <th>
+        Optical Power
+    </th>
+    <th>
+        Design Date
+    </th>
+    <th>
+        Designer
+    </th>
+    <th>
+        Designer UI
+    </th>
+    <th>
+        Created At
+    </th>
+  </tr>
 </thead>
 <tfoot>
-    <tr>
-        <th>
-            Wafer Design UI
-        </th>
-        <th>
-            Emitting Type
-        </th>
-        <th>
-            Contact Location
-        </th>
-        <th>
-            Optical Power
-        </th>
-        <th>
-            Design Date
-        </th>
-        <th>
-            Designer
-        </th>
-        <th>
-            Designer UI
-        </th>
-        <th>
-            Created At
-        </th>
-    </tr>
+  <tr>
+    <th>
+        Wafer Design UI
+    </th>
+    <th>
+        Emitting Type
+    </th>
+    <th>
+        Contact Location
+    </th>
+    <th>
+        Optical Power
+    </th>
+    <th>
+        Design Date
+    </th>
+    <th>
+        Designer
+    </th>
+    <th>
+        Designer UI
+    </th>
+    <th>
+        Created At
+    </th>
+  </tr>
 </tfoot>
 <tbody>
-    {% for gaas_wafer_design in gaas_wafer_designs %}
-    <tr>
-        <td><a href="{% url 'engineering:gaas_wafer_design_detail' pk=gaas_wafer_design.pk %}">{{ gaas_wafer_design.design_ui }}</a></td>
-        <td>{{ gaas_wafer_design.get_emitting_display }}</td>
-        <td>{{ gaas_wafer_design.contact_location }}</td>
-        <td>{{ gaas_wafer_design.optical_power }}</td>
-        <td>{{ gaas_wafer_design.design_date|date:"m/d/y" }}</td>
-        <td>{{ gaas_wafer_design.designer }}</td>
-        <td>{{ gaas_wafer_design.designer_ui }}</td>
-        <td>{{ gaas_wafer_design.created_at }}</td>
-    </tr>
-    {% endfor %}
+  {% for gaas_wafer_design in gaas_wafer_designs %}
+  <tr>
+    <td><a href="{% url 'engineering:gaas_wafer_design_detail' pk=gaas_wafer_design.pk %}">{{ gaas_wafer_design.design_ui }}</a></td>
+    <td>{{ gaas_wafer_design.get_emitting_display }}</td>
+    <td>{{ gaas_wafer_design.contact_location }}</td>
+    <td>{{ gaas_wafer_design.optical_power }}</td>
+    <td>{{ gaas_wafer_design.design_date|date:"m/d/y" }}</td>
+    <td>{{ gaas_wafer_design.designer }}</td>
+    <td>{{ gaas_wafer_design.designer_ui }}</td>
+    <td>{{ gaas_wafer_design.created_at }}</td>
+  </tr>
+  {% endfor %}
 </tbody>
 
 <script>
+function apply_form_field_error(fieldname, error) {
+    var input = $("#id_" + fieldname),
+        container = $("#div_id_" + fieldname),
+        error_msg = $("<span />").addClass("help-inline ajax-error").text(error[0]);
+
+    container.addClass("error");
+    error_msg.insertAfter(input);
+}
+
+function clear_form_field_errors(form) {
+    $(".ajax-error", $(form)).remove();
+    $(".error", $(form)).removeClass("error");
+}
+
+function django_message(msg, level) {
+    var levels = {
+        warning: 'alert',
+        error: 'error',
+        success: 'success',
+        info: 'info'
+    },
+    source = $('#message_template').html(),
+    template = Handlebars.compile(source),
+    context = {
+        'tags': levels[level],
+        'message': msg
+    },
+    html = template(context);
+
+    $("#message_area").append(html);
+}
+
+function django_block_message(msg, level) {
+    var source = $("#message_block_template").html(),
+        template = Handlebars.compile(source),
+        context = {level: level, body: msg},
+        html = template(context);
+
+    $("#message_area").append(html);
+}
+
 var formAjaxSubmit = function(form, modal) {
-    /*$(form).submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function (xhr, ajaxOptions, thrownError) {
-               if ( $(xhr).find('.has-error').length > 0 ) {
-                   $(modal).find('.modal-body').html(xhr);
-               } else {
-                   $(modal).modal('toggle');
-                   alert("Design created!");  // <-- This is just a placeholder for now for testing
-                   window.location.replace("{% url 'engineering:gaas_wafer_design_list' %}");
-               }
-           },
-           error: function (xhr, ajaxOptions, thrownError) {
-               // handle response errors here
-               var errors = $.parseJSON(data.responseText);
-                $.each(errors, function(index, value) {
-                    if (index === "__all__") {
-                        django_message(value[0], "error");
-                    } else {
-                        apply_form_field_error(index, value);
-                    }
-                });
-           }
-       });
-   });*/
    $(form).on("submit", "#create_form", function(e) {
     e.preventDefault();
     var self = $(this),
@@ -154,9 +166,9 @@ var formAjaxSubmit = function(form, modal) {
                 name: self.find("#id_name").val()
             },
             success: function(data, textStatus, jqXHR) {
-              $(modal).modal('toggle');
+              /*$(modal).modal('toggle');
               alert("Design created!");  // <-- This is just a placeholder for now for testing
-              window.location.replace("{% url 'engineering:gaas_wafer_design_list' %}");
+              window.location.replace("{% url 'engineering:gaas_wafer_design_list' %}");*/
             },
             error: function(data, textStatus, jqXHR) {
                 var errors = $.parseJSON(data.responseText);
@@ -167,14 +179,44 @@ var formAjaxSubmit = function(form, modal) {
                         apply_form_field_error(index, value);
                     }
                 });
+                console.log(data);
             }
         });
-      });
+    });
 }
 $('#create-button').click(function() {
    $('#form-modal-body').load('create/', function () {
        formAjaxSubmit('#form-modal-body form', '#form-modal');
    });
 });
+
+/*$(form).submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: $(this).attr('method'),
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function (xhr, ajaxOptions, thrownError) {
+           if ( $(xhr).find('.has-error').length > 0 ) {
+               $(modal).find('.modal-body').html(xhr);
+           } else {
+               $(modal).modal('toggle');
+               alert("Design created!");  // <-- This is just a placeholder for now for testing
+               window.location.replace("{% url 'engineering:gaas_wafer_design_list' %}");
+           }
+       },
+       error: function (xhr, ajaxOptions, thrownError) {
+           // handle response errors here
+           var errors = $.parseJSON(data.responseText);
+            $.each(errors, function(index, value) {
+                if (index === "__all__") {
+                    django_message(value[0], "error");
+                } else {
+                    apply_form_field_error(index, value);
+                }
+            });
+       }
+   });
+});*/
 </script>
 {% endblock %}

@@ -69,16 +69,16 @@
   </div>
   <!--/.row-->
   <div class="row">
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-6">
       <div class="form-group" style="float:left;">
         <label for="{{ form.in_trash.id_for_label }}">In Trash</label>
         {% render_field form.in_trash class+="form-control" %}
         {{ form.in_trash.errors }}
       </div>
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-6">
       <div class="form-group">
-        <label for="{{ form.inactive_date.id_for_label }}">Inactive Date</label>
+        <label for="{{ form.inactive_date.id_for_label }}">Date Trashed</label>
         {% render_field form.inactive_date class+="form-control" %}
         {{ form.inactive_date.errors }}
       </div>

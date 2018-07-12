@@ -1,0 +1,92 @@
+{% extends "pages/list_template.html" %}
+{% block meta_title %}Contacts{% endblock %}
+{% block list_title %}Contacts{% endblock %}
+{% block list_title_2 %}All Contacts{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item active">Contacts</li>
+{% endblock %}
+{% block buttons %}
+  {% include "administration/contacts/contact_buttons.html" %}
+{% endblock %}
+
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                Contact ID
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Company
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                Contact Type
+            </th>
+            <th>
+                Created At
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+      <tr>
+          <th>
+              Contact ID
+          </th>
+          <th>
+              First Name
+          </th>
+          <th>
+              Last Name
+          </th>
+          <th>
+              Company
+          </th>
+          <th>
+              City
+          </th>
+          <th>
+              State
+          </th>
+          <th>
+              Country
+          </th>
+          <th>
+              Contact Type
+          </th>
+          <th>
+              Created At
+          </th>
+      </tr>
+    </tfoot>
+    <tbody>
+        {% for contact in contacts %}
+        <tr>
+            <td><a href="">{{ contact.id }}</a></td>
+            <td>{{ contact.first_name }}</td>
+            <td>{{ contact.last_name }}</td>
+            <td>{{ contact.company }}</td>
+            <td>{{ contact.city }}</td>
+            <td>{{ contact.state }}</td>
+            <td>{{ contact.country }}</td>
+            <td>{{ contact.get_contact_type_display }}</td>
+            <td>{{ contact.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}

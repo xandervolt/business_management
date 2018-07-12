@@ -1,6 +1,4 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
-#from django.db import transaction
-#from django.db import IntegrityError
 from django.template.loader import render_to_string
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -16,11 +14,13 @@ from django.views.generic import (
     TemplateView,
     FormView,
 )
-import simplejson as json
+import json
+from django.contrib import messages
 
 from ..models.gaas_wafer_designs import GaasWaferDesign
 from ..forms import GaasWaferDesignForm
 from .. mixins import AjaxTemplateMixin
+
 
 # Create your views here.
 
@@ -36,16 +36,6 @@ class GaasWaferDesignDetailView(LoginRequiredMixin, DetailView):
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_detail.html'
 
 
-def gaas_create(request):
-    form = GaasWaferDesignForm()
-    context = {'form': form}
-    html_form =  render_to_string('engineering/gaas_wafer_designs/gaas_wafer_design_form_inner.html',
-        context,
-        request=request,
-    )
-    return JsonResponse({'html_form': html_form})
-
-
 class GaasWaferDesignCreateView(LoginRequiredMixin, SuccessMessageMixin, AjaxTemplateMixin, CreateView):
     template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form.html'
     ajax_template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form_inner.html'
@@ -53,7 +43,7 @@ class GaasWaferDesignCreateView(LoginRequiredMixin, SuccessMessageMixin, AjaxTem
     form = GaasWaferDesignForm()
     model = GaasWaferDesign
     success_url = reverse_lazy('engineering:gaas_wafer_design_list')
-    success_message = "yes!"
+    success_message = "GaAs Wafer Design Created Successfully!"
 
     def form_valid(self, form):
         """
@@ -84,18 +74,6 @@ class GaasWaferDesignCreateView(LoginRequiredMixin, SuccessMessageMixin, AjaxTem
                 content_type="application/json")
         return super(GaasWaferDesignCreateView, self).form_invalid(form)
 
-'''
-class GaasWaferDesignCreateView(LoginRequiredMixin, CreateView):
-    fields = ("design_ui", "emitting", "contact_location", "optical_power", "design_date", "designer", "design_document", "designer_ui", "in_trash", "inactive_date", "notes")
-    model = GaasWaferDesign
-    template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_form_inner.html'
-
-    def form_valid(self, form):
-        object = form.save(commit=False)
-        object.created_by = self.request.user
-        object.save()
-        return super(GaasWaferDesignCreateView, self).form_valid(form)
-'''
 
 class GaasWaferDesignUpdateView(LoginRequiredMixin, UpdateView):
     fields = ("design_ui", "emitting", "contact_location", "optical_power", "design_date", "designer", "design_document", "designer_ui", "in_trash", "inactive_date", "notes")

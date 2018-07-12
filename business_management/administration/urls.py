@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls import include, url
-from .views import fixed_assets, employees
+from .views import fixed_assets, employees, contacts
 
 urlpatterns = [
     url(r'^fixed_assets/$', fixed_assets.FixedAssetListView.as_view(), name='fixed_asset_list'),
@@ -13,4 +13,6 @@ urlpatterns = [
 
     url(r'^timesheets/$', employees.TimesheetListView.as_view(), name='timesheet_list'),
 
+    url(r'^contacts/$', contacts.ContactListView.as_view(), name='contact_list'),
+    url(r'^contacts/create$', contacts.ContactCreateView.as_view(), name='contact_create'),
 ]
