@@ -1,0 +1,85 @@
+{% extends "pages/list_template.html" %}
+{% block meta_title %}Purchase Orders{% endblock %}
+{% block list_title %}Purchase Orders{% endblock %}
+{% block list_title_2 %}All Purchase Orders{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+<li class="breadcrumb-item active">Purchase Orders</li>
+{% endblock %}
+{% block buttons %}
+  {% include "financial/purchase_orders/puchase_order_buttons.html" %}
+{% endblock %}
+
+{% block table %}
+    <thead>
+        <tr>
+            <th>
+                PO Number
+            </th>
+            <th>
+                PO Date
+            </th>
+            <th>
+                Purchased From
+            </th>
+            <th>
+                Approved/CEO
+            </th>
+            <th>
+                Date Approved/CEO
+            </th>
+            <th>
+                Approved/DOE
+            </th>
+            <th>
+                Date Approved/DOE
+            </th>
+            <th>
+                Created At
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>
+            PO Number
+        </th>
+        <th>
+            PO Date
+        </th>
+        <th>
+            Purchased From
+        </th>
+        <th>
+            Approved/CEO
+        </th>
+        <th>
+            Date Approved/CEO
+        </th>
+        <th>
+            Approved/DOE
+        </th>
+        <th>
+            Date Approved/DOE
+        </th>
+        <th>
+            Created At
+        </th>
+      </tr>
+    </tfoot>
+    <tbody>
+        {% for purchase_order in purchase_orders %}
+        <tr>
+            <td><a href="">{{ purchase_order.po_number }}</a></td>
+            <td>{{ purchase_order.po_date }}</td>
+            <td>{{ purchase_order.purchased_from_company }}</td>
+            <td>{{ purchase_order.approved_by_ceo }}</td>
+            <td>{{ purchase_order.date_approved_by_ceo }}</td>
+            <td>{{ purchase_order.approved_by_doe }}</td>
+            <td>{{ purchase_order.date_approved_by_doe }}</td>
+            <td>{{ contact.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endblock %}

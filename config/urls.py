@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^administration/', include('business_management.administration.urls', namespace='administration')),
     url(r'^dashboard/', include('business_management.dashboard.urls', namespace='dashboard')),
     url(r'^engineering/', include('business_management.engineering.urls', namespace='engineering')),
+    url(r'^financial/', include('business_management.financial.urls', namespace='financial')),
     url(r'^$', RedirectView.as_view(url='accounts/login'), name='home'),
     # User management
     #url(r'^users/', include('business_management.users.urls', namespace='users')),

@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 import requests
 #import reversion
 
-from .. administration.models.contacts import Contact
+from ...administration.models.contacts import Contact
 
 class PurchaseOrder(models.Model):
     po_number = models.IntegerField(max_length=8, unique=True)
@@ -15,7 +15,11 @@ class PurchaseOrder(models.Model):
     company_state = models.CharField(max_length=60, default='New Mexico')
     company_zipcode = models.CharField(max_length=16, default='87106')
     company_phone = models.CharField(max_length=24, default='888.978.4943')
-    purchased_from_company = models.ForeignKey(Contact, related_name='company')
+    purchased_from_company = models.ForeignKey(
+        Contact,
+        limit_choices_to={'contact_type': 'VE'},
+        to_field = 'company'
+    )
     purchased_from_first_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_last_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_address1 = models.CharField(max_length=80, blank=True, null=True)
@@ -40,6 +44,8 @@ class PurchaseOrder(models.Model):
     date_approved_by_doe = models.DateField(default='', blank=True, null=True)
     approved_by_ceo = models.BooleanField(default=False)
     date_approved_by_ceo = models.DateField(default='', blank=True, null=True)
+    po_document = models.FileField(blank=True, null=True)
+    po_document_location = models.CharField(max_length=255, blank=True, null=True)
 
     CREDIT_CARD = 'CC'
     NET_30 = '30'
@@ -79,5 +85,5 @@ class PurchaseOrder(models.Model):
     def __str__(self):
         return self.po_number
 
-    def get_absolute_url(self):
-        return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})
+    #def get_absolute_url(self):
+        #return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})

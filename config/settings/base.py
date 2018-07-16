@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'business_management.administration',
     'business_management.dashboard',
     'business_management.engineering',
+    'business_management.financial',
 ]
 
 #SOCIALACCOUNT_ADAPTER = 'allauth_office365.adapter.SocialAccountAdapter'
