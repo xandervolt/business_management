@@ -50,7 +50,12 @@ class Contact(models.Model):
         ordering = ['created_at', ]
 
     def __str__(self):
-        return self.email
+        if self.company:
+            return self.company
+        elif self.email:
+            return self.email
+        else:
+            return self.pk
 
     def get_absolute_url(self):
         return reverse("administration:contact_detail", kwargs={"pk": self.pk})

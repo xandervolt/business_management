@@ -13,132 +13,131 @@
 {% block content %}
 <div class="row">
   <div class="col">
-      <h1 class="page_title">{% if not form.instance.pk %}Add Contact{% else %}Edit Contact{% endif %}</h1>
+    <h1 class="page_title">{% if not form.instance.pk %}Add Contact{% else %}Edit Contact{% endif %}</h1>
   </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <form method='POST'>
-          {% csrf_token %}
-          <div class="card-header">
-            <strong>New Contact</strong>
-            <small>Form</small>
+  <div class="col-md-12">
+    <div class="card">
+      <form method='POST'>
+        {% csrf_token %}
+        <div class="card-header">
+          <strong>New Contact</strong>
+          <small>Form</small>
+        </div>
+        <div class="card-body">
+          {{ form.non_field_errors }}
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.contact_type.id_for_label }}"><b>Contact Type</b></label>
+                {% render_field form.contact_type class+="form-control" %}
+                {{ form.contact_type.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                {% render_field form.first_name class+="form-control" %}
+                {{ form.first_name.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                {% render_field form.last_name class+="form-control" %}
+                {{ form.last_name.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.company.id_for_label }}">Company</label>
+                {% render_field form.company class+="form-control" %}
+                {{ form.company.errors }}
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            {{ form.non_field_errors }}
-            <div class="row">
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.contact_type.id_for_label }}"><b>Contact Type</b></label>
-                  {% render_field form.contact_type class+="form-control" %}
-                  {{ form.contact_type.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.first_name.id_for_label }}">First Name</label>
-                  {% render_field form.first_name class+="form-control" %}
-                  {{ form.first_name.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.last_name.id_for_label }}">Last Name</label>
-                  {% render_field form.last_name class+="form-control" %}
-                  {{ form.last_name.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.company.id_for_label }}">Company</label>
-                  {% render_field form.company class+="form-control" %}
-                  {{ form.company.errors }}
-                </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.phone_number.id_for_label }}">Office Phone Number</label>
+                {% render_field form.phone_number class+="form-control" %}
+                {{ form.phone_number.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.phone_number.id_for_label }}">Office Phone Number</label>
-                  {% render_field form.first_name class+="form-control" %}
-                  {{ form.first_name.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.mobile_number.id_for_label }}">Mobile Number</label>
-                  {% render_field form.mobile_number class+="form-control" %}
-                  {{ form.mobile_number.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.fax_number.id_for_label }}">Fax Number</label>
-                  {% render_field form.fax_number class+="form-control" %}
-                  {{ form.fax_number.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.email.id_for_label }}"><b>Email</b></label>
-                  {% render_field form.email class+="form-control" %}
-                  {{ form.email.errors }}
-                </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.mobile_number.id_for_label }}">Mobile Number</label>
+                {% render_field form.mobile_number class+="form-control" %}
+                {{ form.mobile_number.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.address1.id_for_label }}">Physical Address</label>
-                  {% render_field form.address1 class+="form-control" %}
-                  {{ form.address1.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.address2.id_for_label }}">Physical Address Line 2</label>
-                  {% render_field form.address2 class+="form-control" %}
-                  {{ form.address2.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.mobile_number.id_for_label }}">City</label>
-                  {% render_field form.mobile_number class+="form-control" %}
-                  {{ form.mobile_number.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.state.id_for_label }}">State</label>
-                  {% render_field form.state class+="form-control" %}
-                  {{ form.state.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.zipcode.id_for_label }}">Zipcode</label>
-                  {% render_field form.zipcode class+="form-control" %}
-                  {{ form.zipcode.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.country.id_for_label }}">Country</label>
-                  {% render_field form.country class+="form-control" %}
-                  {{ form.country.errors }}
-                </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.fax_number.id_for_label }}">Fax Number</label>
+                {% render_field form.fax_number class+="form-control" %}
+                {{ form.fax_number.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <br />
-            <input type="submit" class="btn btn-primary" value="Create">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.email.id_for_label }}"><b>Email</b></label>
+                {% render_field form.email class+="form-control" %}
+                {{ form.email.errors }}
+              </div>
+            </div>
           </div>
-        </form>
-      </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.address1.id_for_label }}">Physical Address</label>
+                {% render_field form.address1 class+="form-control" %}
+                {{ form.address1.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.address2.id_for_label }}">Physical Address Line 2</label>
+                {% render_field form.address2 class+="form-control" %}
+                {{ form.address2.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.city.id_for_label }}">City</label>
+                {% render_field form.city class+="form-control" %}
+                {{ form.city.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.state.id_for_label }}">State</label>
+                {% render_field form.state class+="form-control" %}
+                {{ form.state.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.zipcode.id_for_label }}">Zipcode</label>
+                {% render_field form.zipcode class+="form-control" %}
+                {{ form.zipcode.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.country.id_for_label }}">Country</label>
+                {% render_field form.country class+="form-control" %}
+                {{ form.country.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <br />
+          <input type="submit" class="btn btn-primary" value="Create">
+        </div>
+      </form>
     </div>
   </div>
 </div>

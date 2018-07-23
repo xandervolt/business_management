@@ -6,19 +6,31 @@ import requests
 
 from ...administration.models.contacts import Contact
 
+def get_po_number(self, *args, **kwargs):
+    if not self.id:
+        last_po = PurchaseOrder.objects.order_by('po_number').last()
+        if last_po:
+            last_po_num = last_po.po_number[-2:]
+            new_po_num = int(last_po_num) + 1
+        else:
+            new_po_num = '0001'
+        self.po_number = new_po_num
+        return self.po_number
+
 class PurchaseOrder(models.Model):
-    po_number = models.IntegerField(max_length=8, unique=True)
+    po_number = models.IntegerField(unique=True)
     po_date = models.DateField()
-    company = models.CharField(max_length=60, default='optiPulse, Inc.')
-    company_address = models.CharField(max_length=60, default='1008 Coal Ave SE, Ste. 120')
-    company_city = models.CharField(max_length=60, default='Albuquerque')
-    company_state = models.CharField(max_length=60, default='New Mexico')
-    company_zipcode = models.CharField(max_length=16, default='87106')
-    company_phone = models.CharField(max_length=24, default='888.978.4943')
+    company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
+    company_address1 = models.CharField(max_length=60, default='1008 Coal Ave SE', blank=True, null=True)
+    company_address2 = models.CharField(max_length=60, default='Ste. 120', blank=True, null=True)
+    company_city = models.CharField(max_length=60, default='Albuquerque', blank=True, null=True)
+    company_state = models.CharField(max_length=60, default='New Mexico', blank=True, null=True)
+    company_zipcode = models.CharField(max_length=16, default='87106', blank=True, null=True)
+    company_phone = models.CharField(max_length=24, default='888.978.4943', blank=True, null=True)
+
     purchased_from_company = models.ForeignKey(
         Contact,
         limit_choices_to={'contact_type': 'VE'},
-        to_field = 'company'
     )
     purchased_from_first_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_last_name = models.CharField(max_length=80, blank=True, null=True)
@@ -33,13 +45,29 @@ class PurchaseOrder(models.Model):
     purchased_from_state = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_zip = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_country = models.CharField(max_length=80, blank=True, null=True)
-    bill_to_company = models.CharField(max_length=60, blank=True, null=True)
-    bill_to_first_name = models.CharField(max_length=60, blank=True, null=True)
-    bill_to_last_name = models.CharField(max_length=60, blank=True, null=True)
-    bill_to_email = models.CharField(max_length=80, blank=True, null=True)
-    bill_to_phone = models.CharField(max_length=24, blank=True, null=True)
-    bill_to_address1 = models.CharField(max_length=80, blank=True, null=True)
-    bill_to_address2 = models.CharField(max_length=80, blank=True, null=True)
+
+    bill_to_company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
+    bill_to_first_name = models.CharField(max_length=60, default='Caitlin', blank=True, null=True)
+    bill_to_last_name = models.CharField(max_length=60, default='Marchi', blank=True, null=True)
+    bill_to_email = models.CharField(max_length=80, default='billing@optipulse.com', blank=True, null=True)
+    bill_to_phone = models.CharField(max_length=24, default='888.978.4943 x706', blank=True, null=True)
+    bill_to_address1 = models.CharField(max_length=80, default='101 Broadway Blvd', blank=True, null=True)
+    bill_to_address2 = models.CharField(max_length=80, default='Ste. 1100', blank=True, null=True)
+    bill_to_city = models.CharField(max_length=80, default='Albuquerque', blank=True, null=True)
+    bill_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
+    bill_to_zipcode = models.CharField(max_length=80, default='87102', blank=True, null=True)
+
+    ship_to_company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
+    ship_to_first_name = models.CharField(max_length=60, default='Eric', blank=True, null=True)
+    ship_to_last_name = models.CharField(max_length=60, default='Gieryng', blank=True, null=True)
+    ship_to_email = models.CharField(max_length=80, default='info@optipulse.com', blank=True, null=True)
+    ship_to_phone = models.CharField(max_length=24, default='888.978.4943 x704', blank=True, null=True)
+    ship_to_address1 = models.CharField(max_length=80, default='1008 Coal Ave. SE', blank=True, null=True)
+    ship_to_address2 = models.CharField(max_length=80, default='Ste. 120', blank=True, null=True)
+    ship_to_city = models.CharField(max_length=80, default='Albuquerque', blank=True, null=True)
+    ship_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
+    ship_to_zipcode = models.CharField(max_length=80, default='87106', blank=True, null=True)
+
     approved_by_doe = models.BooleanField(default=False)
     date_approved_by_doe = models.DateField(default='', blank=True, null=True)
     approved_by_ceo = models.BooleanField(default=False)
@@ -49,8 +77,10 @@ class PurchaseOrder(models.Model):
 
     CREDIT_CARD = 'CC'
     NET_30 = '30'
+    NET_15 = '15'
     TERMS_CHOICES = (
         (CREDIT_CARD, 'Credit Card'),
+        (NET_15, 'Net 15'),
         (NET_30, 'Net 30'),
     )
     terms = models.CharField(
@@ -74,6 +104,7 @@ class PurchaseOrder(models.Model):
         choices=SHIPPING_CHOICES,
         default=FED_EX_ACCT,
     )
+    sales_tax = models.BooleanField(default=False)
 
     comments = models.CharField(max_length=255, default='', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -81,9 +112,21 @@ class PurchaseOrder(models.Model):
 
     class Meta:
         ordering = ['po_number', ]
+        '''
+    def save(self, *args, **kwargs):
+        if not self.id:
+            last_po = PurchaseOrder.objects.order_by('po_number').last()
+            if last_po:
+                last_po_num = last_po.po_number[-2:]
+                new_po_num = int(last_po_num) + 1
+            else:
+                new_po_num = '0001'
+            self.po_number = new_po_num
 
+        super(PurchaseOrder, self).save(*args, **kwargs)
+        '''
     def __str__(self):
         return self.po_number
 
-    #def get_absolute_url(self):
-        #return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})

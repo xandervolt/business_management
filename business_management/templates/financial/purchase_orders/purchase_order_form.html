@@ -1,8 +1,16 @@
 {% extends "pages/layout.html" %}
 {% load static from staticfiles %}
 {% load widget_tweaks %}
-{% block title %}{% if not form.instance.pk %}Add Purchase Order{% else %}Edit Purchase Order{% endif %}{% endblock %}
+{% block title %}{% if not form.instance.pk %}New Purchase Order{% else %}Edit Purchase Order{% endif %}{% endblock %}
 {% load django_bootstrap_breadcrumbs %}
+
+<script>
+$(function(){
+  $("#id_purchased_from_company").change(function() {
+    alert("Help");
+  });
+});
+</script>
 
 {% block breadcrumb %}
   {% block breadcrumbs %}
@@ -13,118 +21,344 @@
 {% block content %}
 <div class="row">
   <div class="col">
-      <h1 class="page_title">{% if not form.instance.pk %}Add Purchase Order{% else %}Edit Purchase Order{% endif %}</h1>
+      <h1 class="page_title">{% if not form.instance.pk %}New Purchase Order{% else %}Edit Purchase Order{% endif %}</h1>
   </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <form method='POST'>
-          {% csrf_token %}
-          <div class="card-header">
-            <strong>New Purchase Order</strong>
-            <small>Form</small>
+  <div class="col-md-8">
+    <div class="card">
+      <form method='POST'>
+        {% csrf_token %}
+        <div class="card-header">
+          <strong>New Purchase Order</strong>
+          <small>Form</small>
+        </div>
+        <div class="card-body">
+          {{ form.non_field_errors }}
+          <div class="row" style="margin-top:14px;"> <!--**** PO Info ******************************************************************** -->
+            <div class="form-group col-sm-12">
+              <h4>Purchase Order Info</h4>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.po_number.id_for_label }}">PO Number</label>
+                {% render_field form.po_number class+="form-control" %}
+                {{ form.po_number.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.po_date.id_for_label }}">PO Date</label>
+                {% render_field form.po_date class+="form-control" %}
+                {{ form.po_date.errors }}
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            {{ form.non_field_errors }}
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <h4>Vendor</h4>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_company.id_for_label }}"><b>Vendor</b></label>
-                  {% render_field form.purchased_from_company class+="form-control" %}
-                  {{ form.purchased_from_company.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_address1.id_for_label }}">Vendor Address</label>
-                  {% render_field form.purchased_from_address1 class+="form-control" %}
-                  {{ form.purchased_from_address1.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_address2.id_for_label }}">Vendor Address Line 2</label>
-                  {% render_field form.purchased_from_address2 class+="form-control" %}
-                  {{ form.purchased_from_address2.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_city.id_for_label }}">Vendor City</label>
-                  {% render_field form.purchased_from_city class+="form-control" %}
-                  {{ form.purchased_from_city.errors }}
-                </div>
+          <!--/.row-->
+          <div class="row"> <!--**** Vendor ******************************************************************** -->
+            <div class="form-group col-sm-12">
+              <h4>Vendor</h4>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_company.id_for_label }}"><b>Vendor</b></label>
+                {% render_field form.purchased_from_company class+="form-control" %}
+                {{ form.purchased_from_company.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_state.id_for_label }}">Vendor State</label>
-                  {% render_field form.purchased_from_state class+="form-control" %}
-                  {{ form.purchased_from_state.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-2">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_zip.id_for_label }}">Vendor Zipcode</label>
-                  {% render_field form.purchased_from_zip class+="form-control" %}
-                  {{ form.purchased_from_zip.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_country.id_for_label }}">Vendor Country</label>
-                  {% render_field form.purchased_from_country class+="form-control" %}
-                  {{ form.purchased_from_country.errors }}
-                </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_address1.id_for_label }}">Vendor Address</label>
+                {% render_field form.purchased_from_address1 class+="form-control" %}
+                {{ form.purchased_from_address1.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <div class="row">
-              <div class="form-group col-sm-4">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_email.id_for_label }}">Vendor Email</label>
-                  {% render_field form.purchased_from_email class+="form-control" %}
-                  {{ form.purchased_from_email.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_phone.id_for_label }}">Vendor Phone</label>
-                  {% render_field form.purchased_from_phone class+="form-control" %}
-                  {{ form.purchased_from_phone.errors }}
-                </div>
-              </div>
-              <div class="form-group col-sm-3">
-                <div class="form-group">
-                  <label for="{{ form.purchased_from_fax.id_for_label }}">Vendor Fax</label>
-                  {% render_field form.purchased_from_fax class+="form-control" %}
-                  {{ form.purchased_from_fax.errors }}
-                </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_address2.id_for_label }}">Vendor Address Line 2</label>
+                {% render_field form.purchased_from_address2 class+="form-control" %}
+                {{ form.purchased_from_address2.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <div class="row" style="margin-top:14px;">
-              <div class="form-group col-sm-12">
-                <h4>Billing</h4>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_city.id_for_label }}">Vendor City</label>
+                {% render_field form.purchased_from_city class+="form-control" %}
+                {{ form.purchased_from_city.errors }}
               </div>
             </div>
-            <!--/.row-->
-            <div class="row" style="margin-top:14px;">
-              <div class="form-group col-sm-12">
-                <h4>Shipping</h4>
-              </div>
-            </div>
-            <!--/.row-->
-            <br />
-            <input type="submit" class="btn btn-primary" value="Create">
           </div>
-        </form>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_state.id_for_label }}">Vendor State</label>
+                {% render_field form.purchased_from_state class+="form-control" %}
+                {{ form.purchased_from_state.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_zip.id_for_label }}">Vendor Zipcode</label>
+                {% render_field form.purchased_from_zip class+="form-control" %}
+                {{ form.purchased_from_zip.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_country.id_for_label }}">Vendor Country</label>
+                {% render_field form.purchased_from_country class+="form-control" %}
+                {{ form.purchased_from_country.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_email.id_for_label }}">Vendor Email</label>
+                {% render_field form.purchased_from_email class+="form-control" %}
+                {{ form.purchased_from_email.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_phone.id_for_label }}">Vendor Phone</label>
+                {% render_field form.purchased_from_phone class+="form-control" %}
+                {{ form.purchased_from_phone.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.purchased_from_fax.id_for_label }}">Vendor Fax</label>
+                {% render_field form.purchased_from_fax class+="form-control" %}
+                {{ form.purchased_from_fax.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row" style="margin-top:14px;"> <!--**** Billing ******************************************************************** -->
+            <div class="form-group col-sm-12">
+              <h4>Billing</h4>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <div class="form-group">
+                <label for="{{ form.terms.id_for_label }}">Terms</label>
+                {% render_field form.terms class+="form-control" %}
+                {{ form.terms.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <div class="form-group float-left">
+                <label for="{{ form.sales_tax.id_for_label }}">Sales Tax</label>
+                {% render_field form.sales_tax class+="form-control float-left" %}
+                {{ form.sales_tax.errors }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_first_name.id_for_label }}">Billing First Name</label>
+                {% render_field form.bill_to_first_name class+="form-control" %}
+                {{ form.bill_to_first_name.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_last_name.id_for_label }}">Billing Last Name</label>
+                {% render_field form.bill_to_last_name class+="form-control" %}
+                {{ form.bill_to_last_name.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <div class="form-group">
+                <label for="{{ form.bill_to_email.id_for_label }}">Billing Email</label>
+                {% render_field form.bill_to_email class+="form-control" %}
+                {{ form.bill_to_email.errors }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_company.id_for_label }}">Billing Company</label>
+                {% render_field form.bill_to_company class+="form-control" %}
+                {{ form.bill_to_company.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_address1.id_for_label }}">Billing Address 1</label>
+                {% render_field form.bill_to_address1 class+="form-control" %}
+                {{ form.bill_to_address1.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_address2.id_for_label }}">Billing Address 2</label>
+                {% render_field form.bill_to_address2 class+="form-control" %}
+                {{ form.bill_to_address2.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_city.id_for_label }}">Billing City</label>
+                {% render_field form.bill_to_city class+="form-control" %}
+                {{ form.bill_to_city.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_state.id_for_label }}">Billing State</label>
+                {% render_field form.bill_to_state class+="form-control" %}
+                {{ form.bill_to_state.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_zipcode.id_for_label }}">Billing Zipcode</label>
+                {% render_field form.bill_to_zipcode class+="form-control" %}
+                {{ form.bill_to_zipcode.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.bill_to_phone.id_for_label }}">Billing Phone</label>
+                {% render_field form.bill_to_phone class+="form-control" %}
+                {{ form.bill_to_phone.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row" style="margin-top:14px;"> <!--**** Shipping ******************************************************************** -->
+            <div class="form-group col-sm-12">
+              <h4>Shipping</h4>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <div class="form-group">
+                <label for="{{ form.shipping.id_for_label }}">Shipping Method</label>
+                {% render_field form.shipping class+="form-control" %}
+                {{ form.shipping.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <div class="form-group">
+                <label for="{{ form.fob.id_for_label }}">FOB</label>
+                {% render_field form.fob class+="form-control" %}
+                {{ form.fob.errors }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_first_name.id_for_label }}">Ship to First Name</label>
+                {% render_field form.ship_to_first_name class+="form-control" %}
+                {{ form.ship_to_first_name.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_last_name.id_for_label }}">Ship to Last Name</label>
+                {% render_field form.ship_to_last_name class+="form-control" %}
+                {{ form.ship_to_last_name.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <div class="form-group">
+                <label for="{{ form.ship_to_email.id_for_label }}">Shipping Email</label>
+                {% render_field form.ship_to_email class+="form-control" %}
+                {{ form.ship_to_email.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_company.id_for_label }}">Ship to Company</label>
+                {% render_field form.ship_to_company class+="form-control" %}
+                {{ form.ship_to_company.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_address1.id_for_label }}">Ship to Address 1</label>
+                {% render_field form.ship_to_address1 class+="form-control" %}
+                {{ form.ship_to_address1.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_address2.id_for_label }}">Ship to Address 2</label>
+                {% render_field form.ship_to_address2 class+="form-control" %}
+                {{ form.ship_to_address2.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_city.id_for_label }}">Ship to City</label>
+                {% render_field form.ship_to_city class+="form-control" %}
+                {{ form.ship_to_city.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_state.id_for_label }}">Ship to State</label>
+                {% render_field form.ship_to_state class+="form-control" %}
+                {{ form.ship_to_state.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_zipcode.id_for_label }}">Ship to Zipcode</label>
+                {% render_field form.ship_to_zipcode class+="form-control" %}
+                {{ form.ship_to_zipcode.errors }}
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <div class="form-group">
+                <label for="{{ form.ship_to_phone.id_for_label }}">Ship to Phone</label>
+                {% render_field form.ship_to_phone class+="form-control" %}
+                {{ form.ship_to_phone.errors }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+
+          <br />
+          <input type="submit" class="btn btn-primary" value="Create">
+          <input type="button" class="btn btn-secondary disabled" value="Save as Template">
+          <input type="button" class="btn btn-secondary float-right" value="Cancel">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <strong>New Purchase Order</strong>
+        <small>Instructions</small>
+      </div>
+      <div class="card-body">
+        <ol>
+          <li class="font-weight-bold">Fill out the New Purchase Order Form</li>
+          <p>Fill out the form by first selecting the Vendor. Vendor field is a dropdown populated by the Vendor Contacts. Once a Vendor is selected the Vendor information (Address, City, State, etc.) will be auto populated.</p>
+          <li class="font-weight-bold">Click Create Button</li>
+        </ol>
       </div>
     </div>
   </div>

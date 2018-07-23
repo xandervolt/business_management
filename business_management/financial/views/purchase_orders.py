@@ -26,12 +26,12 @@ class PurchaseOrderListView(LoginRequiredMixin, ListView):
     model = PurchaseOrder
     template_name = 'financial/purchase_orders/purchase_order_list.html'
 
-'''
+
 class PurchaseOrderDetailView(LoginRequiredMixin, DetailView):
-    context_object_name = "gaas_wafer_design"
-    model = GaasWaferDesign
-    template_name = 'engineering/gaas_wafer_designs/gaas_wafer_design_detail.html'
-'''
+    context_object_name = "purchase_order"
+    model = PurchaseOrder
+    template_name = 'financial/purchase_orders/purchase_order_detail.html'
+
 
 class PurchaseOrderCreateView(LoginRequiredMixin, CreateView):
     template_name = 'financial/purchase_orders/purchase_order_form.html'
@@ -43,7 +43,7 @@ class PurchaseOrderCreateView(LoginRequiredMixin, CreateView):
     #success_message = "GaAs Wafer Design Created Successfully!"
 
     def form_valid(self, form):
-
+        '''
         object = form.save(commit=False) #prevent save of form
         object.created_by = self.request.user #set created_by to request user
 
@@ -63,6 +63,10 @@ class PurchaseOrderCreateView(LoginRequiredMixin, CreateView):
         #object.po_document.save()
 
         # now save the object/form
+        object.save()
+        '''
+        object = form.save(commit=False)
+        object.created_by = self.request.user
         object.save()
 
         return super(PurchaseOrderCreateView, self).form_valid(form)
