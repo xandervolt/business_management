@@ -6,19 +6,18 @@ import requests
 
 from ...administration.models.contacts import Contact
 
-def get_po_number(self, *args, **kwargs):
-    if not self.id:
-        last_po = PurchaseOrder.objects.order_by('po_number').last()
-        if last_po:
-            last_po_num = last_po.po_number[-2:]
-            new_po_num = int(last_po_num) + 1
-        else:
-            new_po_num = '0001'
-        self.po_number = new_po_num
-        return self.po_number
+def get_po_number():
+    last_po = PurchaseOrder.objects.order_by('po_number').last()
+    if last_po:
+        last_po_num = last_po.po_number
+        new_po_num = last_po_num + 1
+    else:
+        new_po_num = '1'
+    po_number = new_po_num
+    return po_number
 
 class PurchaseOrder(models.Model):
-    po_number = models.IntegerField(unique=True)
+    po_number = models.IntegerField(unique=True, default=get_po_number)
     po_date = models.DateField()
     company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     company_address1 = models.CharField(max_length=60, default='1008 Coal Ave SE', blank=True, null=True)
@@ -27,11 +26,7 @@ class PurchaseOrder(models.Model):
     company_state = models.CharField(max_length=60, default='New Mexico', blank=True, null=True)
     company_zipcode = models.CharField(max_length=16, default='87106', blank=True, null=True)
     company_phone = models.CharField(max_length=24, default='888.978.4943', blank=True, null=True)
-
-    purchased_from_company = models.ForeignKey(
-        Contact,
-        limit_choices_to={'contact_type': 'VE'},
-    )
+    purchased_from_company = models.CharField(max_length=100, blank=True, null=True)
     purchased_from_first_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_last_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_address1 = models.CharField(max_length=80, blank=True, null=True)
