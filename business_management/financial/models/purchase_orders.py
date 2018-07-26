@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 import requests
 #import reversion
 
-from ...administration.models.contacts import Contact
 
 def get_po_number():
     last_po = PurchaseOrder.objects.order_by('po_number').last()
@@ -64,9 +63,9 @@ class PurchaseOrder(models.Model):
     ship_to_zipcode = models.CharField(max_length=80, default='87106', blank=True, null=True)
 
     approved_by_doe = models.BooleanField(default=False)
-    date_approved_by_doe = models.DateField(default='', blank=True, null=True)
+    date_approved_by_doe = models.DateField(blank=True, null=True)
     approved_by_ceo = models.BooleanField(default=False)
-    date_approved_by_ceo = models.DateField(default='', blank=True, null=True)
+    date_approved_by_ceo = models.DateField(blank=True, null=True)
     po_document = models.FileField(blank=True, null=True)
     po_document_location = models.CharField(max_length=255, blank=True, null=True)
 
@@ -107,19 +106,7 @@ class PurchaseOrder(models.Model):
 
     class Meta:
         ordering = ['po_number', ]
-        '''
-    def save(self, *args, **kwargs):
-        if not self.id:
-            last_po = PurchaseOrder.objects.order_by('po_number').last()
-            if last_po:
-                last_po_num = last_po.po_number[-2:]
-                new_po_num = int(last_po_num) + 1
-            else:
-                new_po_num = '0001'
-            self.po_number = new_po_num
 
-        super(PurchaseOrder, self).save(*args, **kwargs)
-        '''
     def __str__(self):
         return self.po_number
 
