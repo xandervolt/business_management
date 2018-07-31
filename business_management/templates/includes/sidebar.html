@@ -46,11 +46,33 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'administration:fixed_asset_list' %}" target="_top">Assets</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'financial:purchase_order_list' %}" target="_top">Purchase Orders</a>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">Purchase Orders</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link disabled-link" href="#" target="_top">Incoming POs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'financial:purchase_order_list' %}" target="_top">Outgoing POs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" target="_top">PO Templates</a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" target="_top">Invoices</a>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">Invoices</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'financial:invoice_list' %}" target="_top">Incoming Invoices</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled-link" href="#" target="_top">Outgoing Invoices</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" target="_top">Invoice Templates</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </li>

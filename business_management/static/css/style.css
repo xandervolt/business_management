@@ -12712,6 +12712,7 @@ hr.transparent {
 }
 a.disabled-link:link {
   color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
 }
 
 /* loading icon */
@@ -12725,4 +12726,10 @@ text-align:center;
 margin:0;
 padding:0;
 overflow:hidden;
+}
+
+.errorlist {
+  list-style-type: none;
+  margin-left:-30px;
+  color: red;
 }

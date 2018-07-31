@@ -68,9 +68,9 @@ $(function(){
             </div>
             <div class="form-group col-sm-4">
               <div class="form-group">
-                {{ form.invoice_number.errors }}
-                <label for="{{ form.invoice_number.id_for_label }}"><b>Invoice Number</b></label>
-                {% render_field form.invoice_number class+="form-control" %}
+                {{ form.purchased_from_company.errors }}
+                <label for="{{ form.purchased_from_company.company.id_for_label }}"><b>Invoice Number</b></label>
+                {% render_field form.purchased_from_company class+="form-control" %}
               </div>
             </div>
           </div>

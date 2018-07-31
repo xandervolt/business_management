@@ -5,22 +5,11 @@ import requests
 #import reversion
 
 from ...administration.models.contacts import Contact
-from .invoices import Invoice
 
-def get_po_number():
-    last_po = PurchaseOrder.objects.order_by('po_number').last()
-    if last_po:
-        last_po_num = last_po.po_number
-        new_po_num = last_po_num + 1
-    else:
-        new_po_num = '1'
-    po_number = new_po_num
-    return po_number
 
-class PurchaseOrder(models.Model):
-    po_number = models.IntegerField(default=get_po_number)
-    po_date = models.DateField()
-    invoice_number = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+class Invoice(models.Model):
+    invoice_number = models.CharField(max_length=80)
+    invoice_date = models.DateField()
     company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     company_address1 = models.CharField(max_length=60, default='1008 Coal Ave SE', blank=True, null=True)
     company_address2 = models.CharField(max_length=60, default='Ste. 120', blank=True, null=True)
@@ -66,53 +55,20 @@ class PurchaseOrder(models.Model):
     ship_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
     ship_to_zipcode = models.CharField(max_length=80, default='87106', blank=True, null=True)
 
-    approved_by_doe = models.BooleanField(default=False)
-    date_approved_by_doe = models.DateField(blank=True, null=True)
-    approved_by_ceo = models.BooleanField(default=False)
-    date_approved_by_ceo = models.DateField(blank=True, null=True)
-    po_document = models.FileField(blank=True, null=True)
-    po_document_location = models.CharField(max_length=255, blank=True, null=True)
-
-    CREDIT_CARD = 'CC'
-    NET_30 = '30'
-    NET_15 = '15'
-    TERMS_CHOICES = (
-        (CREDIT_CARD, 'Credit Card'),
-        (NET_15, 'Net 15'),
-        (NET_30, 'Net 30'),
-    )
-    terms = models.CharField(
-        max_length=2,
-        choices=TERMS_CHOICES,
-        default=CREDIT_CARD,
-    )
-
-    fob = models.CharField(max_length=100, default='', blank=True, null=True)
-
-    FED_EX_ACCT = 'FE'
-    VENDOR = 'VE'
-    EXTRA = 'EX'
-    SHIPPING_CHOICES = (
-        (FED_EX_ACCT, 'optiPulse FedEX Account'),
-        (VENDOR, 'Paid by Vendor'),
-        (EXTRA, 'Additional Charge'),
-    )
-    shipping = models.CharField(
-        max_length=2,
-        choices=SHIPPING_CHOICES,
-        default=FED_EX_ACCT,
-    )
-    sales_tax = models.BooleanField(default=False)
+    invoice_document = models.FileField(blank=True, null=True)
+    invoice_document_location = models.CharField(max_length=255, blank=True, null=True)
 
     comments = models.CharField(max_length=255, default='', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
-        ordering = ['po_number', ]
+        ordering = ['invoice_date', ]
 
     def __str__(self):
-        return str(self.po_number)
+        inv_num = self.invoice_number
+        inv_frm = self.purchased_from_company.company
+        return str(inv_num + " - " + inv_frm)
 
     def get_absolute_url(self):
-        return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})
+        return reverse("financial:invoice_detail", kwargs={"pk": self.pk})
