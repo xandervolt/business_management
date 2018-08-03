@@ -17,7 +17,6 @@ class Invoice(models.Model):
     company_state = models.CharField(max_length=60, default='New Mexico', blank=True, null=True)
     company_zipcode = models.CharField(max_length=16, default='87106', blank=True, null=True)
     company_phone = models.CharField(max_length=24, default='888.978.4943', blank=True, null=True)
-
     purchased_from_company = models.ForeignKey(Contact, on_delete=models.CASCADE, limit_choices_to={'contact_type': 'VE'},)
     purchased_from_first_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_last_name = models.CharField(max_length=80, blank=True, null=True)
@@ -32,7 +31,6 @@ class Invoice(models.Model):
     purchased_from_state = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_zip = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_country = models.CharField(max_length=80, blank=True, null=True)
-
     bill_to_company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     bill_to_first_name = models.CharField(max_length=60, default='Caitlin', blank=True, null=True)
     bill_to_last_name = models.CharField(max_length=60, default='Marchi', blank=True, null=True)
@@ -43,7 +41,6 @@ class Invoice(models.Model):
     bill_to_city = models.CharField(max_length=80, default='Albuquerque', blank=True, null=True)
     bill_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
     bill_to_zipcode = models.CharField(max_length=80, default='87102', blank=True, null=True)
-
     ship_to_company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     ship_to_first_name = models.CharField(max_length=60, default='Eric', blank=True, null=True)
     ship_to_last_name = models.CharField(max_length=60, default='Gieryng', blank=True, null=True)
@@ -54,10 +51,8 @@ class Invoice(models.Model):
     ship_to_city = models.CharField(max_length=80, default='Albuquerque', blank=True, null=True)
     ship_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
     ship_to_zipcode = models.CharField(max_length=80, default='87106', blank=True, null=True)
-
     invoice_document = models.FileField(blank=True, null=True)
     invoice_document_location = models.CharField(max_length=255, blank=True, null=True)
-
     comments = models.CharField(max_length=255, default='', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)

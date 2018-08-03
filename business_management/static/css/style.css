@@ -12702,7 +12702,6 @@ hr.transparent {
 }
 .detail-name {
   margin-bottom: 6px;
-  font-weight: bold;
 }
 .page_title_2 {
   color: #7ea6b2;
@@ -12732,4 +12731,24 @@ overflow:hidden;
   list-style-type: none;
   margin-left:-30px;
   color: red;
+}
+
+.po-logo {
+  width:220px;
+  margin-left:-5px;
+}
+.border-box {
+  border:1px dotted #999;
+  padding-left:10px;
+  margin-right:0px;
+}
+.border-box-wht {
+  border:1px dotted #fff;
+  font-weight: bold
+}
+table.table-bordered > thead > tr > th{
+  border:1px solid #999;
+}
+.table-sm th, .table-sm td {
+    padding: 0.1rem;
 }

@@ -18,7 +18,7 @@ def get_po_number():
     return po_number
 
 class PurchaseOrder(models.Model):
-    po_number = models.IntegerField(default=get_po_number)
+    po_number = models.IntegerField(unique=True, default=get_po_number)
     po_date = models.DateField()
     invoice_number = models.ForeignKey(Invoice, on_delete=models.CASCADE)
     company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
@@ -28,7 +28,6 @@ class PurchaseOrder(models.Model):
     company_state = models.CharField(max_length=60, default='New Mexico', blank=True, null=True)
     company_zipcode = models.CharField(max_length=16, default='87106', blank=True, null=True)
     company_phone = models.CharField(max_length=24, default='888.978.4943', blank=True, null=True)
-
     purchased_from_company = models.ForeignKey(Contact, on_delete=models.CASCADE, limit_choices_to={'contact_type': 'VE'},)
     purchased_from_first_name = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_last_name = models.CharField(max_length=80, blank=True, null=True)
@@ -43,7 +42,6 @@ class PurchaseOrder(models.Model):
     purchased_from_state = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_zip = models.CharField(max_length=80, blank=True, null=True)
     purchased_from_country = models.CharField(max_length=80, blank=True, null=True)
-
     bill_to_company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     bill_to_first_name = models.CharField(max_length=60, default='Caitlin', blank=True, null=True)
     bill_to_last_name = models.CharField(max_length=60, default='Marchi', blank=True, null=True)
@@ -54,7 +52,6 @@ class PurchaseOrder(models.Model):
     bill_to_city = models.CharField(max_length=80, default='Albuquerque', blank=True, null=True)
     bill_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
     bill_to_zipcode = models.CharField(max_length=80, default='87102', blank=True, null=True)
-
     ship_to_company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     ship_to_first_name = models.CharField(max_length=60, default='Eric', blank=True, null=True)
     ship_to_last_name = models.CharField(max_length=60, default='Gieryng', blank=True, null=True)
@@ -65,13 +62,22 @@ class PurchaseOrder(models.Model):
     ship_to_city = models.CharField(max_length=80, default='Albuquerque', blank=True, null=True)
     ship_to_state = models.CharField(max_length=80, default='New Mexico', blank=True, null=True)
     ship_to_zipcode = models.CharField(max_length=80, default='87106', blank=True, null=True)
-
     approved_by_doe = models.BooleanField(default=False)
     date_approved_by_doe = models.DateField(blank=True, null=True)
     approved_by_ceo = models.BooleanField(default=False)
     date_approved_by_ceo = models.DateField(blank=True, null=True)
     po_document = models.FileField(blank=True, null=True)
     po_document_location = models.CharField(max_length=255, blank=True, null=True)
+    fob = models.CharField(max_length=100, default='', blank=True, null=True)
+    shipping_amount = models.DecimalField(max_digits=6, decimal_places=2, default="0.00", blank=True, null=True)
+    other_amount = models.DecimalField(max_digits=6, decimal_places=2, default="0.00", blank=True, null=True)
+    sales_tax = models.BooleanField(default=False)
+    tax_amount = models.DecimalField(max_digits=6, decimal_places=2, default="7.82", blank=True, null=True)
+    subtotal = models.DecimalField(max_digits=6, decimal_places=2, default="0.00", blank=True, null=True)
+    total = models.DecimalField(max_digits=6, decimal_places=2, default="0.00", blank=True, null=True)
+    comments = models.CharField(max_length=255, default='', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     CREDIT_CARD = 'CC'
     NET_30 = '30'
@@ -86,9 +92,6 @@ class PurchaseOrder(models.Model):
         choices=TERMS_CHOICES,
         default=CREDIT_CARD,
     )
-
-    fob = models.CharField(max_length=100, default='', blank=True, null=True)
-
     FED_EX_ACCT = 'FE'
     VENDOR = 'VE'
     EXTRA = 'EX'
@@ -102,17 +105,28 @@ class PurchaseOrder(models.Model):
         choices=SHIPPING_CHOICES,
         default=FED_EX_ACCT,
     )
-    sales_tax = models.BooleanField(default=False)
 
-    comments = models.CharField(max_length=255, default='', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
         ordering = ['po_number', ]
 
     def __str__(self):
         return str(self.po_number)
+
+    def get_absolute_url(self):
+        return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})
+
+
+class PurchaseOrderItem(models.Model):
+    po_number_fk = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
+    qty = models.IntegerField()
+    unit = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=255)
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
+
+    class Meta:
+        ordering = ['pk', ]
 
     def get_absolute_url(self):
         return reverse("financial:purchase_order_detail", kwargs={"pk": self.pk})

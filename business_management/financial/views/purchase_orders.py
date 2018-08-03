@@ -16,7 +16,7 @@ from django.views.generic import (
 )
 from reportlab.pdfgen import canvas
 
-from ..models.purchase_orders import PurchaseOrder
+from ..models.purchase_orders import PurchaseOrder, PurchaseOrderItem
 from ..forms import PurchaseOrderForm
 
 # Create your views here.
@@ -27,10 +27,14 @@ class PurchaseOrderListView(LoginRequiredMixin, ListView):
     template_name = 'financial/purchase_orders/purchase_order_list.html'
 
 
-class PurchaseOrderDetailView(LoginRequiredMixin, DetailView):
-    context_object_name = "purchase_order"
-    model = PurchaseOrder
+class PurchaseOrderDetailView(LoginRequiredMixin, TemplateView):
     template_name = 'financial/purchase_orders/purchase_order_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PurchaseOrderDetailView, self).get_context_data(**kwargs)
+        context['purchase_order'] = PurchaseOrder.objects.get(pk=self.kwargs['pk'])
+        context['items'] = PurchaseOrderItem.objects.filter(po_number_fk=self.kwargs['pk'])
+        return context
 
 
 class PurchaseOrderCreateView(LoginRequiredMixin, CreateView):
@@ -39,7 +43,7 @@ class PurchaseOrderCreateView(LoginRequiredMixin, CreateView):
     form_class = PurchaseOrderForm
     form = PurchaseOrderForm()
     model = PurchaseOrder
-    success_url = reverse_lazy('financial:purchase_order_list')
+    #success_url = reverse_lazy('financial:purchase_order_list')
     #success_message = "GaAs Wafer Design Created Successfully!"
 
     def form_valid(self, form):
