@@ -17,7 +17,7 @@ from django.views.generic import (
 from reportlab.pdfgen import canvas
 
 from ..models.purchase_orders import PurchaseOrder, PurchaseOrderItem
-from ..forms import PurchaseOrderForm
+from ..forms import PurchaseOrderForm, PurchaseOrderItemForm
 
 # Create your views here.
 
@@ -74,6 +74,12 @@ class PurchaseOrderCreateView(LoginRequiredMixin, CreateView):
         object.save()
 
         return super(PurchaseOrderCreateView, self).form_valid(form)
+
+
+class PurchaseOrderItemCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'financial/purchase_orders/purchase_order_item_form.html'
+    form_class = PurchaseOrderItemForm
+    success_url = '/'
 
 
 '''

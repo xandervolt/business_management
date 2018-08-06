@@ -12738,17 +12738,28 @@ overflow:hidden;
   margin-left:-5px;
 }
 .border-box {
-  border:1px dotted #999;
+  border:1px solid #fff;
   padding-left:10px;
   margin-right:0px;
+  background:#eee;
 }
 .border-box-wht {
-  border:1px dotted #fff;
+  border:1px solid #fff;
   font-weight: bold
 }
 table.table-bordered > thead > tr > th{
   border:1px solid #999;
 }
 .table-sm th, .table-sm td {
-    padding: 0.1rem;
+  padding: 0.1rem;
+}
+.po-additional {
+  position:absolute;
+  top:145px;
+  left:16px;
+  width:760px;
+  text-align: right;
+}
+.signature-area {
+  border-bottom:1px solid #999;
 }

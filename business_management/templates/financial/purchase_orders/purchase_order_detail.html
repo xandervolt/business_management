@@ -15,19 +15,29 @@
 <div class="row">
   <div class="col">
     <h1 class="page_title">Purchase Order</h1>
-    <h4 class="page_title_2">
-      PO Number {{ purchase_order.po_number }}
-    </h4>
   </div>
   <div class="col-8">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
-      <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New</a>
+      <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New Item</a>
       <a class="btn btn-secondary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
-      <a class="btn btn-secondary" href=""><i class="fa fa-edit fa-fw"></i> Edit</a>
-      <a class="btn btn-secondary disabled"><i class="fa fa-print fa-fw"></i> Print</a>
+      <a class="btn btn-secondary" href=""><i class="fa fa-edit fa-fw"></i> Edit PO</a>
+      <a class="btn btn-secondary" href=""><i class="fa fa-edit fa-fw"></i> Edit Items</a>
+      <a class="btn btn-secondary" href=""><i class="fa fa-download fa-fw"></i> Download</a>
     </div>
   </div>
 </div>
+<button type="button" class="btn btn-primary" id="createTest">
+  <span class="fa fa-plus fa-sm"></span>
+  New Test
+</button>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
 <div class="row">
     <div class="col-md-8">
       <div class="card">
@@ -36,10 +46,10 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <img class="po-logo" src="{% static 'images/po-logo.jpg' %}" />
             </div>
-            <div class="col-sm-4 text-right">
+            <div class="col-sm-6 text-right">
               <h1>PURCHASE ORDER</h1>
             </div>
           </div>
@@ -88,128 +98,110 @@
           </div>
           <br />
           <div class="row">
-            <div class="col-sm-6">
-              <div style="border-bottom:1px dotted #999; color:#999;"><b>SHIP TO</b></div>
+            <div class="col-sm-4">
+              <div style="border-bottom:1px solid #999; color:#999;">Ship to</div>
+              <table>
+                {% if purchase_order.ship_to_last_name %}
+                <tr>
+                  <td class="font-weight-bold">Name: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.ship_to_first_name }} {{ purchase_order.ship_to_last_name }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <td class="font-weight-bold">Company: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.ship_to_company }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold" style=" vertical-align:top;">Address: </td>
+                  <td style="padding-left:10px;">
+                    {{ purchase_order.ship_to_address1 }}, {{ purchase_order.ship_to_address2 }}<br />
+                    {{ purchase_order.ship_to_city }}, {{ purchase_order.ship_to_state }} {{ purchase_order.ship_to_zipcode }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Phone: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.ship_to_phone }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Email: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.ship_to_email }}</td>
+                </tr>
+              </table>
             </div>
-            <div class="col-sm-6">
-              <div style="border-bottom:1px dotted #999; color:#999;"><b>VENDOR</b></div>
+            <div class="col-sm-4">
+              <div style="border-bottom:1px solid #999; color:#999;">Bill to</div>
+              <table>
+                {% if purchase_order.bill_to_last_name %}
+                <tr>
+                  <td class="font-weight-bold">Name: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.bill_to_first_name }} {{ purchase_order.bill_to_last_name }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <td class="font-weight-bold">Company: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.bill_to_company }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold" style=" vertical-align:top;">Address: </td>
+                  <td style="padding-left:10px;">
+                    {{ purchase_order.bill_to_address1 }}, {{ purchase_order.bill_to_address2 }}<br />
+                    {{ purchase_order.bill_to_city }}, {{ purchase_order.bill_to_state }} {{ purchase_order.bill_to_zipcode }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Phone: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.bill_to_phone }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Email: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.bill_to_email }}</td>
+                </tr>
+              </table>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="row">
-                <div class="col-sm-3" style="font-weight:bold;">
-                  <div class="row">
-                    {% if purchase_order.ship_to_first_name %}
-                      <div class="col-sm-12">
-                        Name:
-                      </div>
-                    {% endif %}
-                    <div class="col-sm-12">
-                      Company:
-                    </div>
-                    <div class="col-sm-12">
-                      Address:
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-sm-12">
-                      Phone:
-                    </div>
-                    <div class="col-sm-12">
-                      Email:
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-8">
-                  <div class="row">
-                    {% if purchase_order.ship_to_first_name %}
-                      <div class="col-sm-12">
-                        {{ purchase_order.ship_to_first_name }} {{ purchase_order.ship_to_last_name }}
-                      </div>
-                    {% endif %}
-                    <div class="col-sm-12">
-                      {{ purchase_order.ship_to_company }}
-                    </div>
-                    <div class="col-sm-12">
-                      {{ purchase_order.ship_to_address1 }}, {{ purchase_order.ship_to_address2 }}<br />
-                      {{ purchase_order.ship_to_city }}, {{ purchase_order.ship_to_state }} {{ purchase_order.ship_to_zipcode }}
-                    </div>
-                    <div class="col-sm-12">
-                      {{ purchase_order.ship_to_phone }}
-                    </div>
-                    <div class="col-sm-12">
-                      {{ purchase_order.ship_to_email }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="row">
-                <div class="col-sm-3" style="font-weight:bold;">
-                  <div class="row">
-                    {% if purchase_order.purchased_from_first_name %}
-                      <div class="col-sm-12">
-                        Name:
-                      </div>
-                    {% endif %}
-                    <div class="col-sm-12">
-                      Company:
-                    </div>
-                    <div class="col-sm-12">
-                      Address:
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-sm-12">
-                      Phone:
-                    </div>
-                    <div class="col-sm-12">
-                      Email:
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-8">
-                  <div class="row">
-                    {% if purchase_order.purchased_from_first_name %}
-                      <div class="col-sm-12">
-                        {{ purchase_order.purchased_from_first_name }} {{ purchase_order.purchased_from_last_name }}
-                      </div>
-                    {% endif %}
-                    <div class="col-sm-12">
-                      {{ purchase_order.purchased_from_company }}
-                    </div>
-                    <div class="col-sm-12">
-                      {{ purchase_order.purchased_from_address1 }}, {{ purchase_order.purchased_from_address2 }}<br />
-                      {{ purchase_order.purchased_from_city }}, {{ purchase_order.purchased_from_state }} {{ purchase_order.purchased_from_zip }}
-                    </div>
-                    <div class="col-sm-12">
-                      {{ purchase_order.purchased_from_phone }}
-                    </div>
-                    <div class="col-sm-12">
-                      {{ purchase_order.purchased_from_email }}
-                    </div>
-                  </div>
-                  <br />
-                </div>
-              </div>
+            <div class="col-sm-4">
+              <div style="border-bottom:1px solid #999; color:#999;">Vendor</div>
+              <table>
+                {% if purchase_order.purchased_from_last_name %}
+                <tr>
+                  <td class="font-weight-bold">Name: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.purchased_from_first_name }} {{ purchase_order.purchased_from_last_name }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <td class="font-weight-bold">Company: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.purchased_from_company }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold" style="vertical-align:top;">Address: </td>
+                  <td style="padding-left:10px;">
+                    {{ purchase_order.purchased_from_address1 }}, {{ purchase_order.purchased_from_address2 }}<br />
+                    {{ purchase_order.purchased_from_city }}, {{ purchase_order.purchased_from_state }} {{ purchase_order.purchased_from_zipcode }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Phone: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.purchased_from_phone }}</td>
+                </tr>
+                <tr>
+                  <td class="font-weight-bold">Email: </td>
+                  <td style="padding-left:10px;">{{ purchase_order.purchased_from_email }}</td>
+                </tr>
+              </table>
             </div>
           </div>
-          <!--/.row-->
           <br />
           <div class="row">
             <div class="col-sm-3">
-              <div style="border-bottom:1px dotted #999; color:#999;">Terms</div>
+              <div style="border-bottom:1px solid #999; color:#999;">Terms</div>
             </div>
             <div class="col-sm-3">
-              <div style="border-bottom:1px dotted #999; color:#999;">F.O.B.</div>
+              <div style="border-bottom:1px solid #999; color:#999;">F.O.B.</div>
             </div>
             <div class="col-sm-3">
-              <div style="border-bottom:1px dotted #999; color:#999;">Shipping Method</div>
+              <div style="border-bottom:1px solid #999; color:#999;">Shipping Method</div>
             </div>
             <div class="col-sm-3">
-              <div style="border-bottom:1px dotted #999; color:#999;">Delivery Date</div>
+              <div style="border-bottom:1px solid #999; color:#999;">Delivery Date</div>
             </div>
           </div>
           <div class="row">
@@ -233,11 +225,11 @@
               <table class="table table-striped table-bordered table-sm" style="border: 1px solid #fff;">
                 <thead style="background-color:#dadada;">
                   <tr>
-                    <th>Qty.</th>
-                    <th>Unit</th>
+                    <th width="80px">Qty.</th>
+                    <th width="180px">Unit</th>
                     <th>Description</th>
-                    <th>Unit Price</th>
-                    <th>Amount</th>
+                    <th width="120px">Unit Price</th>
+                    <th width="120px">Amount</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -254,39 +246,64 @@
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
-                    <td style="background-color:#fff">Subtotal</td>
-                    <td style="background-color:#fff">$40.00</td>
+                    <td style="background-color:#d5faf7">Subtotal</td>
+                    <td style="background-color:#d5faf7">$40.00</td>
                   </tr>
                   <tr>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
-                    <td style="background-color:#fff">Tax</td>
-                    <td style="background-color:#fff"></td>
+                    <td style="background-color:#d5faf7">Tax</td>
+                    <td style="background-color:#d5faf7"></td>
                   </tr>
                   <tr>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
-                    <td style="background-color:#fff">Shipping</td>
-                    <td style="background-color:#fff"></td>
+                    <td style="background-color:#d5faf7">Shipping</td>
+                    <td style="background-color:#d5faf7"></td>
                   </tr>
+                  {% if purchase_order.other_amount %}
                   <tr>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
-                    <td style="background-color:#fff">Other</td>
-                    <td style="background-color:#fff"></td>
+                    <td style="background-color:#d5faf7">Other</td>
+                    <td style="background-color:#d5faf7"></td>
                   </tr>
+                  {% endif %}
                   <tr>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
-                    <td style="background-color:#eee">Total</td>
-                    <td style="background-color:#eee"></td>
+                    <td style="background-color:#f5fad5"><b>Total</b></td>
+                    <td style="background-color:#f5fad5"></td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p><div style="margin-bottom:4px;">Tax Rate: <span style="padding-left:20px; padding-right:20px; background-color:#eee; border:1px solid #fff;">{% if purchase_order.sales_tax %}{{ purchase_order.tax_amount }}%{% else %}N/A{% endif %}</span><br /></div>
+              {% if purchase_order.delivery_date %}<b>Optipulse must be informed immediately if the order is not to be completed by {{ purchase_order.delivery_date }}</b><br />{% endif %}</p>
+              <div style="border-bottom:1px solid #999; color:#999;">Additional Comments/Notes:</div>
+            </div>
+            <div class="col-md-6">
+              <div style="border-bottom:1px solid #999; color:#999; margin-bottom:10px;">Approved by CEO</div>
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="signature-area">
+
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="signature-area">
+                    {{ purchase_order.date_approved_by_ceo }}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -295,9 +312,39 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
+          <strong>Instructions</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>After you have finished adding all items to the purchase order click the 'Download' button above to download a PDF of the P.O. to your computer</p>
+              <p>Once you download the P.O. save the file in SharePoint under <a href="">Procurements Site/Purchase Orders</a></p>
+              <p>Once the order has arrived at the destination check the contents of the delivery and approve of the delivery/receipt in the <a href="">Receiving App</a> according to the P.O. Number</p>
+            </div>
+          </div>
+          <!--/.row-->
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
           <strong>Record History</strong>
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="detail-group">
+                <div class="detail-name">Updated By</div>
+                {{ fixed_asset.created_by }}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="detail-group">
+                <div class="detail-name">Updated At</div>
+                {{ fixed_asset.created_at }}
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
           <div class="row">
             <div class="col-sm-6">
               <div class="detail-group">
@@ -317,4 +364,21 @@
       </div>
     </div>
 </div>
+
+
+{% block view_scripts %}
+<script>
+$(document).ready(function() {
+
+    $("#createTest").modalForm({
+        formURL: "/purchase-order-items/create/"
+    });
+
+});
+</script>
+
+<script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+<script src="{% static "js/jquery.bootstrap.modal.forms.js" %}"></script>
+{% endblock %}
+
 {% endblock %}

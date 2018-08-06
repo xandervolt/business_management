@@ -20,7 +20,7 @@ def get_po_number():
 class PurchaseOrder(models.Model):
     po_number = models.IntegerField(unique=True, default=get_po_number)
     po_date = models.DateField()
-    invoice_number = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    invoice_number = models.ForeignKey(Invoice, on_delete=models.CASCADE, blank=True, null=True)
     company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)
     company_address1 = models.CharField(max_length=60, default='1008 Coal Ave SE', blank=True, null=True)
     company_address2 = models.CharField(max_length=60, default='Ste. 120', blank=True, null=True)
@@ -70,6 +70,7 @@ class PurchaseOrder(models.Model):
     po_document_location = models.CharField(max_length=255, blank=True, null=True)
     fob = models.CharField(max_length=100, default='', blank=True, null=True)
     shipping_amount = models.DecimalField(max_digits=6, decimal_places=2, default="0.00", blank=True, null=True)
+    delivery_date = models.DateField(blank=True, null=True)
     other_amount = models.DecimalField(max_digits=6, decimal_places=2, default="0.00", blank=True, null=True)
     sales_tax = models.BooleanField(default=False)
     tax_amount = models.DecimalField(max_digits=6, decimal_places=2, default="7.82", blank=True, null=True)

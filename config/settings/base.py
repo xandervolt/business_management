@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_bootstrap_breadcrumbs',
     'crispy_forms',
+    'bootstrap_modal_forms',
     #'modal',
 
     'business_management.accounts',
