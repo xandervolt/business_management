@@ -17,6 +17,10 @@
     <h1 class="page_title">Purchase Order</h1>
   </div>
   <div class="col-8">
+    <button type="button" class="btn btn-primary" id="createTest">
+      <span class="fa fa-plus fa-sm"></span>
+      New Test
+    </button>
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown" style="z-index:1000;">
       <a class="btn btn-secondary" href="{% url 'administration:fixed_asset_create' %}"><i class="fa fa-plus-circle fa-fw"></i> Add New Item</a>
       <a class="btn btn-secondary disabled"><i class="fa fa-copy fa-fw"></i> Copy</a>
@@ -26,10 +30,6 @@
     </div>
   </div>
 </div>
-<button type="button" class="btn btn-primary" id="createTest">
-  <span class="fa fa-plus fa-sm"></span>
-  New Test
-</button>
 <div class="modal fade" tabindex="-1" role="dialog" id="modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -334,13 +334,13 @@
             <div class="col-sm-6">
               <div class="detail-group">
                 <div class="detail-name">Updated By</div>
-                {{ fixed_asset.created_by }}
+                {{ purchase_order.created_by }}
               </div>
             </div>
             <div class="col-sm-6">
               <div class="detail-group">
                 <div class="detail-name">Updated At</div>
-                {{ fixed_asset.created_at }}
+                {{ purchase_order.created_at }}
               </div>
             </div>
           </div>
@@ -349,13 +349,13 @@
             <div class="col-sm-6">
               <div class="detail-group">
                 <div class="detail-name">Created By</div>
-                {{ fixed_asset.created_by }}
+                {{ purchase_order.created_by }}
               </div>
             </div>
             <div class="col-sm-6">
               <div class="detail-group">
                 <div class="detail-name">Created At</div>
-                {{ fixed_asset.created_at }}
+                {{ purchase_order.created_at }}
               </div>
             </div>
           </div>
@@ -365,8 +365,8 @@
     </div>
 </div>
 
-
 {% block view_scripts %}
+<script src="{% static "js/jquery.bootstrap.modal.forms.js" %}"></script>
 <script>
 $(document).ready(function() {
 
@@ -376,9 +376,6 @@ $(document).ready(function() {
 
 });
 </script>
-
-<script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
-<script src="{% static "js/jquery.bootstrap.modal.forms.js" %}"></script>
 {% endblock %}
 
 {% endblock %}
