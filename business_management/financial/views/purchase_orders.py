@@ -80,6 +80,41 @@ class PurchaseOrderItemCreateView(LoginRequiredMixin, CreateView):
     template_name = 'financial/purchase_orders/purchase_order_item_form.html'
     form_class = PurchaseOrderItemForm
     success_url = '/'
+    form = PurchaseOrderForm()
+    model = PurchaseOrder
+    '''
+    def get_context_data(self, **kwargs):
+        context = super(PurchaseOrderItemCreateView, self).get_context_data(**kwargs)
+        context['purchase_order'] = PurchaseOrder.objects.get(pk=self.kwargs['pk'])
+        context['items'] = PurchaseOrderItem.objects.filter(po_number_fk=self.kwargs['pk'])
+        return context
+    '''
+    def form_valid(self, form):
+        '''
+        object = form.save(commit=False) #prevent save of form
+        object.created_by = self.request.user #set created_by to request user
+
+        # Create the HttpResponse object with the appropriate PDF headers.
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+
+        # Create the PDF object, using the response object as its "file."
+        object.po_document = canvas.Canvas(response)
+
+        # Draw things on the PDF. Here's where the PDF generation happens.
+        # See the ReportLab documentation for the full list of functionality.
+        object.po_document.drawString(100, 100, "Hello world.")
+
+        # Close the PDF object
+        object.po_document.showPage()
+        #object.po_document.save()
+
+        # now save the object/form
+        object.save()
+        '''
+        object = form.save(commit=False)
+        #object.created_by = self.request.user
+        object.save()
 
 
 '''

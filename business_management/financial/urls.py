@@ -10,7 +10,7 @@ urlpatterns = [
     #url(r'^$', purchase_orders.PurchaseOrderUpdateView.as_view(), name='purchase_order_update'),
     url(r'^purchase-orders/(?P<pk>\d+)/$', purchase_orders.PurchaseOrderDetailView.as_view(), name='purchase_order_detail'),
 
-    url(r'^purchase-order-items/create/$', purchase_orders.PurchaseOrderItemCreateView.as_view(), name='purchase_order_item_create'),
+    url(r'^purchase-order-items/create/(?P<pk>\d+)/$', purchase_orders.PurchaseOrderItemCreateView.as_view(), name='purchase_order_item_create'),
 
     # Invoices
     url(r'^invoices/create/$', invoices.InvoiceCreateView.as_view(), name='invoice_create'),

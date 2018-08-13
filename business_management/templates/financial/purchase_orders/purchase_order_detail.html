@@ -247,7 +247,7 @@
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
                     <td style="background-color:#d5faf7">Subtotal</td>
-                    <td style="background-color:#d5faf7">$40.00</td>
+                    <td style="background-color:#d5faf7">{{ purchase_order.subtotal }}</td>
                   </tr>
                   <tr>
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
@@ -261,7 +261,7 @@
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
                     <td style="background-color:#d5faf7">Shipping</td>
-                    <td style="background-color:#d5faf7"></td>
+                    <td style="background-color:#d5faf7">{{ purchase_order.shipping_amount }}</td>
                   </tr>
                   {% if purchase_order.other_amount %}
                   <tr>
@@ -269,7 +269,7 @@
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
                     <td style="background-color:#d5faf7">Other</td>
-                    <td style="background-color:#d5faf7"></td>
+                    <td style="background-color:#d5faf7">{{ purchase_order.other_amount }</td>
                   </tr>
                   {% endif %}
                   <tr>
@@ -277,7 +277,7 @@
                     <td style="background-color:#fff; border:1px solid #fff;"></td>
                     <td style="background-color:#fff; border-bottom:1px solid #fff; border-left:1px solid #fff;"></td>
                     <td style="background-color:#f5fad5"><b>Total</b></td>
-                    <td style="background-color:#f5fad5"></td>
+                    <td style="background-color:#f5fad5">{{ purchase_order.total }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -318,7 +318,7 @@
           <div class="row">
             <div class="col-sm-12">
               <p>After you have finished adding all items to the purchase order click the 'Download' button above to download a PDF of the P.O. to your computer</p>
-              <p>Once you download the P.O. save the file in SharePoint under <a href="">Procurements Site/Purchase Orders</a></p>
+              <p>Once you download the P.O. save the file in SharePoint under <a target="_blank" href="https://optipulse.sharepoint.com/Administration/Procurement/SitePages/Home.aspx?RootFolder=%2FAdministration%2FProcurement%2FShared%20Documents%2FProcurement%20Orders&FolderCTID=0x01200011C13BFEBFC63C4FA5340F8194CFE5CE&View=%7B5A75449B-7EC8-4D3D-9B5D-AA84A9045E89%7D">Procurements Site/Purchase Orders</a></p>
               <p>Once the order has arrived at the destination check the contents of the delivery and approve of the delivery/receipt in the <a href="">Receiving App</a> according to the P.O. Number</p>
             </div>
           </div>
@@ -371,7 +371,7 @@
 $(document).ready(function() {
 
     $("#createTest").modalForm({
-        formURL: "/purchase-order-items/create/"
+        formURL: "/financial/purchase-order-items/create/"
     });
 
 });
