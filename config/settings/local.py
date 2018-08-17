@@ -51,3 +51,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     str(APPS_DIR.path('static')),
 ]
+
+ALLOWED_HOSTS = ['*']

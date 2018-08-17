@@ -1,6 +1,7 @@
 from django import forms
 from .models.fixed_assets import FixedAsset
 from .models.contacts import Contact
+#from .models.timesheets import ClockPunch
 
 class FixedAssetForm(forms.ModelForm):
     class Meta:

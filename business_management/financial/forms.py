@@ -18,6 +18,7 @@ class InvoiceForm(forms.ModelForm):
         #fields = '__all__'
         exclude = ['created_by']
 
+
 class PurchaseOrderItemForm(forms.ModelForm):
     class Meta:
         model = PurchaseOrderItem

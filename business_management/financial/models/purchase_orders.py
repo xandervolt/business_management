@@ -7,6 +7,7 @@ import requests
 from ...administration.models.contacts import Contact
 from .invoices import Invoice
 
+
 def get_po_number():
     last_po = PurchaseOrder.objects.order_by('po_number').last()
     if last_po:
@@ -16,6 +17,7 @@ def get_po_number():
         new_po_num = '1'
     po_number = new_po_num
     return po_number
+
 
 class PurchaseOrder(models.Model):
     po_number = models.IntegerField(primary_key=True, default=get_po_number)

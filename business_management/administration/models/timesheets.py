@@ -1,9 +1,11 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.core.urlresolvers import reverse
 import requests
 #import reversion
 
+'''
 class Timesheet(models.Model):
     timesheet_ui = models.CharField(max_length=60, unique=True)
     employee = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -26,6 +28,7 @@ class Timesheet(models.Model):
     def get_absolute_url(self):
         return reverse("administration:timesheet_detail", kwargs={"pk": self.pk})
 
+
 class TimesheetRow(models.Model):
     row_num = models.AutoField()
     timesheet_fk = models.ForeignKey(models.Timesheet)
@@ -46,3 +49,61 @@ class TimesheetRow(models.Model):
 
     def get_absolute_url(self):
         return reverse("administration:row_num_detail", kwargs={"pk": self.pk})
+
+
+class ClockPunch(models.Model):
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL)
+    date = models.DateField(auto_now_add=True)
+    punched_in = models.BooleanField(default=False)
+    punch_in_time = models.DateTimeField(blank=True, null=True)
+    punch_in_ip = models.GenericIPAddressField(blank=True, null=True)
+    punched_out = models.BooleanField(default=False)
+    punch_out_time = models.DateTimeField(blank=True, null=True)
+    punch_out_ip = models.GenericIPAddressField(blank=True, null=True)
+    hours_for_the_day = models.DecimalField(max_digits=4, decimal_places=2, default="0.00", blank=True, null=True)
+
+    class Meta:
+        ordering = ['date', ]
+
+    def __str__(self):
+        return self.pk
+'''
+
+USER_ACTIVITY_CHOICES = (
+    ('checkin', 'Check In'),
+    ('checkout', 'Check Out'),
+)
+
+class UserActivity(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    activity = models.CharField(max_length=120, default='checkin', choices=USER_ACTIVITY_CHOICES)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return str(self.activity)
+
+    def __str__(self):
+        return str(self.activity)
+
+    class Meta:
+        verbose_name = 'User Activity'
+        verbose_name_plural = "User Activities"
+
+    def clean(self, *args, **kwargs):
+        if self.user:
+            user_activities = UserActivity.objects.exclude(
+                                id=self.id
+                            ).filter(
+                                user = self.user
+                            ).order_by('-timestamp')
+            if user_activities.exists():
+                recent_ = user_activities.first()
+                if self.activity == recent_.activity:
+                    message = "%s is not a valid activity for this user" %(self.get_activity_display())
+                    raise ValidationError(message)
+            else:
+                if self.activity != "checkin":
+                    message = "%s is not a valid activity for this user" %(self.get_activity_display())
+                    raise ValidationError(message)
+                    
+        return super(UserActivity, self).clean(*args, **kwargs)
