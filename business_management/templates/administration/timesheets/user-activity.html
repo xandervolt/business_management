@@ -1,0 +1,14 @@
+{% extends "pages/layout.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+<h2>User Activity</h2>
+
+  Currently: {{ toggle.current }}<br />
+  {{ toggle.current }} at {{ toggle.timestamp }}
+
+<form method='POST' action=''>
+  {% csrf_token %}
+  <input class ="btn btn-secondary" type=submit value='{% if toggle %}{{ toggle.next_activity }}{% else %}Check in{% endif %}' />
+</form>
+{% endblock %}

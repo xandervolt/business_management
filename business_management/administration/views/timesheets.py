@@ -15,12 +15,24 @@ from django.views.generic import (
 
 from django.utils import timezone
 
+from ..models.timesheets import UserActivity
+
+
+# Views here
 class ActivityView(LoginRequiredMixin, View):
+
     def get(self, request, *args, **kwargs):
-        return render(request, "", {})
+        context = {}
+        toggle = UserActivity.objects.current(request.user)
+        context['toggle'] = toggle
+        return render(request, "administration/timesheets/user-activity.html", context)
+
     def post(self, request, *args, **kwargs):
-        new_act = UserActivity.objects.create(user=request.user, activity='checkin')
-        return render(request, "", {})
+        context = {}
+        toggle = UserActivity.objects.toggle(request.user)
+        context['toggle'] = toggle
+        return render(request, "administration/timesheets/user-activity.html", context)
+
 
 '''
 class TimesheetListView(LoginRequiredMixin, CreateView, ListView):

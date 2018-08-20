@@ -20,7 +20,7 @@ def get_po_number():
 
 
 class PurchaseOrder(models.Model):
-    po_number = models.IntegerField(primary_key=True, default=get_po_number)
+    po_number = models.IntegerField(unique=True, default=get_po_number)
     po_date = models.DateField()
     invoice_number = models.ForeignKey(Invoice, on_delete=models.CASCADE, blank=True, null=True)
     company = models.CharField(max_length=60, default='optiPulse, Inc.', blank=True, null=True)

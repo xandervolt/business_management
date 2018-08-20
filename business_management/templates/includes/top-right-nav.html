@@ -1,16 +1,6 @@
 {% load static from staticfiles %}
 
 <ul class="nav navbar-nav ml-auto">
-
-    <form method='POST' action='{% url 'administration:clock_in' %}'>
-      {% csrf_token %}
-      <input type="submit" style="margin-right:6px;" type="button" class="btn btn-success" value="Clock-in"></button>
-    </form>
-    <form method='POST' action='{% url 'administration:clock_out' %}'>
-      {% csrf_token %}
-      <input type="submit" style="margin-right:6px;" type="button" class="btn btn-danger" value="Clock-out"></button>
-    </form>
-
     <!--
     <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="fa fa-bell-o"></i><span class="badge badge-pill badge-danger">5</span></a>

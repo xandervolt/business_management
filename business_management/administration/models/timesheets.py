@@ -3,7 +3,12 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.core.urlresolvers import reverse
 import requests
+import datetime
+import pytz
+from django.utils import timezone
 #import reversion
+
+tz=pytz.timezone('America/Denver')
 
 '''
 class Timesheet(models.Model):
@@ -74,10 +79,32 @@ USER_ACTIVITY_CHOICES = (
     ('checkout', 'Check Out'),
 )
 
+class UserActivityManager(models.Manager):
+    def current(self, user):
+        current_obj = self.get_queryset().filter(user=user).order_by('-timestamp').first()
+        return current_obj
+
+    def toggle(self, user):
+        last_item = self.current(user)
+        activity = "checkin"
+        if last_item is not None:
+            if last_item.timestamp <= tz.localize(datetime.datetime.now()):
+                pass
+            if last_item.activity == "checkin":
+                activity = "checkout"
+        obj = self.model(
+                user=user,
+                activity=activity
+        )
+        obj.save()
+        return obj
+
 class UserActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     activity = models.CharField(max_length=120, default='checkin', choices=USER_ACTIVITY_CHOICES)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    objects = UserActivityManager()
 
     def __unicode__(self):
         return str(self.activity)
@@ -88,6 +115,19 @@ class UserActivity(models.Model):
     class Meta:
         verbose_name = 'User Activity'
         verbose_name_plural = "User Activities"
+
+    def next_activity(self):
+        next = "Check in"
+        if self.activity == "checkin":
+            next = "Check out"
+        return next
+
+    @property
+    def current(self):
+        current = 'Checked Out'
+        if self.activity == 'checkin':
+            current = "Checked in"
+        return current
 
     def clean(self, *args, **kwargs):
         if self.user:
@@ -105,5 +145,5 @@ class UserActivity(models.Model):
                 if self.activity != "checkin":
                     message = "%s is not a valid activity for this user" %(self.get_activity_display())
                     raise ValidationError(message)
-                    
+
         return super(UserActivity, self).clean(*args, **kwargs)

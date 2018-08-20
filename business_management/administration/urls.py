@@ -14,7 +14,7 @@ urlpatterns = [
     #url(r'^timesheets/$', employees.TimesheetListView.as_view(), name='timesheet_list'),
 
     #url(r'^timesheets/clock-out/$', timesheets.ClockPunchOutView.as_view(), name='clock_out'),
-    #url(r'^timesheets/clock-in/$', timesheets.ClockPunchInView.as_view(), name='clock_in'),
+    url(r'^timesheets/user-activity/$', timesheets.ActivityView.as_view(), name='user_activity'),
 
     url(r'^contacts/$', contacts.ContactListView.as_view(), name='contact_list'),
     url(r'^contacts/create$', contacts.ContactCreateView.as_view(), name='contact_create'),
