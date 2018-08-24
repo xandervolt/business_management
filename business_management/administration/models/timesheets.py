@@ -55,23 +55,6 @@ class TimesheetRow(models.Model):
     def get_absolute_url(self):
         return reverse("administration:row_num_detail", kwargs={"pk": self.pk})
 
-
-class ClockPunch(models.Model):
-    employee = models.ForeignKey(settings.AUTH_USER_MODEL)
-    date = models.DateField(auto_now_add=True)
-    punched_in = models.BooleanField(default=False)
-    punch_in_time = models.DateTimeField(blank=True, null=True)
-    punch_in_ip = models.GenericIPAddressField(blank=True, null=True)
-    punched_out = models.BooleanField(default=False)
-    punch_out_time = models.DateTimeField(blank=True, null=True)
-    punch_out_ip = models.GenericIPAddressField(blank=True, null=True)
-    hours_for_the_day = models.DecimalField(max_digits=4, decimal_places=2, default="0.00", blank=True, null=True)
-
-    class Meta:
-        ordering = ['date', ]
-
-    def __str__(self):
-        return self.pk
 '''
 
 USER_ACTIVITY_CHOICES = (
@@ -80,6 +63,7 @@ USER_ACTIVITY_CHOICES = (
 )
 
 class UserActivityManager(models.Manager):
+
     def current(self, user):
         current_obj = self.get_queryset().filter(user=user).order_by('-timestamp').first()
         return current_obj
@@ -92,17 +76,22 @@ class UserActivityManager(models.Manager):
                 pass
             if last_item.activity == "checkin":
                 activity = "checkout"
+
         obj = self.model(
                 user=user,
-                activity=activity
+                activity=activity,
         )
         obj.save()
         return obj
+
 
 class UserActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     activity = models.CharField(max_length=120, default='checkin', choices=USER_ACTIVITY_CHOICES)
     timestamp = models.DateTimeField(auto_now_add=True)
+    time_delta = models.DecimalField(decimal_places=2, max_digits=4, default='0.00', blank=True, null=True)
+    status = models.CharField(max_length=60, null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
 
     objects = UserActivityManager()
 

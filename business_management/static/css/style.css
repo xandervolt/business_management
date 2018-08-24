@@ -12766,7 +12766,33 @@ table.table-bordered > thead > tr > th{
 .aside-margin {
   margin:14px;
 }
+.btn-lg-checkin {
+  width:140px;
+}
 .btn-checkin {
   width:100%;
+  margin-top:-2px;
+  margin-bottom:14px;
+}
+ul.office-status {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li.active {
+  color: #17c484;
+}
+li.inactive {
+  color:#d84f3a;
+}
+.img-avatar-aside {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom:14px;
   margin-top:10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

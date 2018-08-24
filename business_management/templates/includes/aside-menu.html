@@ -11,31 +11,61 @@
       <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="icon-settings"></i></a>
     </li>-->
   </ul>
-  <br />
   <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane active" id="timeline" role="tabpanel">
-      <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
-        <small><b>User Activity</b></small>
+      <div style="margin-top:16px;" class="text-muted text-center text-uppercase">
+        <small><b>User Status</b></small>
       </div>
       <hr class="transparent mx-3 my-0">
       <div class="aside-margin">
-        <h4>User Check in</h4>
-        <!--{% if toggle %}
-          <h5>Currently: {{ toggle.current }}</h4>
-          {{ toggle.current }} at {{ toggle.timestamp }}
-        {% endif %}-->
-        <br />
+        <h5 class="text-center">{{ request.user.first_name }} {{ request.user.last_name|slice:':1'|join:'' }}.</h5>
+        <span class="text-center" style="margin-left:auto; margin-right:auto; height:100px; width:100px;">
+          {% if request.user.prof_image %}
+              <img src="{% static 'images/users/avatars/' %}{{ request.user.prof_image }}" class="img-avatar-aside" alt="">
+          {% else %}
+              <img src="{% static 'images/users/avatars/blank.jpg' %}" class="img-avatar-aside" alt="">
+          {% endif %}
+        </span>
+        {% if toggle %}
+        <p><b>Currently:</b><br />{{ toggle.current }}<br />
+        <b>{{ toggle.current }} at:</b> <br /> {{ toggle.timestamp|date:"l, M j, Y - g:i A" }}</p>
+        <form method='POST' action=''>
+          {% csrf_token %}
+          <input class ="btn btn-checkin {% if toggle.next_activity == "Check in" %}btn-success{% endif %}{% if toggle.next_activity == "Check out" %}btn-danger{% endif %}" type=submit value='{% if toggle %}{{ toggle.next_activity }}{% else %}Check in{% endif %}' />
+        </form>
+        {% endif %}
+        <h6><a href="{% url 'administration:user_activity' %}">See status list</a></h6>
+        <hr />
+        <h5>Currently Checked In</h5>
+        <ul class="office-status">
+          {% if current_users %}
+            {% for users in current_users %}
+              <!--<li>{{ users.user.first_name }} {{ users.user.last_name|slice:':1'|join:'' }}. {{ users.activity }}</li>!-->
+              {% if users.activity == 'checkin' %}<li class="active"><i class="far fa-check-circle"></i> {{ users.user.first_name }} {{ users.user.last_name|slice:':1'|join:'' }}.{% endif %}</li>
+              {% if users.activity == 'checkout' %}<li class="inactive"><i class="far fa-times-circle"></i> {{ users.user.first_name }} {{ users.user.last_name|slice:':1'|join:'' }}.{% endif %}</li>
+            {% endfor %}
+          {% endif %}
+          <!--<li class="active"><i class="far fa-check-circle"></i> Alexander J.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Alexander R.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Danny T.</li>
+          <li class="active"><i class="far fa-check-circle"></i> Eric G.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Mathis S.</li>
+          <li class="active"><i class="far fa-check-circle"></i> Rossann B.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Tim P.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> John J.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Anne E.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Anne K.</li>
+          <li class="inactive"><i class="far fa-times-circle"></i> Caitlin M.</li>-->
+        </ul>
       </div>
     </div>
     <div class="tab-pane p-3" id="messages" role="tabpanel">
+      <div class="text-muted text-center text-uppercase">
+        <small><b>User Change History</b></small>
+      </div>
+      <br />
       <div class="message">
-        <div class="py-3 pb-5 mr-3 float-left">
-          <div class="avatar">
-            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-            <span class="avatar-status badge-success"></span>
-          </div>
-        </div>
         <div>
           <small class="text-muted">Lukasz Holeczek</small>
           <small class="text-muted float-right mt-1">1:52 PM</small>
@@ -45,57 +75,6 @@
       </div>
       <hr>
       <div class="message">
-        <div class="py-3 pb-5 mr-3 float-left">
-          <div class="avatar">
-            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-            <span class="avatar-status badge-success"></span>
-          </div>
-        </div>
-        <div>
-          <small class="text-muted">Lukasz Holeczek</small>
-          <small class="text-muted float-right mt-1">1:52 PM</small>
-        </div>
-        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-      </div>
-      <hr>
-      <div class="message">
-        <div class="py-3 pb-5 mr-3 float-left">
-          <div class="avatar">
-            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-            <span class="avatar-status badge-success"></span>
-          </div>
-        </div>
-        <div>
-          <small class="text-muted">Lukasz Holeczek</small>
-          <small class="text-muted float-right mt-1">1:52 PM</small>
-        </div>
-        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-      </div>
-      <hr>
-      <div class="message">
-        <div class="py-3 pb-5 mr-3 float-left">
-          <div class="avatar">
-            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-            <span class="avatar-status badge-success"></span>
-          </div>
-        </div>
-        <div>
-          <small class="text-muted">Lukasz Holeczek</small>
-          <small class="text-muted float-right mt-1">1:52 PM</small>
-        </div>
-        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-      </div>
-      <hr>
-      <div class="message">
-        <div class="py-3 pb-5 mr-3 float-left">
-          <div class="avatar">
-            <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-            <span class="avatar-status badge-success"></span>
-          </div>
-        </div>
         <div>
           <small class="text-muted">Lukasz Holeczek</small>
           <small class="text-muted float-right mt-1">1:52 PM</small>
