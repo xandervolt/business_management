@@ -68,18 +68,27 @@ class UserActivityManager(models.Manager):
         current_obj = self.get_queryset().filter(user=user).order_by('-timestamp').first()
         return current_obj
 
+    def last_checkin_time(self, user):
+        last_activity_time = self.get_queryset().order_by('-timestamp').filter(user=user, activity="checkin").first()
+        return last_activity_time
+
     def toggle(self, user):
         last_item = self.current(user)
         activity = "checkin"
+        time_delta = None
         if last_item is not None:
             if last_item.timestamp <= tz.localize(datetime.datetime.now()):
                 pass
             if last_item.activity == "checkin":
                 activity = "checkout"
+                last_checkin = self.last_checkin_time(user)
+                last_checkin_local_time = tz.normalize(last_checkin.timestamp)
+                time_delta = tz.localize(datetime.datetime.now()) - last_checkin_local_time
 
         obj = self.model(
                 user=user,
                 activity=activity,
+                time_delta = time_delta,
         )
         obj.save()
         return obj
@@ -89,7 +98,8 @@ class UserActivity(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     activity = models.CharField(max_length=120, default='checkin', choices=USER_ACTIVITY_CHOICES)
     timestamp = models.DateTimeField(auto_now_add=True)
-    time_delta = models.DecimalField(decimal_places=2, max_digits=4, default='0.00', blank=True, null=True)
+    time_delta = models.CharField(max_length=25, blank=True, null=True)
+    project = models.CharField(max_length=60, null=True, blank=True)
     status = models.CharField(max_length=60, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
 

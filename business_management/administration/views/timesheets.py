@@ -22,19 +22,28 @@ class ActivityView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         toggle = UserActivity.objects.current(request.user)
-        user_data = UserActivity.objects.filter(user=request.user).order_by('-timestamp')
+        users_data = UserActivity.objects.filter(user=request.user).order_by('-timestamp')
         current_users = UserActivity.objects.order_by('user', '-timestamp').distinct('user')
         context = {}
         context['toggle'] = toggle
-        context['user_data'] = user_data
+        context['users_data'] = users_data
         context['current_users'] = current_users
         return render(request, "administration/timesheets/user-activity.html", context)
 
     def post(self, request, *args, **kwargs):
         context = {}
         toggle = UserActivity.objects.toggle(request.user)
+        users_data = UserActivity.objects.filter(user=request.user).order_by('-timestamp')
+        current_users = UserActivity.objects.order_by('user', '-timestamp').distinct('user')
         context['toggle'] = toggle
+        context['users_data'] = users_data
+        context['current_users'] = current_users
         return render(request, "administration/timesheets/user-activity.html", context)
+
+class CheckinUpdateView(LoginRequiredMixin, UpdateView):
+    fields = ("status")
+    model = UserActivity
+    template_name = 'administration/timesheets/checkin_update_form.html'
 
 
 '''

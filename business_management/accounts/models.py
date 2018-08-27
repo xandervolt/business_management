@@ -33,8 +33,8 @@ class UserManager(BaseUserManager):
             username,
             password
         )
-        user.is_staff = True
-        user.is_superuser = True
+        user.is_staff = False
+        user.is_superuser = False
         user.save()
         return user
 
@@ -46,14 +46,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=80, unique=True)
     bio = models.CharField(max_length=255, blank=True, default="")
     title = models.CharField(max_length=100, blank=True, default="")
-    prof_image = models.ImageField(blank=True, null=True, upload_to='')
+    prof_image = models.ImageField(blank=True, null=True, upload_to='images/users/avatars/')
     digital_sig = models.ImageField(blank=True, null=True, upload_to='business_management/static/images/users/signatures')
     date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(null=True)
+    #last_login = models.DateTimeField(null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)
-    email_confirmed = models.BooleanField(default=False)
+    #email_confirmed = models.BooleanField(default=False)
 
     objects = UserManager()
 
