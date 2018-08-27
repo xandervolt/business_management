@@ -1,5 +1,6 @@
 {% extends "pages/layout.html" %}
 {% load static from staticfiles %}
+{% load widget_tweaks %}
 
 {% block view_styles %}
   <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -36,8 +37,7 @@
           <div class="col-6">
             <form method='POST' action=''>
               {% csrf_token %}
-              <input
-              <input class ="btn btn-lg-checkin {% if toggle.next_activity == 'Check in' %}btn-success{% endif %}{% if toggle.next_activity == 'Check out' %}btn-danger{% endif %}" type=submit value='{% if toggle %}{{ toggle.next_activity }}{% else %}Check in{% endif %}' />
+              <input class="btn btn-lg-checkin {% if toggle.next_activity == 'Check in' %}btn-success{% endif %}{% if toggle.next_activity == 'Check out' %}btn-danger{% endif %}" type=submit value='{% if toggle %}{{ toggle.next_activity }}{% else %}Check in{% endif %}' />
             </form>
           </div>
         </div>
