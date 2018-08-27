@@ -4,7 +4,7 @@ import json
 '''
 with open('secrets/prod_secrets.json') as f:
     secrets = json.loads(f.read())cd
-    
+
 def get_secret(setting, secrets=secrets):
     try:
         return secrets[setting]
@@ -38,7 +38,7 @@ STATICFILES_DIRS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'business_management_prod_db',
+        'NAME': 'business_management_prod_db_2',
         'USER': 'business_management_prod_user',
         'PASSWORD': 'Rom.8:38-39PTL!',
         'HOST': 'localhost',

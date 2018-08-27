@@ -1,4 +1,6 @@
 python manage.py collectstatic --settings=config.settings.production
+python manage.py makemigrations --settings=config.settings.production
+
 python manage.py makemigrations --settings=config.settings.local
 python manage.py migrate --settings=config.settings.local
 
@@ -7,6 +9,8 @@ python manage.py runsslserver --settings=config.settings.local
 
 set DJANGO_SETTINGS_MODULE=mysite.settings
 
+
+sudo su - postgres
 CREATE USER business_management_prod_user WITH PASSWORD Rom.8:38-39PTL!;
 CREATE DATABASE business_management_prod_db;
 GRANT ALL PRIVILEGES ON DATABASE business_management_prod_db to business_management_prod_user;
