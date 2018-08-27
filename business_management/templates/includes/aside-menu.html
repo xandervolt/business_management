@@ -15,7 +15,7 @@
   <div class="tab-content">
     <div class="tab-pane active" id="timeline" role="tabpanel">
       <div style="margin-top:16px;" class="text-muted text-center text-uppercase">
-        <small><b>User Status</b></small>
+        <small><b>User Activity</b></small>
       </div>
       <hr class="transparent mx-3 my-0">
       <div class="aside-margin">
@@ -35,17 +35,16 @@
           <input class ="btn btn-checkin {% if toggle.next_activity == "Check in" %}btn-success{% endif %}{% if toggle.next_activity == "Check out" %}btn-danger{% endif %}" type=submit value='{% if toggle %}{{ toggle.next_activity }}{% else %}Check in{% endif %}' />
         </form>
         {% endif %}
-        <h6><a href="{% url 'administration:user_activity' %}">See status list</a></h6>
+        <h6><a href="{% url 'administration:user_activity' %}">See activity log</a></h6>
         <hr />
+        {% if current_users %}
         <h5>Currently Checked In</h5>
         <ul class="office-status">
-          {% if current_users %}
             {% for users in current_users %}
               <!--<li>{{ users.user.first_name }} {{ users.user.last_name|slice:':1'|join:'' }}. {{ users.activity }}</li>!-->
               {% if users.activity == 'checkin' %}<li class="active"><i class="far fa-check-circle"></i> {{ users.user.first_name }} {{ users.user.last_name|slice:':1'|join:'' }}.{% endif %}</li>
               {% if users.activity == 'checkout' %}<li class="inactive"><i class="far fa-times-circle"></i> {{ users.user.first_name }} {{ users.user.last_name|slice:':1'|join:'' }}.{% endif %}</li>
             {% endfor %}
-          {% endif %}
           <!--<li class="active"><i class="far fa-check-circle"></i> Alexander J.</li>
           <li class="inactive"><i class="far fa-times-circle"></i> Alexander R.</li>
           <li class="inactive"><i class="far fa-times-circle"></i> Danny T.</li>
@@ -58,6 +57,7 @@
           <li class="inactive"><i class="far fa-times-circle"></i> Anne K.</li>
           <li class="inactive"><i class="far fa-times-circle"></i> Caitlin M.</li>-->
         </ul>
+        {% endif %}
       </div>
     </div>
     <div class="tab-pane p-3" id="messages" role="tabpanel">
@@ -67,21 +67,13 @@
       <br />
       <div class="message">
         <div>
-          <small class="text-muted">Lukasz Holeczek</small>
+          <small class="text-muted">{{ request.user.first_name }} {{ request.user.last_name }}</small>
           <small class="text-muted float-right mt-1">1:52 PM</small>
         </div>
         <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
         <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
       </div>
       <hr>
-      <div class="message">
-        <div>
-          <small class="text-muted">Lukasz Holeczek</small>
-          <small class="text-muted float-right mt-1">1:52 PM</small>
-        </div>
-        <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-      </div>
     </div>
     <div class="tab-pane p-3" id="settings" role="tabpanel">
       <h6>Settings</h6>

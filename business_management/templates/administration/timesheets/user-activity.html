@@ -21,7 +21,13 @@
 
 
 {% block content %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
 
+    </div>
+  </div>
+</div>
 <div class="row" style="margin-left:-30px; margin-right:-30px;">
     <div class="col-6" style="margin-left:14px;margin-bottom:20px;">
         <h1 class="page_title">User Activity</h1>
@@ -36,7 +42,6 @@
           <div class="col-6">
             <form method='POST' action=''>
               {% csrf_token %}
-              <input
               <input class ="btn btn-lg-checkin {% if toggle.next_activity == 'Check in' %}btn-success{% endif %}{% if toggle.next_activity == 'Check out' %}btn-danger{% endif %}" type=submit value='{% if toggle %}{{ toggle.next_activity }}{% else %}Check in{% endif %}' />
             </form>
           </div>
@@ -48,20 +53,20 @@
               <th style="max-width:100px;">
                   Action
               </th>
-              <th style="max-width:200px;">
+              <th style="max-width:180px;">
                   Date
               </th>
               <th style="max-width:100px;">
                   Time
               </th>
-              <th style="max-width:200px;">
+              <th style="max-width:100px;">
                   Time Spent
+              </th>
+              <th style="max-width:160px;">
+                  Project
               </th>
               <th>
                   Description
-              </th>
-              <th style="max-width:300px;">
-                  Status
               </th>
           </tr>
       </thead>
@@ -80,22 +85,22 @@
                 Time Spent
             </th>
             <th>
-                Description
+                Project
             </th>
             <th>
-                Status
+                Description
             </th>
         </tr>
         </tr>
       </tfoot>
       <tbody>
-          {% for user in user_data %}
+          {% for user in users_data %}
           <tr>
-              <td><a href="">{% if user.activity == 'checkin' %}Check in{% else %}Check out{% endif %}</a></td>
+              <td><a href="" id="checkin_update">{% if user.activity == 'checkin' %}Check in{% else %}Check out{% endif %}</a></td>
               <td>{{ user.timestamp|date:"m/d/Y, l" }}</td>
               <td>{{ user.timestamp|date:"h:i A" }}</td>
-              <td>{% if user.activity == 'checkout' %}[time delta]{% endif %}</td>
-              <td></td>
+              <td>{{ user.time_delta|slice:':7' }}</td>
+              <td>{{ user.status }}</td>
               <td></td>
           </tr>
           {% endfor %}
@@ -106,7 +111,6 @@
 <br />
 
 {% block view_scripts %}
-
   <script>
       $(document).ready(function() {
           // Setup - add a text input to each footer cell
@@ -145,7 +149,16 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-html5-1.5.1/b-print-1.5.1/cr-1.4.1/r-2.2.1/datatables.min.js"></script>
 
+  <script src="{% static "js/jquery.bootstrap.modal.forms.js" %}"></script>
+  <script>
+  $(document).ready(function() {
 
+      $("#checkin_update").modalForm({
+          formURL: "/administration/timesheets/checkin_update_form"
+      });
+
+  });
+  </script>
 {% endblock %}
 
 {% endblock %}

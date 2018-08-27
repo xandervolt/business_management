@@ -29,3 +29,8 @@ table.dataTable thead th, table.dataTable thead td {
     padding: 0;
     margin: 0;
 }
+.dataTables_wrapper .dataTables_scroll {
+    clear: both;
+    margin-left:-28px;
+    margin-right:-28px;
+}
